@@ -1,7 +1,16 @@
 """
+------------------------------------------------------------
+Analizador lexico DRAWY
 
+Cesar Armando Galvan Valles	A00814038
+Angel David Gonzalez Galvan	A01137638
 
+Correr en terminal:
+$	python drawylex.py
+$	python drawyparser.py test/test1.txt
 
+*cambiar el filename a otros archivos de prueba
+------------------------------------------------------------
 """
 
 import ply.yacc as yacc
@@ -18,11 +27,12 @@ def p_program(p):
 
 # Funcion que define la declaracion de variables
 def p_vars(p):
-	'''vars : var_type ID SEMICOLON more_vars'''
+	'''vars : var_type ID SEMICOLON vars
+			|'''
 
 # Funcion complementaria de declaracion de variables
 def p_more_vars(p):
-	'''more_vars : vars 
+	'''more_vars : vars
 			|'''
 
 # Funcion de tipos de variables
@@ -35,7 +45,8 @@ def p_var_type(p):
 
 # Funcion para declaracion de funciones
 def p_func(p):
-	'''func : FUNC func_type ID LPAR pars RPAR func_block more_func'''
+	'''func : FUNC func_type ID LPAR pars RPAR func_block func
+			|'''
 
 # Funcion para declarar el tipo de funcion
 def p_func_type(p):
@@ -55,12 +66,13 @@ def p_pars_comp(p):
 
 # Funcion para declarar mas parametros adicionales
 def p_more_pars(p):
-	'''more_pars : COMMA pars_comp more_pars
+	'''more_pars : COMMA pars_comp 
 			|'''
 
 # Funcion del bloque dentro de una funcion
 def p_func_block(p):
-	'''func_block : LBRACKET more_vars more_statements RETURN ID SEMICOLON RBRACKET'''
+	'''func_block : LBRACKET more_vars more_statements RETURN ID SEMICOLON RBRACKET
+			|'''
 
 def p_more_func(p):
 	'''more_func : func
@@ -111,12 +123,17 @@ def p_write(p):
 
 # Funcion
 def p_var_comp(p):
-	'''var_comp : function
+	'''var_comp : function_call
 			| var_cte'''
 
 # Funcion
 def p_function(p):
-	'''function : ID LPAR var_comp var_more RPAR SEMICOLON'''
+	'''function : ID LPAR func_params RPAR SEMICOLON'''
+
+# Funcion
+def p_func_params(p):
+	'''func_params : var_comp var_more
+			|'''
 
 # Funcion
 def p_var_more(p):
@@ -192,7 +209,14 @@ def p_factor(p):
 def p_var_cte(p):
 	'''var_cte : CTEINT
 			| CTEDOUBLE
-			| ID'''
+			| ID
+			| cte_bool
+			| function_call'''
+
+# Funcion
+def p_cte_bool(p):
+	'''cte_bool : TRUE
+			| FALSE'''
 
 # Funcion
 def p_block(p):
@@ -200,8 +224,20 @@ def p_block(p):
 
 # Funcion
 def p_main(p):
-	'''main : MAIN block'''
+	'''main : MAIN main_block'''
 
+# Funcion
+def p_main_block(p):
+	'''main_block : LBRACKET more_vars more_statements RBRACKET'''
+
+# Funcion
+def p_function_call(p):
+	'''function_call : ID LPAR func_params RPAR'''
+
+
+def p_error(p):
+    print('Syntax error in token %s with value \"%s\" in line %s' % (p.type, p.value, p.lineno))
+    sys.exit()
 
 
 # Construir el parser

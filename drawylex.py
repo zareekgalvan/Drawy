@@ -1,9 +1,16 @@
 """
+------------------------------------------------------------
 Analizador lexico DRAWY
 
-César Armando Galván Valles		A00814038
-Ángel David Gonzalez Galván		A011
+Cesar Armando Galvan Valles	A00814038
+Angel David Gonzalez Galvan	A01137638
 
+Correr en terminal:
+$	python drawylex.py
+$	python drawyparser.py test/test1.txt
+
+*cambiar el filename a otros archivos de prueba
+------------------------------------------------------------
 """
 
 import ply.lex as lex
@@ -11,49 +18,49 @@ import ply.lex as lex
 # Lista de palabras reservadas
 
 reserved = {
-	'int' : 'INT'
-	'double' : 'DOUBLE'
-	'bool' : 'BOOL'
-	'intList' : 'INTLIST'
-	'doubleList' : 'DOUBLELIST'
-	'void' : 'VOID'
-	'if' : 'IF'
-	'else' : 'ELSE'
-	'while' : 'WHILE'
-	'read' : 'READ'
-	'write' : 'WRITE'
-	'true' : 'TRUE'
-	'false' : 'FALSE'
-	'main' : 'MAIN'
-	'drawCirle' : 'DRAWCIRCLE'
-	'drawSquare' : 'DRAWSQUARE'
-	'drawRectangle' : 'DRAWRECTANGLE'
-	'drawLine' : 'DRAWLINE'
-	'drawArc' : 'DRAWARC'
-	'moveFigure' : 'MOVEFIGURE'
-	'rotateFigure' : 'ROTATEFIGURE'
-	'changeThickness' : 'CHANGETHICKNESS'
-	'changeColor' : 'CHANGECOLOR'
-	'scaleUp' : 'SCALEUP'
-	'scaleDown' : 'SCALEDOWN'
-	'erase' : 'ERASE'
-	'append' : 'APPEND'
-	'prepend' : 'PREPEND'
-	'addAt' : 'ADDAT'
-	'removeFirst' : 'REMOVEFIRST'
-	'removeLast' : 'REMOVELAST'
-	'removeAt' : 'REMOVEAT'
-	'thin' : 'THIN'
-	'medium' : 'MEDIUM'
-	'thick' : 'THICK'
-	'red' : 'RED'
-	'blue' : 'BLUE'
-	'green' : 'GREEN'
-	'yellow' : 'YELLOW'
-	'black' : 'BLACK'
-	'purple' : 'PURPLE'
-	'orange' : 'ORANGE'
-	'func' : 'FUNC'
+	'int' : 'INT',
+	'double' : 'DOUBLE',
+	'bool' : 'BOOL',
+	'intList' : 'INTLIST',
+	'doubleList' : 'DOUBLELIST',
+	'void' : 'VOID',
+	'if' : 'IF',
+	'else' : 'ELSE',
+	'while' : 'WHILE',
+	'read' : 'READ',
+	'write' : 'WRITE',
+	'true' : 'TRUE',
+	'false' : 'FALSE',
+	'main' : 'MAIN',
+	'drawCirle' : 'DRAWCIRCLE',
+	'drawSquare' : 'DRAWSQUARE',
+	'drawRectangle' : 'DRAWRECTANGLE',
+	'drawLine' : 'DRAWLINE',
+	'drawArc' : 'DRAWARC',
+	'moveFigure' : 'MOVEFIGURE',
+	'rotateFigure' : 'ROTATEFIGURE',
+	'changeThickness' : 'CHANGETHICKNESS',
+	'changeColor' : 'CHANGECOLOR',
+	'scaleUp' : 'SCALEUP',
+	'scaleDown' : 'SCALEDOWN',
+	'erase' : 'ERASE',
+	'append' : 'APPEND',
+	'prepend' : 'PREPEND',
+	'addAt' : 'ADDAT',
+	'removeFirst' : 'REMOVEFIRST',
+	'removeLast' : 'REMOVELAST',
+	'removeAt' : 'REMOVEAT',
+	'thin' : 'THIN',
+	'medium' : 'MEDIUM',
+	'thick' : 'THICK',
+	'red' : 'RED',
+	'blue' : 'BLUE',
+	'green' : 'GREEN',
+	'yellow' : 'YELLOW',
+	'black' : 'BLACK',
+	'purple' : 'PURPLE',
+	'orange' : 'ORANGE',
+	'func' : 'FUNC',
 	'return' : 'RETURN'
 }
 
@@ -63,11 +70,11 @@ tokens = ['PLUS', 'MINUS', 'MULTIPLICATION', 'DIVISION', 'MOD', 'EQUALS',
 			'EQUALEQUALS', 'DIFFERENT', 'GREATER', 'FEWER', 
 			'GREATEROREQUAL', 'FEWEROREQUAL', 'AND', 'OR', 'LPAR', 'RPAR', 
 			'LBRACKET', 'RBRACKET', 'COMMA', 'SEMICOLON', 'CTEINT', 
-			'CTEDOUBLE', 'CTESTRING'] + list(reserved.values())
+			'CTEDOUBLE', 'CTESTRING', 'ID'] + list(reserved.values())
 
 # Expresiones regulares
 
-t_ignore = '\t'
+t_ignore = ' \t'
 t_CTEINT = r'-?[0-9]+'
 t_CTEDOUBLE = r'-?[0-9]+\.[0-9]+'
 t_PLUS = r'\+'
@@ -78,14 +85,14 @@ t_MOD = r'%'
 t_COMMA = r','
 t_SEMICOLON = r';'
 t_EQUALS = r'='
-t_EQUALSEQUALS = r'=='
+t_EQUALEQUALS = r'=='
 t_DIFFERENT = r'<>'
 t_GREATER = r'>'
 t_FEWER = r'<'
 t_GREATEROREQUAL = r'>='
 t_FEWEROREQUAL = r'<='
 t_AND = r'&&'
-t_OR = r'||'
+t_OR = r'\|\|'
 t_LPAR = r'\('
 t_RPAR = r'\)'
 t_LBRACKET = r'{'
@@ -123,6 +130,7 @@ def t_comment(t):
     r'//.*\n'
     t.lexer.lineno += 1
     return t
+
 
 # Crear el analizador de lexico
 
