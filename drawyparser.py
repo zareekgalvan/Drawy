@@ -13,7 +13,7 @@ from drawylex import tokens
 
 # Funcion que encapsula todo el codigo, funcion principal del lenguaje
 def p_program(p):
-	'''program : vars func main'''
+	'''program : more_vars more_func main'''
 	p[0] = "PROGRAM COMPILED"
 
 # Funcion que define la declaracion de variables
@@ -35,7 +35,7 @@ def p_var_type(p):
 
 # Funcion para declaracion de funciones
 def p_func(p):
-	'''func : FUNC func_type ID LPAR pars RPAR func_block'''
+	'''func : FUNC func_type ID LPAR pars RPAR func_block more_func'''
 
 # Funcion para declarar el tipo de funcion
 def p_func_type(p):
@@ -62,16 +62,20 @@ def p_more_pars(p):
 def p_func_block(p):
 	'''func_block : LBRACKET more_vars more_statements RETURN ID SEMICOLON RBRACKET'''
 
-# Funcion
+def p_more_func(p):
+	'''more_func : func
+			|'''
+
+# Funcion para mas estatutos o ninguno
 def p_more_statements(p):
 	'''more_statements : statement
 			|'''
 
-# Funcion
+# Funcion de estatutos
 def p_statement(p):
 	'''statement : statement_comp more_statements'''
 
-# Funcion
+# Funcion complementaria de estatutos
 def p_statement_comp(p):
 	'''statement_comp : assignation
 			| condition
@@ -80,7 +84,7 @@ def p_statement_comp(p):
 			| write
 			| function'''
 
-# Funcion
+# Funcion 
 def p_assignation(p):
 	'''assignation : ID EQUALS expression SEMICOLON'''
 
@@ -200,8 +204,28 @@ def p_main(p):
 
 
 
+# Construir el parser
+drawyparser = yacc.yacc()
 
 
+# Programa Main
+if __name__ == '__main__':
+	if (len(sys.argv) > 1):
+		file = sys.argv[1]
+		# Abre el archivo, almacena su informacion y lo cierra
+		try:
+			f = open(file,'r')
+			data = f.read()
+			f.close()
+			# Parse the data
+			
+			if (drawyparser.parse(data, tracking=True) == 'PROGRAM COMPILED'):
+				print "Valid"
+				
+		except EOFError:
+	   		print(EOFError)
+	else:
+		print('File missing')
 
 
 
