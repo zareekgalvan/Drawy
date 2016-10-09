@@ -117,6 +117,13 @@ def t_error(t):
 	exit(-1)
 	t.lexer.skip(1)
 
+# Comentarios estilo C++
+
+def t_comment(t):
+    r'//.*\n'
+    t.lexer.lineno += 1
+    return t
+
 # Crear el analizador de lexico
 
 lexer = lex.lex()
