@@ -1,4 +1,27 @@
-main {
+int i;
+double x;
+bool y;
+intList c;
+doubleList j;
+
+func int fun1(int i)
+{
+	return i;
+}
+
+func int fun2(int i, double e)
+{
+	return i;
+}
+
+func double func3()
+{
+	c = 0;
+	return 8;
+}
+
+func void func4(int i, int e, double t, intList h, doubleList j, bool d)
+{
 	x = y;
 	x = 5;
 	y = fun();
@@ -10,7 +33,7 @@ main {
 
 	}
 
-	if ( 5 + 5 > 5 )
+	if ( 5 + 5 > 5)
 	{
 		x = y;
 		read(5);
@@ -20,10 +43,53 @@ main {
 
 	while (5 > 5)
 	{
-		else {
-
+		if (5)
+		{
+			x = 8;
 		}
 	}
+	read(i);
+	write(6);
+
+	fnc(8);
+	return func3(6);
+}
+
+func bool func5(int i, int e, double t, intList h, doubleList j, bool d)
+{
+	return 8;
+}
+
+main 
+{
+	x = y;
+	x = 5;
+	y = fun();
+	y = true;
+	x = 5.5;
+
+	if ( true )
+	{
+
+	}
+
+	if ( 5 + 5 > 5)
+	{
+		x = y;
+		read(5);
+	}
+	else 
+	{	}
+
+	while (5 > 5)
+	{
+		if (5)
+		{
+			x = 8;
+		}
+	}
+	read(i);
+	write(6);
 
 	fnc(8);
 }

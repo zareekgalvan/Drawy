@@ -1,6 +1,6 @@
 """
 ------------------------------------------------------------
-Analizador lexico DRAWY
+Analizador sintactico DRAWY
 
 Cesar Armando Galvan Valles	A00814038
 Angel David Gonzalez Galvan	A01137638
@@ -19,6 +19,9 @@ import sys
 
 # Importar token del lexer
 from drawylex import tokens
+# Directorio de procedimientos
+dirProcedures = {}
+varTableGlobal = []
 
 # Funcion que encapsula todo el codigo, funcion principal del lenguaje
 def p_program(p):
@@ -45,8 +48,7 @@ def p_var_type(p):
 
 # Funcion para declaracion de funciones
 def p_func(p):
-	'''func : FUNC func_type ID LPAR pars RPAR func_block func
-			|'''
+	'''func : FUNC func_type ID LPAR pars RPAR func_block more_func'''
 
 # Funcion para declarar el tipo de funcion
 def p_func_type(p):
@@ -71,7 +73,7 @@ def p_more_pars(p):
 
 # Funcion del bloque dentro de una funcion
 def p_func_block(p):
-	'''func_block : LBRACKET more_vars more_statements RETURN ID SEMICOLON RBRACKET
+	'''func_block : LBRACKET more_vars more_statements RETURN var_cte SEMICOLON RBRACKET
 			|'''
 
 def p_more_func(p):
@@ -252,11 +254,12 @@ if __name__ == '__main__':
 		try:
 			f = open(file,'r')
 			data = f.read()
+			#print data
 			f.close()
-			# Parse the data
+			# Parsear el contenido
 			
 			if (drawyparser.parse(data, tracking=True) == 'PROGRAM COMPILED'):
-				print "Valid"
+				print "Valid syntax"
 				
 		except EOFError:
 	   		print(EOFError)
