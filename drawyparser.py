@@ -15,6 +15,7 @@ $	python drawyparser.py test/test1.txt
 
 import ply.yacc as yacc
 import sys
+from sets import Set
 
 
 # Importar token del lexer
@@ -22,9 +23,12 @@ from drawylex import tokens
 # Directorio de procedimientos
 dirProcedures = {}
 dirProcedures["global"] = {}
-varTableGlobal = []
-scope = "global"
-actualtype = ""
+varTableGlobal = {}
+varTableGlobal["global"] = {}
+ids = set()
+global scope 
+scope = ['global']
+tipo = None
 
 
 # Funcion que encapsula todo el codigo, funcion principal del lenguaje
@@ -36,19 +40,32 @@ def p_program(p):
 def p_vars(p):
 	'''vars : var_type to_actual_type ID to_var_table SEMICOLON vars
 			|'''
+# Funcion
+def p_to_ids_set(p):
+	'''to_ids_set :'''
+
 
 #
 def p_to_actual_type(p):
 	'''to_actual_type :'''
-	actualtype = p[-1]
-	print actualtype
+	#print p[-1]
+	global tipo
+	tipo = p[-1]
+	#print actualtype
 
 # Funcion para agregar al directorio de funciones la variable y su tipo
 def p_to_var_table(p):
 	'''to_var_table :'''
-	print p[-1]
-	print scope
-	dirProcedures[scope][p[-1]] = actualtype
+	#print p[-1]
+	varid = p[-1]
+	print varid
+	if varid not in varTableGlobal['global']:
+		ids.add(varid)
+		varTableGlobal[scope[len(scope)-1]][varid]  = tipo
+	else:
+		print('Variable "%s" already registered' % (varid))
+		sys.exit() 
+	#print dirProcedures[scope[len(scope)-1]]
 
 # Funcion complementaria de declaracion de variables
 def p_more_vars(p):
@@ -62,6 +79,7 @@ def p_var_type(p):
 			| BOOL
 			| INTLIST
 			| DOUBLELIST'''
+	p[0] = p[1]
 
 # Funcion para declaracion de funciones
 def p_func(p):
@@ -78,8 +96,10 @@ def p_func_type(p):
 def p_procedure_name(p):
 	'''procedure_name :'''
 	funcname = p[-1]
-	scope = p[-1]
-	dirProcedures[funcname] = {}
+	scope.append(p[-1])
+	ids.add(p[-1])
+	print scope[len(scope)-1]
+	varTableGlobal[funcname] = {}
 
 # Funcion para la declaracion de parametros dentro de una funcion
 def p_pars(p):
@@ -88,7 +108,7 @@ def p_pars(p):
 
 # Funcion para declarar al menos un parametro
 def p_pars_comp(p):
-	'''pars_comp : var_type ID more_pars'''
+	'''pars_comp : var_type ID to_var_table more_pars'''
 
 # Funcion para declarar mas parametros adicionales
 def p_more_pars(p):
@@ -250,7 +270,7 @@ def p_block(p):
 
 # Funcion
 def p_main(p):
-	'''main : MAIN main_block'''
+	'''main : MAIN procedure_name main_block'''
 
 # Funcion
 def p_main_block(p):
@@ -283,7 +303,8 @@ if __name__ == '__main__':
 			# Parsear el contenido
 			
 			if (drawyparser.parse(data, tracking=True) == 'PROGRAM COMPILED'):
-				print dirProcedures
+				print varTableGlobal
+				print ids
 				print "Valid syntax"
 				
 		except EOFError:

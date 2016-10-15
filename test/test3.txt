@@ -22,6 +22,7 @@ func double func3()
 
 func void func4(int i, int e, double t, intList h, doubleList j, bool d)
 {
+	int x;
 	x = y;
 	x = 5;
 	y = fun();
@@ -64,8 +65,16 @@ func void func6 () {
 	return 0;	
 }
 
+func void func6 () {
+	return 0;	
+}
+
 main 
 {
+	int x;
+	int y;
+	double z;
+	bool a;
 	x = y;
 	x = 5;
 	y = fun();
@@ -83,7 +92,9 @@ main
 		read(5);
 	}
 	else 
-	{	}
+	{	
+
+	}
 
 	while (5 > 5)
 	{

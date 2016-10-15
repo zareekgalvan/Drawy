@@ -1,0 +1,10 @@
+int i;
+int j;
+int k;
+
+main {
+	int x;
+	int y;
+	double z;
+	bool a;
+}
