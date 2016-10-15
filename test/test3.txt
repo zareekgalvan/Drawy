@@ -4,14 +4,14 @@ bool y;
 intList c;
 doubleList j;
 
-func int fun1(int i)
+func int fun1(int v)
 {
 	return i;
 }
 
-func int fun2(int i, double e)
+func int fun2(int v, double e)
 {
-	return i;
+	return v;
 }
 
 func double func3()
@@ -20,7 +20,7 @@ func double func3()
 	return 8;
 }
 
-func void func4(int i, int e, double t, intList h, doubleList j, bool d)
+func void func4(int v, int e, double t, intList h, doubleList j, bool d)
 {
 	int x;
 	x = y;
