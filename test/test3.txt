@@ -33,7 +33,7 @@ func void func4(int i, int e, double t, intList h, doubleList j, bool d)
 
 	}
 
-	if ( 5 + 5 > 5)
+	if ( (5 + 5)*3/8 > 5)
 	{
 		x = y;
 		read(5);
@@ -58,6 +58,10 @@ func void func4(int i, int e, double t, intList h, doubleList j, bool d)
 func bool func5(int i, int e, double t, intList h, doubleList j, bool d)
 {
 	return 8;
+}
+
+func void func6 () {
+	return 0;	
 }
 
 main 

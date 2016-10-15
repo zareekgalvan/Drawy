@@ -37,207 +37,213 @@ Grammar
 
 Rule 0     S' -> program
 Rule 1     program -> more_vars more_func main
-Rule 2     vars -> var_type ID SEMICOLON vars
+Rule 2     vars -> var_type to_actual_type ID to_var_table SEMICOLON vars
 Rule 3     vars -> <empty>
-Rule 4     more_vars -> vars
-Rule 5     more_vars -> <empty>
-Rule 6     var_type -> INT
-Rule 7     var_type -> DOUBLE
-Rule 8     var_type -> BOOL
-Rule 9     var_type -> INTLIST
-Rule 10    var_type -> DOUBLELIST
-Rule 11    func -> FUNC func_type ID LPAR pars RPAR func_block more_func
-Rule 12    func_type -> INT
-Rule 13    func_type -> DOUBLE
-Rule 14    func_type -> BOOL
-Rule 15    func_type -> VOID
-Rule 16    pars -> pars_comp
-Rule 17    pars -> <empty>
-Rule 18    pars_comp -> var_type ID more_pars
-Rule 19    more_pars -> COMMA pars_comp
-Rule 20    more_pars -> <empty>
-Rule 21    func_block -> LBRACKET more_vars more_statements RETURN var_cte SEMICOLON RBRACKET
-Rule 22    func_block -> <empty>
-Rule 23    more_func -> func
-Rule 24    more_func -> <empty>
-Rule 25    more_statements -> statement
-Rule 26    more_statements -> <empty>
-Rule 27    statement -> statement_comp more_statements
-Rule 28    statement_comp -> assignation
-Rule 29    statement_comp -> condition
-Rule 30    statement_comp -> cycle
-Rule 31    statement_comp -> read
-Rule 32    statement_comp -> write
-Rule 33    statement_comp -> function
-Rule 34    assignation -> ID EQUALS expression SEMICOLON
-Rule 35    condition -> IF LPAR expression RPAR block condition_comp
-Rule 36    condition_comp -> ELSE block
-Rule 37    condition_comp -> <empty>
-Rule 38    cycle -> WHILE LPAR expression RPAR block
-Rule 39    read -> READ LPAR var_cte RPAR SEMICOLON
-Rule 40    write -> WRITE LPAR var_comp RPAR SEMICOLON
-Rule 41    var_comp -> function_call
-Rule 42    var_comp -> var_cte
-Rule 43    function -> ID LPAR func_params RPAR SEMICOLON
-Rule 44    func_params -> var_comp var_more
-Rule 45    func_params -> <empty>
-Rule 46    var_more -> COMMA var_comp var_more
-Rule 47    var_more -> <empty>
-Rule 48    expression -> comp expression_comp
-Rule 49    expression_comp -> andor comp
-Rule 50    expression_comp -> <empty>
-Rule 51    andor -> AND
-Rule 52    andor -> OR
-Rule 53    comp -> exp exp_comp
-Rule 54    exp_comp -> comparator exp
-Rule 55    exp_comp -> <empty>
-Rule 56    comparator -> GREATER
-Rule 57    comparator -> FEWER
-Rule 58    comparator -> GREATEROREQUAL
-Rule 59    comparator -> FEWEROREQUAL
-Rule 60    comparator -> DIFFERENT
-Rule 61    comparator -> EQUALEQUALS
-Rule 62    exp -> term more_term
-Rule 63    more_term -> operator exp
-Rule 64    more_term -> <empty>
-Rule 65    operator -> PLUS
-Rule 66    operator -> MINUS
-Rule 67    term -> factor more_factor
-Rule 68    more_factor -> multiplier term
-Rule 69    more_factor -> <empty>
-Rule 70    multiplier -> MULTIPLICATION
-Rule 71    multiplier -> DIVISION
-Rule 72    factor -> LPAR exp RPAR
-Rule 73    factor -> var_cte
-Rule 74    var_cte -> CTEINT
-Rule 75    var_cte -> CTEDOUBLE
-Rule 76    var_cte -> ID
-Rule 77    var_cte -> cte_bool
-Rule 78    var_cte -> function_call
-Rule 79    cte_bool -> TRUE
-Rule 80    cte_bool -> FALSE
-Rule 81    block -> LBRACKET more_statements RBRACKET
-Rule 82    main -> MAIN main_block
-Rule 83    main_block -> LBRACKET more_vars more_statements RBRACKET
-Rule 84    function_call -> ID LPAR func_params RPAR
+Rule 4     to_actual_type -> <empty>
+Rule 5     to_var_table -> <empty>
+Rule 6     more_vars -> vars
+Rule 7     more_vars -> <empty>
+Rule 8     var_type -> INT
+Rule 9     var_type -> DOUBLE
+Rule 10    var_type -> BOOL
+Rule 11    var_type -> INTLIST
+Rule 12    var_type -> DOUBLELIST
+Rule 13    func -> FUNC func_type ID procedure_name LPAR pars RPAR func_block more_func
+Rule 14    func_type -> INT
+Rule 15    func_type -> DOUBLE
+Rule 16    func_type -> BOOL
+Rule 17    func_type -> VOID
+Rule 18    procedure_name -> <empty>
+Rule 19    pars -> pars_comp
+Rule 20    pars -> <empty>
+Rule 21    pars_comp -> var_type ID more_pars
+Rule 22    more_pars -> COMMA pars_comp
+Rule 23    more_pars -> <empty>
+Rule 24    func_block -> LBRACKET more_vars more_statements RETURN var_cte SEMICOLON RBRACKET
+Rule 25    func_block -> <empty>
+Rule 26    more_func -> func
+Rule 27    more_func -> <empty>
+Rule 28    more_statements -> statement
+Rule 29    more_statements -> <empty>
+Rule 30    statement -> statement_comp more_statements
+Rule 31    statement_comp -> assignation
+Rule 32    statement_comp -> condition
+Rule 33    statement_comp -> cycle
+Rule 34    statement_comp -> read
+Rule 35    statement_comp -> write
+Rule 36    statement_comp -> function
+Rule 37    assignation -> ID EQUALS expression SEMICOLON
+Rule 38    condition -> IF LPAR expression RPAR block condition_comp
+Rule 39    condition_comp -> ELSE block
+Rule 40    condition_comp -> <empty>
+Rule 41    cycle -> WHILE LPAR expression RPAR block
+Rule 42    read -> READ LPAR var_cte RPAR SEMICOLON
+Rule 43    write -> WRITE LPAR var_comp RPAR SEMICOLON
+Rule 44    var_comp -> function_call
+Rule 45    var_comp -> var_cte
+Rule 46    function -> ID LPAR func_params RPAR SEMICOLON
+Rule 47    func_params -> var_comp var_more
+Rule 48    func_params -> <empty>
+Rule 49    var_more -> COMMA var_comp var_more
+Rule 50    var_more -> <empty>
+Rule 51    expression -> comp expression_comp
+Rule 52    expression_comp -> andor comp
+Rule 53    expression_comp -> <empty>
+Rule 54    andor -> AND
+Rule 55    andor -> OR
+Rule 56    comp -> exp exp_comp
+Rule 57    exp_comp -> comparator exp
+Rule 58    exp_comp -> <empty>
+Rule 59    comparator -> GREATER
+Rule 60    comparator -> FEWER
+Rule 61    comparator -> GREATEROREQUAL
+Rule 62    comparator -> FEWEROREQUAL
+Rule 63    comparator -> DIFFERENT
+Rule 64    comparator -> EQUALEQUALS
+Rule 65    exp -> term more_term
+Rule 66    more_term -> operator exp
+Rule 67    more_term -> <empty>
+Rule 68    operator -> PLUS
+Rule 69    operator -> MINUS
+Rule 70    term -> factor more_factor
+Rule 71    more_factor -> multiplier term
+Rule 72    more_factor -> <empty>
+Rule 73    multiplier -> MULTIPLICATION
+Rule 74    multiplier -> DIVISION
+Rule 75    factor -> LPAR exp RPAR
+Rule 76    factor -> var_cte
+Rule 77    var_cte -> CTEINT
+Rule 78    var_cte -> CTEDOUBLE
+Rule 79    var_cte -> ID
+Rule 80    var_cte -> cte_bool
+Rule 81    var_cte -> function_call
+Rule 82    cte_bool -> TRUE
+Rule 83    cte_bool -> FALSE
+Rule 84    block -> LBRACKET more_statements RBRACKET
+Rule 85    main -> MAIN main_block
+Rule 86    main_block -> LBRACKET more_vars more_statements RBRACKET
+Rule 87    function_call -> ID LPAR func_params RPAR
 
 Terminals, with rules where they appear
 
 ADDAT                : 
-AND                  : 51
+AND                  : 54
 APPEND               : 
 BLACK                : 
 BLUE                 : 
-BOOL                 : 8 14
+BOOL                 : 10 16
 CHANGECOLOR          : 
 CHANGETHICKNESS      : 
-COMMA                : 19 46
-CTEDOUBLE            : 75
-CTEINT               : 74
+COMMA                : 22 49
+CTEDOUBLE            : 78
+CTEINT               : 77
 CTESTRING            : 
-DIFFERENT            : 60
-DIVISION             : 71
-DOUBLE               : 7 13
-DOUBLELIST           : 10
+DIFFERENT            : 63
+DIVISION             : 74
+DOUBLE               : 9 15
+DOUBLELIST           : 12
 DRAWARC              : 
 DRAWCIRCLE           : 
 DRAWLINE             : 
 DRAWRECTANGLE        : 
 DRAWSQUARE           : 
-ELSE                 : 36
-EQUALEQUALS          : 61
-EQUALS               : 34
+ELSE                 : 39
+EQUALEQUALS          : 64
+EQUALS               : 37
 ERASE                : 
-FALSE                : 80
-FEWER                : 57
-FEWEROREQUAL         : 59
-FUNC                 : 11
-GREATER              : 56
-GREATEROREQUAL       : 58
+FALSE                : 83
+FEWER                : 60
+FEWEROREQUAL         : 62
+FUNC                 : 13
+GREATER              : 59
+GREATEROREQUAL       : 61
 GREEN                : 
-ID                   : 2 11 18 34 43 76 84
-IF                   : 35
-INT                  : 6 12
-INTLIST              : 9
-LBRACKET             : 21 81 83
-LPAR                 : 11 35 38 39 40 43 72 84
-MAIN                 : 82
+ID                   : 2 13 21 37 46 79 87
+IF                   : 38
+INT                  : 8 14
+INTLIST              : 11
+LBRACKET             : 24 84 86
+LPAR                 : 13 38 41 42 43 46 75 87
+MAIN                 : 85
 MEDIUM               : 
-MINUS                : 66
+MINUS                : 69
 MOD                  : 
 MOVEFIGURE           : 
-MULTIPLICATION       : 70
-OR                   : 52
+MULTIPLICATION       : 73
+OR                   : 55
 ORANGE               : 
-PLUS                 : 65
+PLUS                 : 68
 PREPEND              : 
 PURPLE               : 
-RBRACKET             : 21 81 83
-READ                 : 39
+RBRACKET             : 24 84 86
+READ                 : 42
 RED                  : 
 REMOVEAT             : 
 REMOVEFIRST          : 
 REMOVELAST           : 
-RETURN               : 21
+RETURN               : 24
 ROTATEFIGURE         : 
-RPAR                 : 11 35 38 39 40 43 72 84
+RPAR                 : 13 38 41 42 43 46 75 87
 SCALEDOWN            : 
 SCALEUP              : 
-SEMICOLON            : 2 21 34 39 40 43
+SEMICOLON            : 2 24 37 42 43 46
 THICK                : 
 THIN                 : 
-TRUE                 : 79
-VOID                 : 15
-WHILE                : 38
-WRITE                : 40
+TRUE                 : 82
+VOID                 : 17
+WHILE                : 41
+WRITE                : 43
 YELLOW               : 
 error                : 
 
 Nonterminals, with rules where they appear
 
-andor                : 49
-assignation          : 28
-block                : 35 36 38
-comp                 : 48 49
-comparator           : 54
-condition            : 29
-condition_comp       : 35
-cte_bool             : 77
-cycle                : 30
-exp                  : 53 54 63 72
-exp_comp             : 53
-expression           : 34 35 38
-expression_comp      : 48
-factor               : 67
-func                 : 23
-func_block           : 11
-func_params          : 43 84
-func_type            : 11
-function             : 33
-function_call        : 41 78
+andor                : 52
+assignation          : 31
+block                : 38 39 41
+comp                 : 51 52
+comparator           : 57
+condition            : 32
+condition_comp       : 38
+cte_bool             : 80
+cycle                : 33
+exp                  : 56 57 66 75
+exp_comp             : 56
+expression           : 37 38 41
+expression_comp      : 51
+factor               : 70
+func                 : 26
+func_block           : 13
+func_params          : 46 87
+func_type            : 13
+function             : 36
+function_call        : 44 81
 main                 : 1
-main_block           : 82
-more_factor          : 67
-more_func            : 1 11
-more_pars            : 18
-more_statements      : 21 27 81 83
-more_term            : 62
-more_vars            : 1 21 83
-multiplier           : 68
-operator             : 63
-pars                 : 11
-pars_comp            : 16 19
+main_block           : 85
+more_factor          : 70
+more_func            : 1 13
+more_pars            : 21
+more_statements      : 24 30 84 86
+more_term            : 65
+more_vars            : 1 24 86
+multiplier           : 71
+operator             : 66
+pars                 : 13
+pars_comp            : 19 22
+procedure_name       : 13
 program              : 0
-read                 : 31
-statement            : 25
-statement_comp       : 27
-term                 : 62 68
-var_comp             : 40 44 46
-var_cte              : 21 39 42 73
-var_more             : 44 46
-var_type             : 2 18
-vars                 : 2 4
-write                : 32
+read                 : 34
+statement            : 28
+statement_comp       : 30
+term                 : 65 71
+to_actual_type       : 2
+to_var_table         : 2
+var_comp             : 43 47 49
+var_cte              : 24 42 45 76
+var_more             : 47 49
+var_type             : 2 21
+vars                 : 2 6
+write                : 35
 
 Parsing method: LALR
 
@@ -245,15 +251,15 @@ state 0
 
     (0) S' -> . program
     (1) program -> . more_vars more_func main
-    (4) more_vars -> . vars
-    (5) more_vars -> .
-    (2) vars -> . var_type ID SEMICOLON vars
+    (6) more_vars -> . vars
+    (7) more_vars -> .
+    (2) vars -> . var_type to_actual_type ID to_var_table SEMICOLON vars
     (3) vars -> .
-    (6) var_type -> . INT
-    (7) var_type -> . DOUBLE
-    (8) var_type -> . BOOL
-    (9) var_type -> . INTLIST
-    (10) var_type -> . DOUBLELIST
+    (8) var_type -> . INT
+    (9) var_type -> . DOUBLE
+    (10) var_type -> . BOOL
+    (11) var_type -> . INTLIST
+    (12) var_type -> . DOUBLELIST
 
   ! reduce/reduce conflict for FUNC resolved using rule 3 (vars -> .)
   ! reduce/reduce conflict for MAIN resolved using rule 3 (vars -> .)
@@ -265,8 +271,8 @@ state 0
     INTLIST         shift and go to state 7
     DOUBLELIST      shift and go to state 8
 
-  ! FUNC            [ reduce using rule 5 (more_vars -> .) ]
-  ! MAIN            [ reduce using rule 5 (more_vars -> .) ]
+  ! FUNC            [ reduce using rule 7 (more_vars -> .) ]
+  ! MAIN            [ reduce using rule 7 (more_vars -> .) ]
 
     vars                           shift and go to state 1
     var_type                       shift and go to state 2
@@ -275,38 +281,40 @@ state 0
 
 state 1
 
-    (4) more_vars -> vars .
+    (6) more_vars -> vars .
 
-    ID              reduce using rule 4 (more_vars -> vars .)
-    IF              reduce using rule 4 (more_vars -> vars .)
-    WHILE           reduce using rule 4 (more_vars -> vars .)
-    READ            reduce using rule 4 (more_vars -> vars .)
-    WRITE           reduce using rule 4 (more_vars -> vars .)
-    RETURN          reduce using rule 4 (more_vars -> vars .)
-    RBRACKET        reduce using rule 4 (more_vars -> vars .)
-    FUNC            reduce using rule 4 (more_vars -> vars .)
-    MAIN            reduce using rule 4 (more_vars -> vars .)
+    ID              reduce using rule 6 (more_vars -> vars .)
+    IF              reduce using rule 6 (more_vars -> vars .)
+    WHILE           reduce using rule 6 (more_vars -> vars .)
+    READ            reduce using rule 6 (more_vars -> vars .)
+    WRITE           reduce using rule 6 (more_vars -> vars .)
+    RBRACKET        reduce using rule 6 (more_vars -> vars .)
+    FUNC            reduce using rule 6 (more_vars -> vars .)
+    MAIN            reduce using rule 6 (more_vars -> vars .)
+    RETURN          reduce using rule 6 (more_vars -> vars .)
 
 
 state 2
 
-    (2) vars -> var_type . ID SEMICOLON vars
+    (2) vars -> var_type . to_actual_type ID to_var_table SEMICOLON vars
+    (4) to_actual_type -> .
 
-    ID              shift and go to state 10
+    ID              reduce using rule 4 (to_actual_type -> .)
 
+    to_actual_type                 shift and go to state 10
 
 state 3
 
-    (6) var_type -> INT .
+    (8) var_type -> INT .
 
-    ID              reduce using rule 6 (var_type -> INT .)
+    ID              reduce using rule 8 (var_type -> INT .)
 
 
 state 4
 
-    (7) var_type -> DOUBLE .
+    (9) var_type -> DOUBLE .
 
-    ID              reduce using rule 7 (var_type -> DOUBLE .)
+    ID              reduce using rule 9 (var_type -> DOUBLE .)
 
 
 state 5
@@ -317,33 +325,33 @@ state 5
 
 state 6
 
-    (8) var_type -> BOOL .
+    (10) var_type -> BOOL .
 
-    ID              reduce using rule 8 (var_type -> BOOL .)
+    ID              reduce using rule 10 (var_type -> BOOL .)
 
 
 state 7
 
-    (9) var_type -> INTLIST .
+    (11) var_type -> INTLIST .
 
-    ID              reduce using rule 9 (var_type -> INTLIST .)
+    ID              reduce using rule 11 (var_type -> INTLIST .)
 
 
 state 8
 
-    (10) var_type -> DOUBLELIST .
+    (12) var_type -> DOUBLELIST .
 
-    ID              reduce using rule 10 (var_type -> DOUBLELIST .)
+    ID              reduce using rule 12 (var_type -> DOUBLELIST .)
 
 
 state 9
 
     (1) program -> more_vars . more_func main
-    (23) more_func -> . func
-    (24) more_func -> .
-    (11) func -> . FUNC func_type ID LPAR pars RPAR func_block more_func
+    (26) more_func -> . func
+    (27) more_func -> .
+    (13) func -> . FUNC func_type ID procedure_name LPAR pars RPAR func_block more_func
 
-    MAIN            reduce using rule 24 (more_func -> .)
+    MAIN            reduce using rule 27 (more_func -> .)
     FUNC            shift and go to state 13
 
     more_func                      shift and go to state 12
@@ -351,22 +359,22 @@ state 9
 
 state 10
 
-    (2) vars -> var_type ID . SEMICOLON vars
+    (2) vars -> var_type to_actual_type . ID to_var_table SEMICOLON vars
 
-    SEMICOLON       shift and go to state 14
+    ID              shift and go to state 14
 
 
 state 11
 
-    (23) more_func -> func .
+    (26) more_func -> func .
 
-    MAIN            reduce using rule 23 (more_func -> func .)
+    MAIN            reduce using rule 26 (more_func -> func .)
 
 
 state 12
 
     (1) program -> more_vars more_func . main
-    (82) main -> . MAIN main_block
+    (85) main -> . MAIN main_block
 
     MAIN            shift and go to state 15
 
@@ -374,11 +382,11 @@ state 12
 
 state 13
 
-    (11) func -> FUNC . func_type ID LPAR pars RPAR func_block more_func
-    (12) func_type -> . INT
-    (13) func_type -> . DOUBLE
-    (14) func_type -> . BOOL
-    (15) func_type -> . VOID
+    (13) func -> FUNC . func_type ID procedure_name LPAR pars RPAR func_block more_func
+    (14) func_type -> . INT
+    (15) func_type -> . DOUBLE
+    (16) func_type -> . BOOL
+    (17) func_type -> . VOID
 
     INT             shift and go to state 20
     DOUBLE          shift and go to state 18
@@ -389,37 +397,17 @@ state 13
 
 state 14
 
-    (2) vars -> var_type ID SEMICOLON . vars
-    (2) vars -> . var_type ID SEMICOLON vars
-    (3) vars -> .
-    (6) var_type -> . INT
-    (7) var_type -> . DOUBLE
-    (8) var_type -> . BOOL
-    (9) var_type -> . INTLIST
-    (10) var_type -> . DOUBLELIST
+    (2) vars -> var_type to_actual_type ID . to_var_table SEMICOLON vars
+    (5) to_var_table -> .
 
-    FUNC            reduce using rule 3 (vars -> .)
-    MAIN            reduce using rule 3 (vars -> .)
-    ID              reduce using rule 3 (vars -> .)
-    IF              reduce using rule 3 (vars -> .)
-    WHILE           reduce using rule 3 (vars -> .)
-    READ            reduce using rule 3 (vars -> .)
-    WRITE           reduce using rule 3 (vars -> .)
-    RBRACKET        reduce using rule 3 (vars -> .)
-    RETURN          reduce using rule 3 (vars -> .)
-    INT             shift and go to state 3
-    DOUBLE          shift and go to state 4
-    BOOL            shift and go to state 6
-    INTLIST         shift and go to state 7
-    DOUBLELIST      shift and go to state 8
+    SEMICOLON       reduce using rule 5 (to_var_table -> .)
 
-    vars                           shift and go to state 22
-    var_type                       shift and go to state 2
+    to_var_table                   shift and go to state 22
 
 state 15
 
-    (82) main -> MAIN . main_block
-    (83) main_block -> . LBRACKET more_vars more_statements RBRACKET
+    (85) main -> MAIN . main_block
+    (86) main_block -> . LBRACKET more_vars more_statements RBRACKET
 
     LBRACKET        shift and go to state 24
 
@@ -434,73 +422,65 @@ state 16
 
 state 17
 
-    (11) func -> FUNC func_type . ID LPAR pars RPAR func_block more_func
+    (13) func -> FUNC func_type . ID procedure_name LPAR pars RPAR func_block more_func
 
     ID              shift and go to state 25
 
 
 state 18
 
-    (13) func_type -> DOUBLE .
+    (15) func_type -> DOUBLE .
 
-    ID              reduce using rule 13 (func_type -> DOUBLE .)
+    ID              reduce using rule 15 (func_type -> DOUBLE .)
 
 
 state 19
 
-    (15) func_type -> VOID .
+    (17) func_type -> VOID .
 
-    ID              reduce using rule 15 (func_type -> VOID .)
+    ID              reduce using rule 17 (func_type -> VOID .)
 
 
 state 20
 
-    (12) func_type -> INT .
+    (14) func_type -> INT .
 
-    ID              reduce using rule 12 (func_type -> INT .)
+    ID              reduce using rule 14 (func_type -> INT .)
 
 
 state 21
 
-    (14) func_type -> BOOL .
+    (16) func_type -> BOOL .
 
-    ID              reduce using rule 14 (func_type -> BOOL .)
+    ID              reduce using rule 16 (func_type -> BOOL .)
 
 
 state 22
 
-    (2) vars -> var_type ID SEMICOLON vars .
+    (2) vars -> var_type to_actual_type ID to_var_table . SEMICOLON vars
 
-    FUNC            reduce using rule 2 (vars -> var_type ID SEMICOLON vars .)
-    MAIN            reduce using rule 2 (vars -> var_type ID SEMICOLON vars .)
-    ID              reduce using rule 2 (vars -> var_type ID SEMICOLON vars .)
-    IF              reduce using rule 2 (vars -> var_type ID SEMICOLON vars .)
-    WHILE           reduce using rule 2 (vars -> var_type ID SEMICOLON vars .)
-    READ            reduce using rule 2 (vars -> var_type ID SEMICOLON vars .)
-    WRITE           reduce using rule 2 (vars -> var_type ID SEMICOLON vars .)
-    RBRACKET        reduce using rule 2 (vars -> var_type ID SEMICOLON vars .)
-    RETURN          reduce using rule 2 (vars -> var_type ID SEMICOLON vars .)
+    SEMICOLON       shift and go to state 26
 
 
 state 23
 
-    (82) main -> MAIN main_block .
+    (85) main -> MAIN main_block .
 
-    $end            reduce using rule 82 (main -> MAIN main_block .)
+    $end            reduce using rule 85 (main -> MAIN main_block .)
 
 
 state 24
 
-    (83) main_block -> LBRACKET . more_vars more_statements RBRACKET
-    (4) more_vars -> . vars
-    (5) more_vars -> .
-    (2) vars -> . var_type ID SEMICOLON vars
+    (86) main_block -> LBRACKET . more_vars more_statements RBRACKET
+    (6) more_vars -> . vars
+    (7) more_vars -> .
+    (2) vars -> . var_type to_actual_type ID to_var_table SEMICOLON vars
     (3) vars -> .
-    (6) var_type -> . INT
-    (7) var_type -> . DOUBLE
-    (8) var_type -> . BOOL
-    (9) var_type -> . INTLIST
-    (10) var_type -> . DOUBLELIST
+    (8) var_type -> . INT
+    (9) var_type -> . DOUBLE
+    (10) var_type -> . BOOL
+    (11) var_type -> . INTLIST
+    (12) var_type -> . DOUBLELIST
 
   ! reduce/reduce conflict for ID resolved using rule 3 (vars -> .)
   ! reduce/reduce conflict for IF resolved using rule 3 (vars -> .)
@@ -520,870 +500,1359 @@ state 24
     INTLIST         shift and go to state 7
     DOUBLELIST      shift and go to state 8
 
-  ! ID              [ reduce using rule 5 (more_vars -> .) ]
-  ! IF              [ reduce using rule 5 (more_vars -> .) ]
-  ! WHILE           [ reduce using rule 5 (more_vars -> .) ]
-  ! READ            [ reduce using rule 5 (more_vars -> .) ]
-  ! WRITE           [ reduce using rule 5 (more_vars -> .) ]
-  ! RBRACKET        [ reduce using rule 5 (more_vars -> .) ]
+  ! ID              [ reduce using rule 7 (more_vars -> .) ]
+  ! IF              [ reduce using rule 7 (more_vars -> .) ]
+  ! WHILE           [ reduce using rule 7 (more_vars -> .) ]
+  ! READ            [ reduce using rule 7 (more_vars -> .) ]
+  ! WRITE           [ reduce using rule 7 (more_vars -> .) ]
+  ! RBRACKET        [ reduce using rule 7 (more_vars -> .) ]
 
-    var_type                       shift and go to state 2
-    more_vars                      shift and go to state 26
     vars                           shift and go to state 1
+    var_type                       shift and go to state 2
+    more_vars                      shift and go to state 27
 
 state 25
 
-    (11) func -> FUNC func_type ID . LPAR pars RPAR func_block more_func
+    (13) func -> FUNC func_type ID . procedure_name LPAR pars RPAR func_block more_func
+    (18) procedure_name -> .
 
-    LPAR            shift and go to state 27
+    LPAR            reduce using rule 18 (procedure_name -> .)
 
+    procedure_name                 shift and go to state 28
 
 state 26
 
-    (83) main_block -> LBRACKET more_vars . more_statements RBRACKET
-    (25) more_statements -> . statement
-    (26) more_statements -> .
-    (27) statement -> . statement_comp more_statements
-    (28) statement_comp -> . assignation
-    (29) statement_comp -> . condition
-    (30) statement_comp -> . cycle
-    (31) statement_comp -> . read
-    (32) statement_comp -> . write
-    (33) statement_comp -> . function
-    (34) assignation -> . ID EQUALS expression SEMICOLON
-    (35) condition -> . IF LPAR expression RPAR block condition_comp
-    (38) cycle -> . WHILE LPAR expression RPAR block
-    (39) read -> . READ LPAR var_cte RPAR SEMICOLON
-    (40) write -> . WRITE LPAR var_comp RPAR SEMICOLON
-    (43) function -> . ID LPAR func_params RPAR SEMICOLON
+    (2) vars -> var_type to_actual_type ID to_var_table SEMICOLON . vars
+    (2) vars -> . var_type to_actual_type ID to_var_table SEMICOLON vars
+    (3) vars -> .
+    (8) var_type -> . INT
+    (9) var_type -> . DOUBLE
+    (10) var_type -> . BOOL
+    (11) var_type -> . INTLIST
+    (12) var_type -> . DOUBLELIST
 
-    RBRACKET        reduce using rule 26 (more_statements -> .)
-    ID              shift and go to state 38
-    IF              shift and go to state 40
-    WHILE           shift and go to state 29
-    READ            shift and go to state 28
-    WRITE           shift and go to state 37
-
-    function                       shift and go to state 35
-    assignation                    shift and go to state 41
-    read                           shift and go to state 36
-    write                          shift and go to state 32
-    statement                      shift and go to state 33
-    statement_comp                 shift and go to state 30
-    cycle                          shift and go to state 34
-    condition                      shift and go to state 39
-    more_statements                shift and go to state 31
-
-state 27
-
-    (11) func -> FUNC func_type ID LPAR . pars RPAR func_block more_func
-    (16) pars -> . pars_comp
-    (17) pars -> .
-    (18) pars_comp -> . var_type ID more_pars
-    (6) var_type -> . INT
-    (7) var_type -> . DOUBLE
-    (8) var_type -> . BOOL
-    (9) var_type -> . INTLIST
-    (10) var_type -> . DOUBLELIST
-
-    RPAR            reduce using rule 17 (pars -> .)
+    FUNC            reduce using rule 3 (vars -> .)
+    MAIN            reduce using rule 3 (vars -> .)
+    ID              reduce using rule 3 (vars -> .)
+    IF              reduce using rule 3 (vars -> .)
+    WHILE           reduce using rule 3 (vars -> .)
+    READ            reduce using rule 3 (vars -> .)
+    WRITE           reduce using rule 3 (vars -> .)
+    RBRACKET        reduce using rule 3 (vars -> .)
+    RETURN          reduce using rule 3 (vars -> .)
     INT             shift and go to state 3
     DOUBLE          shift and go to state 4
     BOOL            shift and go to state 6
     INTLIST         shift and go to state 7
     DOUBLELIST      shift and go to state 8
 
-    var_type                       shift and go to state 42
-    pars                           shift and go to state 43
-    pars_comp                      shift and go to state 44
+    vars                           shift and go to state 29
+    var_type                       shift and go to state 2
+
+state 27
+
+    (86) main_block -> LBRACKET more_vars . more_statements RBRACKET
+    (28) more_statements -> . statement
+    (29) more_statements -> .
+    (30) statement -> . statement_comp more_statements
+    (31) statement_comp -> . assignation
+    (32) statement_comp -> . condition
+    (33) statement_comp -> . cycle
+    (34) statement_comp -> . read
+    (35) statement_comp -> . write
+    (36) statement_comp -> . function
+    (37) assignation -> . ID EQUALS expression SEMICOLON
+    (38) condition -> . IF LPAR expression RPAR block condition_comp
+    (41) cycle -> . WHILE LPAR expression RPAR block
+    (42) read -> . READ LPAR var_cte RPAR SEMICOLON
+    (43) write -> . WRITE LPAR var_comp RPAR SEMICOLON
+    (46) function -> . ID LPAR func_params RPAR SEMICOLON
+
+    RBRACKET        reduce using rule 29 (more_statements -> .)
+    ID              shift and go to state 40
+    IF              shift and go to state 42
+    WHILE           shift and go to state 31
+    READ            shift and go to state 30
+    WRITE           shift and go to state 39
+
+    function                       shift and go to state 37
+    assignation                    shift and go to state 43
+    read                           shift and go to state 38
+    write                          shift and go to state 34
+    statement                      shift and go to state 35
+    statement_comp                 shift and go to state 32
+    cycle                          shift and go to state 36
+    condition                      shift and go to state 41
+    more_statements                shift and go to state 33
 
 state 28
 
-    (39) read -> READ . LPAR var_cte RPAR SEMICOLON
+    (13) func -> FUNC func_type ID procedure_name . LPAR pars RPAR func_block more_func
 
-    LPAR            shift and go to state 45
+    LPAR            shift and go to state 44
 
 
 state 29
 
-    (38) cycle -> WHILE . LPAR expression RPAR block
+    (2) vars -> var_type to_actual_type ID to_var_table SEMICOLON vars .
 
-    LPAR            shift and go to state 46
+    FUNC            reduce using rule 2 (vars -> var_type to_actual_type ID to_var_table SEMICOLON vars .)
+    MAIN            reduce using rule 2 (vars -> var_type to_actual_type ID to_var_table SEMICOLON vars .)
+    ID              reduce using rule 2 (vars -> var_type to_actual_type ID to_var_table SEMICOLON vars .)
+    IF              reduce using rule 2 (vars -> var_type to_actual_type ID to_var_table SEMICOLON vars .)
+    WHILE           reduce using rule 2 (vars -> var_type to_actual_type ID to_var_table SEMICOLON vars .)
+    READ            reduce using rule 2 (vars -> var_type to_actual_type ID to_var_table SEMICOLON vars .)
+    WRITE           reduce using rule 2 (vars -> var_type to_actual_type ID to_var_table SEMICOLON vars .)
+    RBRACKET        reduce using rule 2 (vars -> var_type to_actual_type ID to_var_table SEMICOLON vars .)
+    RETURN          reduce using rule 2 (vars -> var_type to_actual_type ID to_var_table SEMICOLON vars .)
 
 
 state 30
 
-    (27) statement -> statement_comp . more_statements
-    (25) more_statements -> . statement
-    (26) more_statements -> .
-    (27) statement -> . statement_comp more_statements
-    (28) statement_comp -> . assignation
-    (29) statement_comp -> . condition
-    (30) statement_comp -> . cycle
-    (31) statement_comp -> . read
-    (32) statement_comp -> . write
-    (33) statement_comp -> . function
-    (34) assignation -> . ID EQUALS expression SEMICOLON
-    (35) condition -> . IF LPAR expression RPAR block condition_comp
-    (38) cycle -> . WHILE LPAR expression RPAR block
-    (39) read -> . READ LPAR var_cte RPAR SEMICOLON
-    (40) write -> . WRITE LPAR var_comp RPAR SEMICOLON
-    (43) function -> . ID LPAR func_params RPAR SEMICOLON
+    (42) read -> READ . LPAR var_cte RPAR SEMICOLON
 
-    RBRACKET        reduce using rule 26 (more_statements -> .)
-    RETURN          reduce using rule 26 (more_statements -> .)
-    ID              shift and go to state 38
-    IF              shift and go to state 40
-    WHILE           shift and go to state 29
-    READ            shift and go to state 28
-    WRITE           shift and go to state 37
+    LPAR            shift and go to state 45
 
-    function                       shift and go to state 35
-    assignation                    shift and go to state 41
-    read                           shift and go to state 36
-    write                          shift and go to state 32
-    statement                      shift and go to state 33
-    statement_comp                 shift and go to state 30
-    more_statements                shift and go to state 47
-    condition                      shift and go to state 39
-    cycle                          shift and go to state 34
 
 state 31
 
-    (83) main_block -> LBRACKET more_vars more_statements . RBRACKET
+    (41) cycle -> WHILE . LPAR expression RPAR block
 
-    RBRACKET        shift and go to state 48
+    LPAR            shift and go to state 46
 
 
 state 32
 
-    (32) statement_comp -> write .
+    (30) statement -> statement_comp . more_statements
+    (28) more_statements -> . statement
+    (29) more_statements -> .
+    (30) statement -> . statement_comp more_statements
+    (31) statement_comp -> . assignation
+    (32) statement_comp -> . condition
+    (33) statement_comp -> . cycle
+    (34) statement_comp -> . read
+    (35) statement_comp -> . write
+    (36) statement_comp -> . function
+    (37) assignation -> . ID EQUALS expression SEMICOLON
+    (38) condition -> . IF LPAR expression RPAR block condition_comp
+    (41) cycle -> . WHILE LPAR expression RPAR block
+    (42) read -> . READ LPAR var_cte RPAR SEMICOLON
+    (43) write -> . WRITE LPAR var_comp RPAR SEMICOLON
+    (46) function -> . ID LPAR func_params RPAR SEMICOLON
 
-    ID              reduce using rule 32 (statement_comp -> write .)
-    IF              reduce using rule 32 (statement_comp -> write .)
-    WHILE           reduce using rule 32 (statement_comp -> write .)
-    READ            reduce using rule 32 (statement_comp -> write .)
-    WRITE           reduce using rule 32 (statement_comp -> write .)
-    RBRACKET        reduce using rule 32 (statement_comp -> write .)
-    RETURN          reduce using rule 32 (statement_comp -> write .)
+    RBRACKET        reduce using rule 29 (more_statements -> .)
+    RETURN          reduce using rule 29 (more_statements -> .)
+    ID              shift and go to state 40
+    IF              shift and go to state 42
+    WHILE           shift and go to state 31
+    READ            shift and go to state 30
+    WRITE           shift and go to state 39
 
+    function                       shift and go to state 37
+    assignation                    shift and go to state 43
+    read                           shift and go to state 38
+    write                          shift and go to state 34
+    statement                      shift and go to state 35
+    statement_comp                 shift and go to state 32
+    more_statements                shift and go to state 47
+    condition                      shift and go to state 41
+    cycle                          shift and go to state 36
 
 state 33
 
-    (25) more_statements -> statement .
+    (86) main_block -> LBRACKET more_vars more_statements . RBRACKET
 
-    RETURN          reduce using rule 25 (more_statements -> statement .)
-    RBRACKET        reduce using rule 25 (more_statements -> statement .)
+    RBRACKET        shift and go to state 48
 
 
 state 34
 
-    (30) statement_comp -> cycle .
+    (35) statement_comp -> write .
 
-    ID              reduce using rule 30 (statement_comp -> cycle .)
-    IF              reduce using rule 30 (statement_comp -> cycle .)
-    WHILE           reduce using rule 30 (statement_comp -> cycle .)
-    READ            reduce using rule 30 (statement_comp -> cycle .)
-    WRITE           reduce using rule 30 (statement_comp -> cycle .)
-    RBRACKET        reduce using rule 30 (statement_comp -> cycle .)
-    RETURN          reduce using rule 30 (statement_comp -> cycle .)
+    ID              reduce using rule 35 (statement_comp -> write .)
+    IF              reduce using rule 35 (statement_comp -> write .)
+    WHILE           reduce using rule 35 (statement_comp -> write .)
+    READ            reduce using rule 35 (statement_comp -> write .)
+    WRITE           reduce using rule 35 (statement_comp -> write .)
+    RBRACKET        reduce using rule 35 (statement_comp -> write .)
+    RETURN          reduce using rule 35 (statement_comp -> write .)
 
 
 state 35
 
-    (33) statement_comp -> function .
+    (28) more_statements -> statement .
 
-    ID              reduce using rule 33 (statement_comp -> function .)
-    IF              reduce using rule 33 (statement_comp -> function .)
-    WHILE           reduce using rule 33 (statement_comp -> function .)
-    READ            reduce using rule 33 (statement_comp -> function .)
-    WRITE           reduce using rule 33 (statement_comp -> function .)
-    RBRACKET        reduce using rule 33 (statement_comp -> function .)
-    RETURN          reduce using rule 33 (statement_comp -> function .)
+    RBRACKET        reduce using rule 28 (more_statements -> statement .)
+    RETURN          reduce using rule 28 (more_statements -> statement .)
 
 
 state 36
 
-    (31) statement_comp -> read .
+    (33) statement_comp -> cycle .
 
-    ID              reduce using rule 31 (statement_comp -> read .)
-    IF              reduce using rule 31 (statement_comp -> read .)
-    WHILE           reduce using rule 31 (statement_comp -> read .)
-    READ            reduce using rule 31 (statement_comp -> read .)
-    WRITE           reduce using rule 31 (statement_comp -> read .)
-    RBRACKET        reduce using rule 31 (statement_comp -> read .)
-    RETURN          reduce using rule 31 (statement_comp -> read .)
+    ID              reduce using rule 33 (statement_comp -> cycle .)
+    IF              reduce using rule 33 (statement_comp -> cycle .)
+    WHILE           reduce using rule 33 (statement_comp -> cycle .)
+    READ            reduce using rule 33 (statement_comp -> cycle .)
+    WRITE           reduce using rule 33 (statement_comp -> cycle .)
+    RBRACKET        reduce using rule 33 (statement_comp -> cycle .)
+    RETURN          reduce using rule 33 (statement_comp -> cycle .)
 
 
 state 37
 
-    (40) write -> WRITE . LPAR var_comp RPAR SEMICOLON
+    (36) statement_comp -> function .
 
-    LPAR            shift and go to state 49
+    ID              reduce using rule 36 (statement_comp -> function .)
+    IF              reduce using rule 36 (statement_comp -> function .)
+    WHILE           reduce using rule 36 (statement_comp -> function .)
+    READ            reduce using rule 36 (statement_comp -> function .)
+    WRITE           reduce using rule 36 (statement_comp -> function .)
+    RBRACKET        reduce using rule 36 (statement_comp -> function .)
+    RETURN          reduce using rule 36 (statement_comp -> function .)
 
 
 state 38
 
-    (34) assignation -> ID . EQUALS expression SEMICOLON
-    (43) function -> ID . LPAR func_params RPAR SEMICOLON
+    (34) statement_comp -> read .
+
+    ID              reduce using rule 34 (statement_comp -> read .)
+    IF              reduce using rule 34 (statement_comp -> read .)
+    WHILE           reduce using rule 34 (statement_comp -> read .)
+    READ            reduce using rule 34 (statement_comp -> read .)
+    WRITE           reduce using rule 34 (statement_comp -> read .)
+    RBRACKET        reduce using rule 34 (statement_comp -> read .)
+    RETURN          reduce using rule 34 (statement_comp -> read .)
+
+
+state 39
+
+    (43) write -> WRITE . LPAR var_comp RPAR SEMICOLON
+
+    LPAR            shift and go to state 49
+
+
+state 40
+
+    (37) assignation -> ID . EQUALS expression SEMICOLON
+    (46) function -> ID . LPAR func_params RPAR SEMICOLON
 
     EQUALS          shift and go to state 51
     LPAR            shift and go to state 50
 
 
-state 39
-
-    (29) statement_comp -> condition .
-
-    ID              reduce using rule 29 (statement_comp -> condition .)
-    IF              reduce using rule 29 (statement_comp -> condition .)
-    WHILE           reduce using rule 29 (statement_comp -> condition .)
-    READ            reduce using rule 29 (statement_comp -> condition .)
-    WRITE           reduce using rule 29 (statement_comp -> condition .)
-    RBRACKET        reduce using rule 29 (statement_comp -> condition .)
-    RETURN          reduce using rule 29 (statement_comp -> condition .)
-
-
-state 40
-
-    (35) condition -> IF . LPAR expression RPAR block condition_comp
-
-    LPAR            shift and go to state 52
-
-
 state 41
 
-    (28) statement_comp -> assignation .
+    (32) statement_comp -> condition .
 
-    ID              reduce using rule 28 (statement_comp -> assignation .)
-    IF              reduce using rule 28 (statement_comp -> assignation .)
-    WHILE           reduce using rule 28 (statement_comp -> assignation .)
-    READ            reduce using rule 28 (statement_comp -> assignation .)
-    WRITE           reduce using rule 28 (statement_comp -> assignation .)
-    RBRACKET        reduce using rule 28 (statement_comp -> assignation .)
-    RETURN          reduce using rule 28 (statement_comp -> assignation .)
+    ID              reduce using rule 32 (statement_comp -> condition .)
+    IF              reduce using rule 32 (statement_comp -> condition .)
+    WHILE           reduce using rule 32 (statement_comp -> condition .)
+    READ            reduce using rule 32 (statement_comp -> condition .)
+    WRITE           reduce using rule 32 (statement_comp -> condition .)
+    RBRACKET        reduce using rule 32 (statement_comp -> condition .)
+    RETURN          reduce using rule 32 (statement_comp -> condition .)
 
 
 state 42
 
-    (18) pars_comp -> var_type . ID more_pars
+    (38) condition -> IF . LPAR expression RPAR block condition_comp
 
-    ID              shift and go to state 53
+    LPAR            shift and go to state 52
 
 
 state 43
 
-    (11) func -> FUNC func_type ID LPAR pars . RPAR func_block more_func
+    (31) statement_comp -> assignation .
 
-    RPAR            shift and go to state 54
+    ID              reduce using rule 31 (statement_comp -> assignation .)
+    IF              reduce using rule 31 (statement_comp -> assignation .)
+    WHILE           reduce using rule 31 (statement_comp -> assignation .)
+    READ            reduce using rule 31 (statement_comp -> assignation .)
+    WRITE           reduce using rule 31 (statement_comp -> assignation .)
+    RBRACKET        reduce using rule 31 (statement_comp -> assignation .)
+    RETURN          reduce using rule 31 (statement_comp -> assignation .)
 
 
 state 44
 
-    (16) pars -> pars_comp .
+    (13) func -> FUNC func_type ID procedure_name LPAR . pars RPAR func_block more_func
+    (19) pars -> . pars_comp
+    (20) pars -> .
+    (21) pars_comp -> . var_type ID more_pars
+    (8) var_type -> . INT
+    (9) var_type -> . DOUBLE
+    (10) var_type -> . BOOL
+    (11) var_type -> . INTLIST
+    (12) var_type -> . DOUBLELIST
 
-    RPAR            reduce using rule 16 (pars -> pars_comp .)
+    RPAR            reduce using rule 20 (pars -> .)
+    INT             shift and go to state 3
+    DOUBLE          shift and go to state 4
+    BOOL            shift and go to state 6
+    INTLIST         shift and go to state 7
+    DOUBLELIST      shift and go to state 8
 
+    var_type                       shift and go to state 53
+    pars                           shift and go to state 54
+    pars_comp                      shift and go to state 55
 
 state 45
 
-    (39) read -> READ LPAR . var_cte RPAR SEMICOLON
-    (74) var_cte -> . CTEINT
-    (75) var_cte -> . CTEDOUBLE
-    (76) var_cte -> . ID
-    (77) var_cte -> . cte_bool
-    (78) var_cte -> . function_call
-    (79) cte_bool -> . TRUE
-    (80) cte_bool -> . FALSE
-    (84) function_call -> . ID LPAR func_params RPAR
+    (42) read -> READ LPAR . var_cte RPAR SEMICOLON
+    (77) var_cte -> . CTEINT
+    (78) var_cte -> . CTEDOUBLE
+    (79) var_cte -> . ID
+    (80) var_cte -> . cte_bool
+    (81) var_cte -> . function_call
+    (82) cte_bool -> . TRUE
+    (83) cte_bool -> . FALSE
+    (87) function_call -> . ID LPAR func_params RPAR
 
-    CTEINT          shift and go to state 57
-    CTEDOUBLE       shift and go to state 55
-    ID              shift and go to state 62
-    TRUE            shift and go to state 61
-    FALSE           shift and go to state 56
+    CTEINT          shift and go to state 58
+    CTEDOUBLE       shift and go to state 56
+    ID              shift and go to state 63
+    TRUE            shift and go to state 62
+    FALSE           shift and go to state 57
 
-    cte_bool                       shift and go to state 58
-    function_call                  shift and go to state 59
-    var_cte                        shift and go to state 60
+    cte_bool                       shift and go to state 59
+    function_call                  shift and go to state 60
+    var_cte                        shift and go to state 61
 
 state 46
 
-    (38) cycle -> WHILE LPAR . expression RPAR block
-    (48) expression -> . comp expression_comp
-    (53) comp -> . exp exp_comp
-    (62) exp -> . term more_term
-    (67) term -> . factor more_factor
-    (72) factor -> . LPAR exp RPAR
-    (73) factor -> . var_cte
-    (74) var_cte -> . CTEINT
-    (75) var_cte -> . CTEDOUBLE
-    (76) var_cte -> . ID
-    (77) var_cte -> . cte_bool
-    (78) var_cte -> . function_call
-    (79) cte_bool -> . TRUE
-    (80) cte_bool -> . FALSE
-    (84) function_call -> . ID LPAR func_params RPAR
+    (41) cycle -> WHILE LPAR . expression RPAR block
+    (51) expression -> . comp expression_comp
+    (56) comp -> . exp exp_comp
+    (65) exp -> . term more_term
+    (70) term -> . factor more_factor
+    (75) factor -> . LPAR exp RPAR
+    (76) factor -> . var_cte
+    (77) var_cte -> . CTEINT
+    (78) var_cte -> . CTEDOUBLE
+    (79) var_cte -> . ID
+    (80) var_cte -> . cte_bool
+    (81) var_cte -> . function_call
+    (82) cte_bool -> . TRUE
+    (83) cte_bool -> . FALSE
+    (87) function_call -> . ID LPAR func_params RPAR
 
-    LPAR            shift and go to state 63
-    CTEINT          shift and go to state 57
-    CTEDOUBLE       shift and go to state 55
-    ID              shift and go to state 62
-    TRUE            shift and go to state 61
-    FALSE           shift and go to state 56
+    LPAR            shift and go to state 64
+    CTEINT          shift and go to state 58
+    CTEDOUBLE       shift and go to state 56
+    ID              shift and go to state 63
+    TRUE            shift and go to state 62
+    FALSE           shift and go to state 57
 
-    term                           shift and go to state 67
-    comp                           shift and go to state 65
-    factor                         shift and go to state 64
-    cte_bool                       shift and go to state 58
-    function_call                  shift and go to state 59
-    var_cte                        shift and go to state 66
-    exp                            shift and go to state 68
-    expression                     shift and go to state 69
+    term                           shift and go to state 68
+    comp                           shift and go to state 66
+    factor                         shift and go to state 65
+    cte_bool                       shift and go to state 59
+    function_call                  shift and go to state 60
+    var_cte                        shift and go to state 67
+    exp                            shift and go to state 69
+    expression                     shift and go to state 70
 
 state 47
 
-    (27) statement -> statement_comp more_statements .
+    (30) statement -> statement_comp more_statements .
 
-    RBRACKET        reduce using rule 27 (statement -> statement_comp more_statements .)
-    RETURN          reduce using rule 27 (statement -> statement_comp more_statements .)
+    RETURN          reduce using rule 30 (statement -> statement_comp more_statements .)
+    RBRACKET        reduce using rule 30 (statement -> statement_comp more_statements .)
 
 
 state 48
 
-    (83) main_block -> LBRACKET more_vars more_statements RBRACKET .
+    (86) main_block -> LBRACKET more_vars more_statements RBRACKET .
 
-    $end            reduce using rule 83 (main_block -> LBRACKET more_vars more_statements RBRACKET .)
+    $end            reduce using rule 86 (main_block -> LBRACKET more_vars more_statements RBRACKET .)
 
 
 state 49
 
-    (40) write -> WRITE LPAR . var_comp RPAR SEMICOLON
-    (41) var_comp -> . function_call
-    (42) var_comp -> . var_cte
-    (84) function_call -> . ID LPAR func_params RPAR
-    (74) var_cte -> . CTEINT
-    (75) var_cte -> . CTEDOUBLE
-    (76) var_cte -> . ID
-    (77) var_cte -> . cte_bool
-    (78) var_cte -> . function_call
-    (79) cte_bool -> . TRUE
-    (80) cte_bool -> . FALSE
+    (43) write -> WRITE LPAR . var_comp RPAR SEMICOLON
+    (44) var_comp -> . function_call
+    (45) var_comp -> . var_cte
+    (87) function_call -> . ID LPAR func_params RPAR
+    (77) var_cte -> . CTEINT
+    (78) var_cte -> . CTEDOUBLE
+    (79) var_cte -> . ID
+    (80) var_cte -> . cte_bool
+    (81) var_cte -> . function_call
+    (82) cte_bool -> . TRUE
+    (83) cte_bool -> . FALSE
 
-    ID              shift and go to state 73
-    CTEINT          shift and go to state 57
-    CTEDOUBLE       shift and go to state 55
-    TRUE            shift and go to state 61
-    FALSE           shift and go to state 56
+    ID              shift and go to state 74
+    CTEINT          shift and go to state 58
+    CTEDOUBLE       shift and go to state 56
+    TRUE            shift and go to state 62
+    FALSE           shift and go to state 57
 
-    var_comp                       shift and go to state 70
-    cte_bool                       shift and go to state 58
-    function_call                  shift and go to state 71
-    var_cte                        shift and go to state 72
+    var_comp                       shift and go to state 71
+    cte_bool                       shift and go to state 59
+    function_call                  shift and go to state 72
+    var_cte                        shift and go to state 73
 
 state 50
 
-    (43) function -> ID LPAR . func_params RPAR SEMICOLON
-    (44) func_params -> . var_comp var_more
-    (45) func_params -> .
-    (41) var_comp -> . function_call
-    (42) var_comp -> . var_cte
-    (84) function_call -> . ID LPAR func_params RPAR
-    (74) var_cte -> . CTEINT
-    (75) var_cte -> . CTEDOUBLE
-    (76) var_cte -> . ID
-    (77) var_cte -> . cte_bool
-    (78) var_cte -> . function_call
-    (79) cte_bool -> . TRUE
-    (80) cte_bool -> . FALSE
+    (46) function -> ID LPAR . func_params RPAR SEMICOLON
+    (47) func_params -> . var_comp var_more
+    (48) func_params -> .
+    (44) var_comp -> . function_call
+    (45) var_comp -> . var_cte
+    (87) function_call -> . ID LPAR func_params RPAR
+    (77) var_cte -> . CTEINT
+    (78) var_cte -> . CTEDOUBLE
+    (79) var_cte -> . ID
+    (80) var_cte -> . cte_bool
+    (81) var_cte -> . function_call
+    (82) cte_bool -> . TRUE
+    (83) cte_bool -> . FALSE
 
-    RPAR            reduce using rule 45 (func_params -> .)
-    ID              shift and go to state 73
-    CTEINT          shift and go to state 57
-    CTEDOUBLE       shift and go to state 55
-    TRUE            shift and go to state 61
-    FALSE           shift and go to state 56
+    RPAR            reduce using rule 48 (func_params -> .)
+    ID              shift and go to state 74
+    CTEINT          shift and go to state 58
+    CTEDOUBLE       shift and go to state 56
+    TRUE            shift and go to state 62
+    FALSE           shift and go to state 57
 
-    func_params                    shift and go to state 74
-    var_comp                       shift and go to state 75
-    cte_bool                       shift and go to state 58
-    function_call                  shift and go to state 71
-    var_cte                        shift and go to state 72
+    func_params                    shift and go to state 75
+    var_comp                       shift and go to state 76
+    cte_bool                       shift and go to state 59
+    function_call                  shift and go to state 72
+    var_cte                        shift and go to state 73
 
 state 51
 
-    (34) assignation -> ID EQUALS . expression SEMICOLON
-    (48) expression -> . comp expression_comp
-    (53) comp -> . exp exp_comp
-    (62) exp -> . term more_term
-    (67) term -> . factor more_factor
-    (72) factor -> . LPAR exp RPAR
-    (73) factor -> . var_cte
-    (74) var_cte -> . CTEINT
-    (75) var_cte -> . CTEDOUBLE
-    (76) var_cte -> . ID
-    (77) var_cte -> . cte_bool
-    (78) var_cte -> . function_call
-    (79) cte_bool -> . TRUE
-    (80) cte_bool -> . FALSE
-    (84) function_call -> . ID LPAR func_params RPAR
+    (37) assignation -> ID EQUALS . expression SEMICOLON
+    (51) expression -> . comp expression_comp
+    (56) comp -> . exp exp_comp
+    (65) exp -> . term more_term
+    (70) term -> . factor more_factor
+    (75) factor -> . LPAR exp RPAR
+    (76) factor -> . var_cte
+    (77) var_cte -> . CTEINT
+    (78) var_cte -> . CTEDOUBLE
+    (79) var_cte -> . ID
+    (80) var_cte -> . cte_bool
+    (81) var_cte -> . function_call
+    (82) cte_bool -> . TRUE
+    (83) cte_bool -> . FALSE
+    (87) function_call -> . ID LPAR func_params RPAR
 
-    LPAR            shift and go to state 63
-    CTEINT          shift and go to state 57
-    CTEDOUBLE       shift and go to state 55
-    ID              shift and go to state 62
-    TRUE            shift and go to state 61
-    FALSE           shift and go to state 56
+    LPAR            shift and go to state 64
+    CTEINT          shift and go to state 58
+    CTEDOUBLE       shift and go to state 56
+    ID              shift and go to state 63
+    TRUE            shift and go to state 62
+    FALSE           shift and go to state 57
 
-    term                           shift and go to state 67
-    comp                           shift and go to state 65
-    factor                         shift and go to state 64
-    cte_bool                       shift and go to state 58
-    function_call                  shift and go to state 59
-    var_cte                        shift and go to state 66
-    exp                            shift and go to state 68
-    expression                     shift and go to state 76
+    term                           shift and go to state 68
+    comp                           shift and go to state 66
+    factor                         shift and go to state 65
+    cte_bool                       shift and go to state 59
+    function_call                  shift and go to state 60
+    var_cte                        shift and go to state 67
+    exp                            shift and go to state 69
+    expression                     shift and go to state 77
 
 state 52
 
-    (35) condition -> IF LPAR . expression RPAR block condition_comp
-    (48) expression -> . comp expression_comp
-    (53) comp -> . exp exp_comp
-    (62) exp -> . term more_term
-    (67) term -> . factor more_factor
-    (72) factor -> . LPAR exp RPAR
-    (73) factor -> . var_cte
-    (74) var_cte -> . CTEINT
-    (75) var_cte -> . CTEDOUBLE
-    (76) var_cte -> . ID
-    (77) var_cte -> . cte_bool
-    (78) var_cte -> . function_call
-    (79) cte_bool -> . TRUE
-    (80) cte_bool -> . FALSE
-    (84) function_call -> . ID LPAR func_params RPAR
+    (38) condition -> IF LPAR . expression RPAR block condition_comp
+    (51) expression -> . comp expression_comp
+    (56) comp -> . exp exp_comp
+    (65) exp -> . term more_term
+    (70) term -> . factor more_factor
+    (75) factor -> . LPAR exp RPAR
+    (76) factor -> . var_cte
+    (77) var_cte -> . CTEINT
+    (78) var_cte -> . CTEDOUBLE
+    (79) var_cte -> . ID
+    (80) var_cte -> . cte_bool
+    (81) var_cte -> . function_call
+    (82) cte_bool -> . TRUE
+    (83) cte_bool -> . FALSE
+    (87) function_call -> . ID LPAR func_params RPAR
 
-    LPAR            shift and go to state 63
-    CTEINT          shift and go to state 57
-    CTEDOUBLE       shift and go to state 55
-    ID              shift and go to state 62
-    TRUE            shift and go to state 61
-    FALSE           shift and go to state 56
+    LPAR            shift and go to state 64
+    CTEINT          shift and go to state 58
+    CTEDOUBLE       shift and go to state 56
+    ID              shift and go to state 63
+    TRUE            shift and go to state 62
+    FALSE           shift and go to state 57
 
-    term                           shift and go to state 67
-    comp                           shift and go to state 65
-    factor                         shift and go to state 64
-    cte_bool                       shift and go to state 58
-    function_call                  shift and go to state 59
-    var_cte                        shift and go to state 66
-    exp                            shift and go to state 68
-    expression                     shift and go to state 77
+    term                           shift and go to state 68
+    comp                           shift and go to state 66
+    factor                         shift and go to state 65
+    cte_bool                       shift and go to state 59
+    function_call                  shift and go to state 60
+    var_cte                        shift and go to state 67
+    exp                            shift and go to state 69
+    expression                     shift and go to state 78
 
 state 53
 
-    (18) pars_comp -> var_type ID . more_pars
-    (19) more_pars -> . COMMA pars_comp
-    (20) more_pars -> .
+    (21) pars_comp -> var_type . ID more_pars
 
-    COMMA           shift and go to state 78
-    RPAR            reduce using rule 20 (more_pars -> .)
+    ID              shift and go to state 79
 
-    more_pars                      shift and go to state 79
 
 state 54
 
-    (11) func -> FUNC func_type ID LPAR pars RPAR . func_block more_func
-    (21) func_block -> . LBRACKET more_vars more_statements RETURN var_cte SEMICOLON RBRACKET
-    (22) func_block -> .
+    (13) func -> FUNC func_type ID procedure_name LPAR pars . RPAR func_block more_func
 
-    LBRACKET        shift and go to state 81
-    FUNC            reduce using rule 22 (func_block -> .)
-    MAIN            reduce using rule 22 (func_block -> .)
+    RPAR            shift and go to state 80
 
-    func_block                     shift and go to state 80
 
 state 55
 
-    (75) var_cte -> CTEDOUBLE .
+    (19) pars -> pars_comp .
 
-    COMMA           reduce using rule 75 (var_cte -> CTEDOUBLE .)
-    RPAR            reduce using rule 75 (var_cte -> CTEDOUBLE .)
-    MULTIPLICATION  reduce using rule 75 (var_cte -> CTEDOUBLE .)
-    DIVISION        reduce using rule 75 (var_cte -> CTEDOUBLE .)
-    PLUS            reduce using rule 75 (var_cte -> CTEDOUBLE .)
-    MINUS           reduce using rule 75 (var_cte -> CTEDOUBLE .)
-    GREATER         reduce using rule 75 (var_cte -> CTEDOUBLE .)
-    FEWER           reduce using rule 75 (var_cte -> CTEDOUBLE .)
-    GREATEROREQUAL  reduce using rule 75 (var_cte -> CTEDOUBLE .)
-    FEWEROREQUAL    reduce using rule 75 (var_cte -> CTEDOUBLE .)
-    DIFFERENT       reduce using rule 75 (var_cte -> CTEDOUBLE .)
-    EQUALEQUALS     reduce using rule 75 (var_cte -> CTEDOUBLE .)
-    AND             reduce using rule 75 (var_cte -> CTEDOUBLE .)
-    OR              reduce using rule 75 (var_cte -> CTEDOUBLE .)
-    SEMICOLON       reduce using rule 75 (var_cte -> CTEDOUBLE .)
+    RPAR            reduce using rule 19 (pars -> pars_comp .)
 
 
 state 56
 
-    (80) cte_bool -> FALSE .
+    (78) var_cte -> CTEDOUBLE .
 
-    MULTIPLICATION  reduce using rule 80 (cte_bool -> FALSE .)
-    DIVISION        reduce using rule 80 (cte_bool -> FALSE .)
-    PLUS            reduce using rule 80 (cte_bool -> FALSE .)
-    MINUS           reduce using rule 80 (cte_bool -> FALSE .)
-    GREATER         reduce using rule 80 (cte_bool -> FALSE .)
-    FEWER           reduce using rule 80 (cte_bool -> FALSE .)
-    GREATEROREQUAL  reduce using rule 80 (cte_bool -> FALSE .)
-    FEWEROREQUAL    reduce using rule 80 (cte_bool -> FALSE .)
-    DIFFERENT       reduce using rule 80 (cte_bool -> FALSE .)
-    EQUALEQUALS     reduce using rule 80 (cte_bool -> FALSE .)
-    RPAR            reduce using rule 80 (cte_bool -> FALSE .)
-    SEMICOLON       reduce using rule 80 (cte_bool -> FALSE .)
-    COMMA           reduce using rule 80 (cte_bool -> FALSE .)
-    AND             reduce using rule 80 (cte_bool -> FALSE .)
-    OR              reduce using rule 80 (cte_bool -> FALSE .)
+    COMMA           reduce using rule 78 (var_cte -> CTEDOUBLE .)
+    RPAR            reduce using rule 78 (var_cte -> CTEDOUBLE .)
+    MULTIPLICATION  reduce using rule 78 (var_cte -> CTEDOUBLE .)
+    DIVISION        reduce using rule 78 (var_cte -> CTEDOUBLE .)
+    PLUS            reduce using rule 78 (var_cte -> CTEDOUBLE .)
+    MINUS           reduce using rule 78 (var_cte -> CTEDOUBLE .)
+    GREATER         reduce using rule 78 (var_cte -> CTEDOUBLE .)
+    FEWER           reduce using rule 78 (var_cte -> CTEDOUBLE .)
+    GREATEROREQUAL  reduce using rule 78 (var_cte -> CTEDOUBLE .)
+    FEWEROREQUAL    reduce using rule 78 (var_cte -> CTEDOUBLE .)
+    DIFFERENT       reduce using rule 78 (var_cte -> CTEDOUBLE .)
+    EQUALEQUALS     reduce using rule 78 (var_cte -> CTEDOUBLE .)
+    AND             reduce using rule 78 (var_cte -> CTEDOUBLE .)
+    OR              reduce using rule 78 (var_cte -> CTEDOUBLE .)
+    SEMICOLON       reduce using rule 78 (var_cte -> CTEDOUBLE .)
 
 
 state 57
 
-    (74) var_cte -> CTEINT .
+    (83) cte_bool -> FALSE .
 
-    COMMA           reduce using rule 74 (var_cte -> CTEINT .)
-    RPAR            reduce using rule 74 (var_cte -> CTEINT .)
-    MULTIPLICATION  reduce using rule 74 (var_cte -> CTEINT .)
-    DIVISION        reduce using rule 74 (var_cte -> CTEINT .)
-    PLUS            reduce using rule 74 (var_cte -> CTEINT .)
-    MINUS           reduce using rule 74 (var_cte -> CTEINT .)
-    GREATER         reduce using rule 74 (var_cte -> CTEINT .)
-    FEWER           reduce using rule 74 (var_cte -> CTEINT .)
-    GREATEROREQUAL  reduce using rule 74 (var_cte -> CTEINT .)
-    FEWEROREQUAL    reduce using rule 74 (var_cte -> CTEINT .)
-    DIFFERENT       reduce using rule 74 (var_cte -> CTEINT .)
-    EQUALEQUALS     reduce using rule 74 (var_cte -> CTEINT .)
-    AND             reduce using rule 74 (var_cte -> CTEINT .)
-    OR              reduce using rule 74 (var_cte -> CTEINT .)
-    SEMICOLON       reduce using rule 74 (var_cte -> CTEINT .)
+    COMMA           reduce using rule 83 (cte_bool -> FALSE .)
+    RPAR            reduce using rule 83 (cte_bool -> FALSE .)
+    MULTIPLICATION  reduce using rule 83 (cte_bool -> FALSE .)
+    DIVISION        reduce using rule 83 (cte_bool -> FALSE .)
+    PLUS            reduce using rule 83 (cte_bool -> FALSE .)
+    MINUS           reduce using rule 83 (cte_bool -> FALSE .)
+    GREATER         reduce using rule 83 (cte_bool -> FALSE .)
+    FEWER           reduce using rule 83 (cte_bool -> FALSE .)
+    GREATEROREQUAL  reduce using rule 83 (cte_bool -> FALSE .)
+    FEWEROREQUAL    reduce using rule 83 (cte_bool -> FALSE .)
+    DIFFERENT       reduce using rule 83 (cte_bool -> FALSE .)
+    EQUALEQUALS     reduce using rule 83 (cte_bool -> FALSE .)
+    AND             reduce using rule 83 (cte_bool -> FALSE .)
+    OR              reduce using rule 83 (cte_bool -> FALSE .)
+    SEMICOLON       reduce using rule 83 (cte_bool -> FALSE .)
 
 
 state 58
 
-    (77) var_cte -> cte_bool .
+    (77) var_cte -> CTEINT .
 
-    COMMA           reduce using rule 77 (var_cte -> cte_bool .)
-    RPAR            reduce using rule 77 (var_cte -> cte_bool .)
-    MULTIPLICATION  reduce using rule 77 (var_cte -> cte_bool .)
-    DIVISION        reduce using rule 77 (var_cte -> cte_bool .)
-    PLUS            reduce using rule 77 (var_cte -> cte_bool .)
-    MINUS           reduce using rule 77 (var_cte -> cte_bool .)
-    GREATER         reduce using rule 77 (var_cte -> cte_bool .)
-    FEWER           reduce using rule 77 (var_cte -> cte_bool .)
-    GREATEROREQUAL  reduce using rule 77 (var_cte -> cte_bool .)
-    FEWEROREQUAL    reduce using rule 77 (var_cte -> cte_bool .)
-    DIFFERENT       reduce using rule 77 (var_cte -> cte_bool .)
-    EQUALEQUALS     reduce using rule 77 (var_cte -> cte_bool .)
-    AND             reduce using rule 77 (var_cte -> cte_bool .)
-    OR              reduce using rule 77 (var_cte -> cte_bool .)
-    SEMICOLON       reduce using rule 77 (var_cte -> cte_bool .)
+    COMMA           reduce using rule 77 (var_cte -> CTEINT .)
+    RPAR            reduce using rule 77 (var_cte -> CTEINT .)
+    MULTIPLICATION  reduce using rule 77 (var_cte -> CTEINT .)
+    DIVISION        reduce using rule 77 (var_cte -> CTEINT .)
+    PLUS            reduce using rule 77 (var_cte -> CTEINT .)
+    MINUS           reduce using rule 77 (var_cte -> CTEINT .)
+    GREATER         reduce using rule 77 (var_cte -> CTEINT .)
+    FEWER           reduce using rule 77 (var_cte -> CTEINT .)
+    GREATEROREQUAL  reduce using rule 77 (var_cte -> CTEINT .)
+    FEWEROREQUAL    reduce using rule 77 (var_cte -> CTEINT .)
+    DIFFERENT       reduce using rule 77 (var_cte -> CTEINT .)
+    EQUALEQUALS     reduce using rule 77 (var_cte -> CTEINT .)
+    AND             reduce using rule 77 (var_cte -> CTEINT .)
+    OR              reduce using rule 77 (var_cte -> CTEINT .)
+    SEMICOLON       reduce using rule 77 (var_cte -> CTEINT .)
 
 
 state 59
 
-    (78) var_cte -> function_call .
+    (80) var_cte -> cte_bool .
 
-    MULTIPLICATION  reduce using rule 78 (var_cte -> function_call .)
-    DIVISION        reduce using rule 78 (var_cte -> function_call .)
-    PLUS            reduce using rule 78 (var_cte -> function_call .)
-    MINUS           reduce using rule 78 (var_cte -> function_call .)
-    GREATER         reduce using rule 78 (var_cte -> function_call .)
-    FEWER           reduce using rule 78 (var_cte -> function_call .)
-    GREATEROREQUAL  reduce using rule 78 (var_cte -> function_call .)
-    FEWEROREQUAL    reduce using rule 78 (var_cte -> function_call .)
-    DIFFERENT       reduce using rule 78 (var_cte -> function_call .)
-    EQUALEQUALS     reduce using rule 78 (var_cte -> function_call .)
-    AND             reduce using rule 78 (var_cte -> function_call .)
-    OR              reduce using rule 78 (var_cte -> function_call .)
-    SEMICOLON       reduce using rule 78 (var_cte -> function_call .)
-    RPAR            reduce using rule 78 (var_cte -> function_call .)
+    COMMA           reduce using rule 80 (var_cte -> cte_bool .)
+    RPAR            reduce using rule 80 (var_cte -> cte_bool .)
+    MULTIPLICATION  reduce using rule 80 (var_cte -> cte_bool .)
+    DIVISION        reduce using rule 80 (var_cte -> cte_bool .)
+    PLUS            reduce using rule 80 (var_cte -> cte_bool .)
+    MINUS           reduce using rule 80 (var_cte -> cte_bool .)
+    GREATER         reduce using rule 80 (var_cte -> cte_bool .)
+    FEWER           reduce using rule 80 (var_cte -> cte_bool .)
+    GREATEROREQUAL  reduce using rule 80 (var_cte -> cte_bool .)
+    FEWEROREQUAL    reduce using rule 80 (var_cte -> cte_bool .)
+    DIFFERENT       reduce using rule 80 (var_cte -> cte_bool .)
+    EQUALEQUALS     reduce using rule 80 (var_cte -> cte_bool .)
+    AND             reduce using rule 80 (var_cte -> cte_bool .)
+    OR              reduce using rule 80 (var_cte -> cte_bool .)
+    SEMICOLON       reduce using rule 80 (var_cte -> cte_bool .)
 
 
 state 60
 
-    (39) read -> READ LPAR var_cte . RPAR SEMICOLON
+    (81) var_cte -> function_call .
 
-    RPAR            shift and go to state 82
+    MULTIPLICATION  reduce using rule 81 (var_cte -> function_call .)
+    DIVISION        reduce using rule 81 (var_cte -> function_call .)
+    PLUS            reduce using rule 81 (var_cte -> function_call .)
+    MINUS           reduce using rule 81 (var_cte -> function_call .)
+    GREATER         reduce using rule 81 (var_cte -> function_call .)
+    FEWER           reduce using rule 81 (var_cte -> function_call .)
+    GREATEROREQUAL  reduce using rule 81 (var_cte -> function_call .)
+    FEWEROREQUAL    reduce using rule 81 (var_cte -> function_call .)
+    DIFFERENT       reduce using rule 81 (var_cte -> function_call .)
+    EQUALEQUALS     reduce using rule 81 (var_cte -> function_call .)
+    AND             reduce using rule 81 (var_cte -> function_call .)
+    OR              reduce using rule 81 (var_cte -> function_call .)
+    SEMICOLON       reduce using rule 81 (var_cte -> function_call .)
+    RPAR            reduce using rule 81 (var_cte -> function_call .)
 
 
 state 61
 
-    (79) cte_bool -> TRUE .
+    (42) read -> READ LPAR var_cte . RPAR SEMICOLON
 
-    MULTIPLICATION  reduce using rule 79 (cte_bool -> TRUE .)
-    DIVISION        reduce using rule 79 (cte_bool -> TRUE .)
-    PLUS            reduce using rule 79 (cte_bool -> TRUE .)
-    MINUS           reduce using rule 79 (cte_bool -> TRUE .)
-    GREATER         reduce using rule 79 (cte_bool -> TRUE .)
-    FEWER           reduce using rule 79 (cte_bool -> TRUE .)
-    GREATEROREQUAL  reduce using rule 79 (cte_bool -> TRUE .)
-    FEWEROREQUAL    reduce using rule 79 (cte_bool -> TRUE .)
-    DIFFERENT       reduce using rule 79 (cte_bool -> TRUE .)
-    EQUALEQUALS     reduce using rule 79 (cte_bool -> TRUE .)
-    RPAR            reduce using rule 79 (cte_bool -> TRUE .)
-    SEMICOLON       reduce using rule 79 (cte_bool -> TRUE .)
-    COMMA           reduce using rule 79 (cte_bool -> TRUE .)
-    AND             reduce using rule 79 (cte_bool -> TRUE .)
-    OR              reduce using rule 79 (cte_bool -> TRUE .)
+    RPAR            shift and go to state 81
 
 
 state 62
 
-    (76) var_cte -> ID .
-    (84) function_call -> ID . LPAR func_params RPAR
+    (82) cte_bool -> TRUE .
 
-    MULTIPLICATION  reduce using rule 76 (var_cte -> ID .)
-    DIVISION        reduce using rule 76 (var_cte -> ID .)
-    PLUS            reduce using rule 76 (var_cte -> ID .)
-    MINUS           reduce using rule 76 (var_cte -> ID .)
-    GREATER         reduce using rule 76 (var_cte -> ID .)
-    FEWER           reduce using rule 76 (var_cte -> ID .)
-    GREATEROREQUAL  reduce using rule 76 (var_cte -> ID .)
-    FEWEROREQUAL    reduce using rule 76 (var_cte -> ID .)
-    DIFFERENT       reduce using rule 76 (var_cte -> ID .)
-    EQUALEQUALS     reduce using rule 76 (var_cte -> ID .)
-    AND             reduce using rule 76 (var_cte -> ID .)
-    OR              reduce using rule 76 (var_cte -> ID .)
-    SEMICOLON       reduce using rule 76 (var_cte -> ID .)
-    RPAR            reduce using rule 76 (var_cte -> ID .)
-    LPAR            shift and go to state 83
+    COMMA           reduce using rule 82 (cte_bool -> TRUE .)
+    RPAR            reduce using rule 82 (cte_bool -> TRUE .)
+    MULTIPLICATION  reduce using rule 82 (cte_bool -> TRUE .)
+    DIVISION        reduce using rule 82 (cte_bool -> TRUE .)
+    PLUS            reduce using rule 82 (cte_bool -> TRUE .)
+    MINUS           reduce using rule 82 (cte_bool -> TRUE .)
+    GREATER         reduce using rule 82 (cte_bool -> TRUE .)
+    FEWER           reduce using rule 82 (cte_bool -> TRUE .)
+    GREATEROREQUAL  reduce using rule 82 (cte_bool -> TRUE .)
+    FEWEROREQUAL    reduce using rule 82 (cte_bool -> TRUE .)
+    DIFFERENT       reduce using rule 82 (cte_bool -> TRUE .)
+    EQUALEQUALS     reduce using rule 82 (cte_bool -> TRUE .)
+    AND             reduce using rule 82 (cte_bool -> TRUE .)
+    OR              reduce using rule 82 (cte_bool -> TRUE .)
+    SEMICOLON       reduce using rule 82 (cte_bool -> TRUE .)
 
 
 state 63
 
-    (72) factor -> LPAR . exp RPAR
-    (62) exp -> . term more_term
-    (67) term -> . factor more_factor
-    (72) factor -> . LPAR exp RPAR
-    (73) factor -> . var_cte
-    (74) var_cte -> . CTEINT
-    (75) var_cte -> . CTEDOUBLE
-    (76) var_cte -> . ID
-    (77) var_cte -> . cte_bool
-    (78) var_cte -> . function_call
-    (79) cte_bool -> . TRUE
-    (80) cte_bool -> . FALSE
-    (84) function_call -> . ID LPAR func_params RPAR
+    (79) var_cte -> ID .
+    (87) function_call -> ID . LPAR func_params RPAR
 
-    LPAR            shift and go to state 63
-    CTEINT          shift and go to state 57
-    CTEDOUBLE       shift and go to state 55
-    ID              shift and go to state 62
-    TRUE            shift and go to state 61
-    FALSE           shift and go to state 56
+    MULTIPLICATION  reduce using rule 79 (var_cte -> ID .)
+    DIVISION        reduce using rule 79 (var_cte -> ID .)
+    PLUS            reduce using rule 79 (var_cte -> ID .)
+    MINUS           reduce using rule 79 (var_cte -> ID .)
+    GREATER         reduce using rule 79 (var_cte -> ID .)
+    FEWER           reduce using rule 79 (var_cte -> ID .)
+    GREATEROREQUAL  reduce using rule 79 (var_cte -> ID .)
+    FEWEROREQUAL    reduce using rule 79 (var_cte -> ID .)
+    DIFFERENT       reduce using rule 79 (var_cte -> ID .)
+    EQUALEQUALS     reduce using rule 79 (var_cte -> ID .)
+    AND             reduce using rule 79 (var_cte -> ID .)
+    OR              reduce using rule 79 (var_cte -> ID .)
+    SEMICOLON       reduce using rule 79 (var_cte -> ID .)
+    RPAR            reduce using rule 79 (var_cte -> ID .)
+    LPAR            shift and go to state 82
 
-    term                           shift and go to state 67
-    cte_bool                       shift and go to state 58
-    function_call                  shift and go to state 59
-    var_cte                        shift and go to state 66
-    exp                            shift and go to state 84
-    factor                         shift and go to state 64
 
 state 64
 
-    (67) term -> factor . more_factor
-    (68) more_factor -> . multiplier term
-    (69) more_factor -> .
-    (70) multiplier -> . MULTIPLICATION
-    (71) multiplier -> . DIVISION
+    (75) factor -> LPAR . exp RPAR
+    (65) exp -> . term more_term
+    (70) term -> . factor more_factor
+    (75) factor -> . LPAR exp RPAR
+    (76) factor -> . var_cte
+    (77) var_cte -> . CTEINT
+    (78) var_cte -> . CTEDOUBLE
+    (79) var_cte -> . ID
+    (80) var_cte -> . cte_bool
+    (81) var_cte -> . function_call
+    (82) cte_bool -> . TRUE
+    (83) cte_bool -> . FALSE
+    (87) function_call -> . ID LPAR func_params RPAR
 
-    PLUS            reduce using rule 69 (more_factor -> .)
-    MINUS           reduce using rule 69 (more_factor -> .)
-    GREATER         reduce using rule 69 (more_factor -> .)
-    FEWER           reduce using rule 69 (more_factor -> .)
-    GREATEROREQUAL  reduce using rule 69 (more_factor -> .)
-    FEWEROREQUAL    reduce using rule 69 (more_factor -> .)
-    DIFFERENT       reduce using rule 69 (more_factor -> .)
-    EQUALEQUALS     reduce using rule 69 (more_factor -> .)
-    AND             reduce using rule 69 (more_factor -> .)
-    OR              reduce using rule 69 (more_factor -> .)
-    RPAR            reduce using rule 69 (more_factor -> .)
-    SEMICOLON       reduce using rule 69 (more_factor -> .)
-    MULTIPLICATION  shift and go to state 88
-    DIVISION        shift and go to state 85
+    LPAR            shift and go to state 64
+    CTEINT          shift and go to state 58
+    CTEDOUBLE       shift and go to state 56
+    ID              shift and go to state 63
+    TRUE            shift and go to state 62
+    FALSE           shift and go to state 57
 
-    multiplier                     shift and go to state 87
-    more_factor                    shift and go to state 86
+    term                           shift and go to state 68
+    cte_bool                       shift and go to state 59
+    function_call                  shift and go to state 60
+    var_cte                        shift and go to state 67
+    exp                            shift and go to state 83
+    factor                         shift and go to state 65
 
 state 65
 
-    (48) expression -> comp . expression_comp
-    (49) expression_comp -> . andor comp
-    (50) expression_comp -> .
-    (51) andor -> . AND
-    (52) andor -> . OR
+    (70) term -> factor . more_factor
+    (71) more_factor -> . multiplier term
+    (72) more_factor -> .
+    (73) multiplier -> . MULTIPLICATION
+    (74) multiplier -> . DIVISION
 
-    RPAR            reduce using rule 50 (expression_comp -> .)
-    SEMICOLON       reduce using rule 50 (expression_comp -> .)
-    AND             shift and go to state 89
-    OR              shift and go to state 92
+    PLUS            reduce using rule 72 (more_factor -> .)
+    MINUS           reduce using rule 72 (more_factor -> .)
+    GREATER         reduce using rule 72 (more_factor -> .)
+    FEWER           reduce using rule 72 (more_factor -> .)
+    GREATEROREQUAL  reduce using rule 72 (more_factor -> .)
+    FEWEROREQUAL    reduce using rule 72 (more_factor -> .)
+    DIFFERENT       reduce using rule 72 (more_factor -> .)
+    EQUALEQUALS     reduce using rule 72 (more_factor -> .)
+    AND             reduce using rule 72 (more_factor -> .)
+    OR              reduce using rule 72 (more_factor -> .)
+    RPAR            reduce using rule 72 (more_factor -> .)
+    SEMICOLON       reduce using rule 72 (more_factor -> .)
+    MULTIPLICATION  shift and go to state 87
+    DIVISION        shift and go to state 84
 
-    expression_comp                shift and go to state 90
-    andor                          shift and go to state 91
+    multiplier                     shift and go to state 86
+    more_factor                    shift and go to state 85
 
 state 66
 
-    (73) factor -> var_cte .
+    (51) expression -> comp . expression_comp
+    (52) expression_comp -> . andor comp
+    (53) expression_comp -> .
+    (54) andor -> . AND
+    (55) andor -> . OR
 
-    MULTIPLICATION  reduce using rule 73 (factor -> var_cte .)
-    DIVISION        reduce using rule 73 (factor -> var_cte .)
-    PLUS            reduce using rule 73 (factor -> var_cte .)
-    MINUS           reduce using rule 73 (factor -> var_cte .)
-    GREATER         reduce using rule 73 (factor -> var_cte .)
-    FEWER           reduce using rule 73 (factor -> var_cte .)
-    GREATEROREQUAL  reduce using rule 73 (factor -> var_cte .)
-    FEWEROREQUAL    reduce using rule 73 (factor -> var_cte .)
-    DIFFERENT       reduce using rule 73 (factor -> var_cte .)
-    EQUALEQUALS     reduce using rule 73 (factor -> var_cte .)
-    AND             reduce using rule 73 (factor -> var_cte .)
-    OR              reduce using rule 73 (factor -> var_cte .)
-    RPAR            reduce using rule 73 (factor -> var_cte .)
-    SEMICOLON       reduce using rule 73 (factor -> var_cte .)
+    RPAR            reduce using rule 53 (expression_comp -> .)
+    SEMICOLON       reduce using rule 53 (expression_comp -> .)
+    AND             shift and go to state 88
+    OR              shift and go to state 91
 
+    expression_comp                shift and go to state 89
+    andor                          shift and go to state 90
 
 state 67
 
-    (62) exp -> term . more_term
-    (63) more_term -> . operator exp
-    (64) more_term -> .
-    (65) operator -> . PLUS
-    (66) operator -> . MINUS
+    (76) factor -> var_cte .
 
-    GREATER         reduce using rule 64 (more_term -> .)
-    FEWER           reduce using rule 64 (more_term -> .)
-    GREATEROREQUAL  reduce using rule 64 (more_term -> .)
-    FEWEROREQUAL    reduce using rule 64 (more_term -> .)
-    DIFFERENT       reduce using rule 64 (more_term -> .)
-    EQUALEQUALS     reduce using rule 64 (more_term -> .)
-    AND             reduce using rule 64 (more_term -> .)
-    OR              reduce using rule 64 (more_term -> .)
-    RPAR            reduce using rule 64 (more_term -> .)
-    SEMICOLON       reduce using rule 64 (more_term -> .)
-    PLUS            shift and go to state 94
-    MINUS           shift and go to state 96
+    MULTIPLICATION  reduce using rule 76 (factor -> var_cte .)
+    DIVISION        reduce using rule 76 (factor -> var_cte .)
+    PLUS            reduce using rule 76 (factor -> var_cte .)
+    MINUS           reduce using rule 76 (factor -> var_cte .)
+    GREATER         reduce using rule 76 (factor -> var_cte .)
+    FEWER           reduce using rule 76 (factor -> var_cte .)
+    GREATEROREQUAL  reduce using rule 76 (factor -> var_cte .)
+    FEWEROREQUAL    reduce using rule 76 (factor -> var_cte .)
+    DIFFERENT       reduce using rule 76 (factor -> var_cte .)
+    EQUALEQUALS     reduce using rule 76 (factor -> var_cte .)
+    AND             reduce using rule 76 (factor -> var_cte .)
+    OR              reduce using rule 76 (factor -> var_cte .)
+    RPAR            reduce using rule 76 (factor -> var_cte .)
+    SEMICOLON       reduce using rule 76 (factor -> var_cte .)
 
-    operator                       shift and go to state 95
-    more_term                      shift and go to state 93
 
 state 68
 
-    (53) comp -> exp . exp_comp
-    (54) exp_comp -> . comparator exp
-    (55) exp_comp -> .
-    (56) comparator -> . GREATER
-    (57) comparator -> . FEWER
-    (58) comparator -> . GREATEROREQUAL
-    (59) comparator -> . FEWEROREQUAL
-    (60) comparator -> . DIFFERENT
-    (61) comparator -> . EQUALEQUALS
+    (65) exp -> term . more_term
+    (66) more_term -> . operator exp
+    (67) more_term -> .
+    (68) operator -> . PLUS
+    (69) operator -> . MINUS
 
-    AND             reduce using rule 55 (exp_comp -> .)
-    OR              reduce using rule 55 (exp_comp -> .)
-    RPAR            reduce using rule 55 (exp_comp -> .)
-    SEMICOLON       reduce using rule 55 (exp_comp -> .)
-    GREATER         shift and go to state 98
-    FEWER           shift and go to state 102
-    GREATEROREQUAL  shift and go to state 103
-    FEWEROREQUAL    shift and go to state 101
-    DIFFERENT       shift and go to state 97
-    EQUALEQUALS     shift and go to state 100
+    GREATER         reduce using rule 67 (more_term -> .)
+    FEWER           reduce using rule 67 (more_term -> .)
+    GREATEROREQUAL  reduce using rule 67 (more_term -> .)
+    FEWEROREQUAL    reduce using rule 67 (more_term -> .)
+    DIFFERENT       reduce using rule 67 (more_term -> .)
+    EQUALEQUALS     reduce using rule 67 (more_term -> .)
+    AND             reduce using rule 67 (more_term -> .)
+    OR              reduce using rule 67 (more_term -> .)
+    RPAR            reduce using rule 67 (more_term -> .)
+    SEMICOLON       reduce using rule 67 (more_term -> .)
+    PLUS            shift and go to state 93
+    MINUS           shift and go to state 95
 
-    exp_comp                       shift and go to state 104
-    comparator                     shift and go to state 99
+    operator                       shift and go to state 94
+    more_term                      shift and go to state 92
 
 state 69
 
-    (38) cycle -> WHILE LPAR expression . RPAR block
+    (56) comp -> exp . exp_comp
+    (57) exp_comp -> . comparator exp
+    (58) exp_comp -> .
+    (59) comparator -> . GREATER
+    (60) comparator -> . FEWER
+    (61) comparator -> . GREATEROREQUAL
+    (62) comparator -> . FEWEROREQUAL
+    (63) comparator -> . DIFFERENT
+    (64) comparator -> . EQUALEQUALS
 
-    RPAR            shift and go to state 105
+    AND             reduce using rule 58 (exp_comp -> .)
+    OR              reduce using rule 58 (exp_comp -> .)
+    RPAR            reduce using rule 58 (exp_comp -> .)
+    SEMICOLON       reduce using rule 58 (exp_comp -> .)
+    GREATER         shift and go to state 97
+    FEWER           shift and go to state 101
+    GREATEROREQUAL  shift and go to state 102
+    FEWEROREQUAL    shift and go to state 100
+    DIFFERENT       shift and go to state 96
+    EQUALEQUALS     shift and go to state 99
 
+    exp_comp                       shift and go to state 103
+    comparator                     shift and go to state 98
 
 state 70
 
-    (40) write -> WRITE LPAR var_comp . RPAR SEMICOLON
+    (41) cycle -> WHILE LPAR expression . RPAR block
 
-    RPAR            shift and go to state 106
+    RPAR            shift and go to state 104
 
 
 state 71
 
-    (41) var_comp -> function_call .
-    (78) var_cte -> function_call .
+    (43) write -> WRITE LPAR var_comp . RPAR SEMICOLON
 
-  ! reduce/reduce conflict for COMMA resolved using rule 41 (var_comp -> function_call .)
-  ! reduce/reduce conflict for RPAR resolved using rule 41 (var_comp -> function_call .)
-    RPAR            reduce using rule 41 (var_comp -> function_call .)
-    COMMA           reduce using rule 41 (var_comp -> function_call .)
-
-  ! COMMA           [ reduce using rule 78 (var_cte -> function_call .) ]
-  ! RPAR            [ reduce using rule 78 (var_cte -> function_call .) ]
+    RPAR            shift and go to state 105
 
 
 state 72
 
-    (42) var_comp -> var_cte .
+    (44) var_comp -> function_call .
+    (81) var_cte -> function_call .
 
-    RPAR            reduce using rule 42 (var_comp -> var_cte .)
-    COMMA           reduce using rule 42 (var_comp -> var_cte .)
+  ! reduce/reduce conflict for COMMA resolved using rule 44 (var_comp -> function_call .)
+  ! reduce/reduce conflict for RPAR resolved using rule 44 (var_comp -> function_call .)
+    RPAR            reduce using rule 44 (var_comp -> function_call .)
+    COMMA           reduce using rule 44 (var_comp -> function_call .)
+
+  ! COMMA           [ reduce using rule 81 (var_cte -> function_call .) ]
+  ! RPAR            [ reduce using rule 81 (var_cte -> function_call .) ]
 
 
 state 73
 
-    (84) function_call -> ID . LPAR func_params RPAR
-    (76) var_cte -> ID .
+    (45) var_comp -> var_cte .
 
-    LPAR            shift and go to state 83
-    COMMA           reduce using rule 76 (var_cte -> ID .)
-    RPAR            reduce using rule 76 (var_cte -> ID .)
+    RPAR            reduce using rule 45 (var_comp -> var_cte .)
+    COMMA           reduce using rule 45 (var_comp -> var_cte .)
 
 
 state 74
 
-    (43) function -> ID LPAR func_params . RPAR SEMICOLON
+    (87) function_call -> ID . LPAR func_params RPAR
+    (79) var_cte -> ID .
 
-    RPAR            shift and go to state 107
+    LPAR            shift and go to state 82
+    COMMA           reduce using rule 79 (var_cte -> ID .)
+    RPAR            reduce using rule 79 (var_cte -> ID .)
 
 
 state 75
 
-    (44) func_params -> var_comp . var_more
-    (46) var_more -> . COMMA var_comp var_more
-    (47) var_more -> .
+    (46) function -> ID LPAR func_params . RPAR SEMICOLON
 
-    COMMA           shift and go to state 109
-    RPAR            reduce using rule 47 (var_more -> .)
+    RPAR            shift and go to state 106
 
-    var_more                       shift and go to state 108
 
 state 76
 
-    (34) assignation -> ID EQUALS expression . SEMICOLON
+    (47) func_params -> var_comp . var_more
+    (49) var_more -> . COMMA var_comp var_more
+    (50) var_more -> .
 
-    SEMICOLON       shift and go to state 110
+    COMMA           shift and go to state 108
+    RPAR            reduce using rule 50 (var_more -> .)
 
+    var_more                       shift and go to state 107
 
 state 77
 
-    (35) condition -> IF LPAR expression . RPAR block condition_comp
+    (37) assignation -> ID EQUALS expression . SEMICOLON
 
-    RPAR            shift and go to state 111
+    SEMICOLON       shift and go to state 109
 
 
 state 78
 
-    (19) more_pars -> COMMA . pars_comp
-    (18) pars_comp -> . var_type ID more_pars
-    (6) var_type -> . INT
-    (7) var_type -> . DOUBLE
-    (8) var_type -> . BOOL
-    (9) var_type -> . INTLIST
-    (10) var_type -> . DOUBLELIST
+    (38) condition -> IF LPAR expression . RPAR block condition_comp
+
+    RPAR            shift and go to state 110
+
+
+state 79
+
+    (21) pars_comp -> var_type ID . more_pars
+    (22) more_pars -> . COMMA pars_comp
+    (23) more_pars -> .
+
+    COMMA           shift and go to state 111
+    RPAR            reduce using rule 23 (more_pars -> .)
+
+    more_pars                      shift and go to state 112
+
+state 80
+
+    (13) func -> FUNC func_type ID procedure_name LPAR pars RPAR . func_block more_func
+    (24) func_block -> . LBRACKET more_vars more_statements RETURN var_cte SEMICOLON RBRACKET
+    (25) func_block -> .
+
+    LBRACKET        shift and go to state 114
+    FUNC            reduce using rule 25 (func_block -> .)
+    MAIN            reduce using rule 25 (func_block -> .)
+
+    func_block                     shift and go to state 113
+
+state 81
+
+    (42) read -> READ LPAR var_cte RPAR . SEMICOLON
+
+    SEMICOLON       shift and go to state 115
+
+
+state 82
+
+    (87) function_call -> ID LPAR . func_params RPAR
+    (47) func_params -> . var_comp var_more
+    (48) func_params -> .
+    (44) var_comp -> . function_call
+    (45) var_comp -> . var_cte
+    (87) function_call -> . ID LPAR func_params RPAR
+    (77) var_cte -> . CTEINT
+    (78) var_cte -> . CTEDOUBLE
+    (79) var_cte -> . ID
+    (80) var_cte -> . cte_bool
+    (81) var_cte -> . function_call
+    (82) cte_bool -> . TRUE
+    (83) cte_bool -> . FALSE
+
+    RPAR            reduce using rule 48 (func_params -> .)
+    ID              shift and go to state 74
+    CTEINT          shift and go to state 58
+    CTEDOUBLE       shift and go to state 56
+    TRUE            shift and go to state 62
+    FALSE           shift and go to state 57
+
+    func_params                    shift and go to state 116
+    var_comp                       shift and go to state 76
+    cte_bool                       shift and go to state 59
+    function_call                  shift and go to state 72
+    var_cte                        shift and go to state 73
+
+state 83
+
+    (75) factor -> LPAR exp . RPAR
+
+    RPAR            shift and go to state 117
+
+
+state 84
+
+    (74) multiplier -> DIVISION .
+
+    LPAR            reduce using rule 74 (multiplier -> DIVISION .)
+    CTEINT          reduce using rule 74 (multiplier -> DIVISION .)
+    CTEDOUBLE       reduce using rule 74 (multiplier -> DIVISION .)
+    ID              reduce using rule 74 (multiplier -> DIVISION .)
+    TRUE            reduce using rule 74 (multiplier -> DIVISION .)
+    FALSE           reduce using rule 74 (multiplier -> DIVISION .)
+
+
+state 85
+
+    (70) term -> factor more_factor .
+
+    PLUS            reduce using rule 70 (term -> factor more_factor .)
+    MINUS           reduce using rule 70 (term -> factor more_factor .)
+    GREATER         reduce using rule 70 (term -> factor more_factor .)
+    FEWER           reduce using rule 70 (term -> factor more_factor .)
+    GREATEROREQUAL  reduce using rule 70 (term -> factor more_factor .)
+    FEWEROREQUAL    reduce using rule 70 (term -> factor more_factor .)
+    DIFFERENT       reduce using rule 70 (term -> factor more_factor .)
+    EQUALEQUALS     reduce using rule 70 (term -> factor more_factor .)
+    AND             reduce using rule 70 (term -> factor more_factor .)
+    OR              reduce using rule 70 (term -> factor more_factor .)
+    RPAR            reduce using rule 70 (term -> factor more_factor .)
+    SEMICOLON       reduce using rule 70 (term -> factor more_factor .)
+
+
+state 86
+
+    (71) more_factor -> multiplier . term
+    (70) term -> . factor more_factor
+    (75) factor -> . LPAR exp RPAR
+    (76) factor -> . var_cte
+    (77) var_cte -> . CTEINT
+    (78) var_cte -> . CTEDOUBLE
+    (79) var_cte -> . ID
+    (80) var_cte -> . cte_bool
+    (81) var_cte -> . function_call
+    (82) cte_bool -> . TRUE
+    (83) cte_bool -> . FALSE
+    (87) function_call -> . ID LPAR func_params RPAR
+
+    LPAR            shift and go to state 64
+    CTEINT          shift and go to state 58
+    CTEDOUBLE       shift and go to state 56
+    ID              shift and go to state 63
+    TRUE            shift and go to state 62
+    FALSE           shift and go to state 57
+
+    term                           shift and go to state 118
+    cte_bool                       shift and go to state 59
+    function_call                  shift and go to state 60
+    var_cte                        shift and go to state 67
+    factor                         shift and go to state 65
+
+state 87
+
+    (73) multiplier -> MULTIPLICATION .
+
+    LPAR            reduce using rule 73 (multiplier -> MULTIPLICATION .)
+    CTEINT          reduce using rule 73 (multiplier -> MULTIPLICATION .)
+    CTEDOUBLE       reduce using rule 73 (multiplier -> MULTIPLICATION .)
+    ID              reduce using rule 73 (multiplier -> MULTIPLICATION .)
+    TRUE            reduce using rule 73 (multiplier -> MULTIPLICATION .)
+    FALSE           reduce using rule 73 (multiplier -> MULTIPLICATION .)
+
+
+state 88
+
+    (54) andor -> AND .
+
+    LPAR            reduce using rule 54 (andor -> AND .)
+    CTEINT          reduce using rule 54 (andor -> AND .)
+    CTEDOUBLE       reduce using rule 54 (andor -> AND .)
+    ID              reduce using rule 54 (andor -> AND .)
+    TRUE            reduce using rule 54 (andor -> AND .)
+    FALSE           reduce using rule 54 (andor -> AND .)
+
+
+state 89
+
+    (51) expression -> comp expression_comp .
+
+    RPAR            reduce using rule 51 (expression -> comp expression_comp .)
+    SEMICOLON       reduce using rule 51 (expression -> comp expression_comp .)
+
+
+state 90
+
+    (52) expression_comp -> andor . comp
+    (56) comp -> . exp exp_comp
+    (65) exp -> . term more_term
+    (70) term -> . factor more_factor
+    (75) factor -> . LPAR exp RPAR
+    (76) factor -> . var_cte
+    (77) var_cte -> . CTEINT
+    (78) var_cte -> . CTEDOUBLE
+    (79) var_cte -> . ID
+    (80) var_cte -> . cte_bool
+    (81) var_cte -> . function_call
+    (82) cte_bool -> . TRUE
+    (83) cte_bool -> . FALSE
+    (87) function_call -> . ID LPAR func_params RPAR
+
+    LPAR            shift and go to state 64
+    CTEINT          shift and go to state 58
+    CTEDOUBLE       shift and go to state 56
+    ID              shift and go to state 63
+    TRUE            shift and go to state 62
+    FALSE           shift and go to state 57
+
+    term                           shift and go to state 68
+    comp                           shift and go to state 119
+    factor                         shift and go to state 65
+    cte_bool                       shift and go to state 59
+    function_call                  shift and go to state 60
+    var_cte                        shift and go to state 67
+    exp                            shift and go to state 69
+
+state 91
+
+    (55) andor -> OR .
+
+    LPAR            reduce using rule 55 (andor -> OR .)
+    CTEINT          reduce using rule 55 (andor -> OR .)
+    CTEDOUBLE       reduce using rule 55 (andor -> OR .)
+    ID              reduce using rule 55 (andor -> OR .)
+    TRUE            reduce using rule 55 (andor -> OR .)
+    FALSE           reduce using rule 55 (andor -> OR .)
+
+
+state 92
+
+    (65) exp -> term more_term .
+
+    GREATER         reduce using rule 65 (exp -> term more_term .)
+    FEWER           reduce using rule 65 (exp -> term more_term .)
+    GREATEROREQUAL  reduce using rule 65 (exp -> term more_term .)
+    FEWEROREQUAL    reduce using rule 65 (exp -> term more_term .)
+    DIFFERENT       reduce using rule 65 (exp -> term more_term .)
+    EQUALEQUALS     reduce using rule 65 (exp -> term more_term .)
+    AND             reduce using rule 65 (exp -> term more_term .)
+    OR              reduce using rule 65 (exp -> term more_term .)
+    RPAR            reduce using rule 65 (exp -> term more_term .)
+    SEMICOLON       reduce using rule 65 (exp -> term more_term .)
+
+
+state 93
+
+    (68) operator -> PLUS .
+
+    LPAR            reduce using rule 68 (operator -> PLUS .)
+    CTEINT          reduce using rule 68 (operator -> PLUS .)
+    CTEDOUBLE       reduce using rule 68 (operator -> PLUS .)
+    ID              reduce using rule 68 (operator -> PLUS .)
+    TRUE            reduce using rule 68 (operator -> PLUS .)
+    FALSE           reduce using rule 68 (operator -> PLUS .)
+
+
+state 94
+
+    (66) more_term -> operator . exp
+    (65) exp -> . term more_term
+    (70) term -> . factor more_factor
+    (75) factor -> . LPAR exp RPAR
+    (76) factor -> . var_cte
+    (77) var_cte -> . CTEINT
+    (78) var_cte -> . CTEDOUBLE
+    (79) var_cte -> . ID
+    (80) var_cte -> . cte_bool
+    (81) var_cte -> . function_call
+    (82) cte_bool -> . TRUE
+    (83) cte_bool -> . FALSE
+    (87) function_call -> . ID LPAR func_params RPAR
+
+    LPAR            shift and go to state 64
+    CTEINT          shift and go to state 58
+    CTEDOUBLE       shift and go to state 56
+    ID              shift and go to state 63
+    TRUE            shift and go to state 62
+    FALSE           shift and go to state 57
+
+    term                           shift and go to state 68
+    cte_bool                       shift and go to state 59
+    function_call                  shift and go to state 60
+    var_cte                        shift and go to state 67
+    exp                            shift and go to state 120
+    factor                         shift and go to state 65
+
+state 95
+
+    (69) operator -> MINUS .
+
+    LPAR            reduce using rule 69 (operator -> MINUS .)
+    CTEINT          reduce using rule 69 (operator -> MINUS .)
+    CTEDOUBLE       reduce using rule 69 (operator -> MINUS .)
+    ID              reduce using rule 69 (operator -> MINUS .)
+    TRUE            reduce using rule 69 (operator -> MINUS .)
+    FALSE           reduce using rule 69 (operator -> MINUS .)
+
+
+state 96
+
+    (63) comparator -> DIFFERENT .
+
+    LPAR            reduce using rule 63 (comparator -> DIFFERENT .)
+    CTEINT          reduce using rule 63 (comparator -> DIFFERENT .)
+    CTEDOUBLE       reduce using rule 63 (comparator -> DIFFERENT .)
+    ID              reduce using rule 63 (comparator -> DIFFERENT .)
+    TRUE            reduce using rule 63 (comparator -> DIFFERENT .)
+    FALSE           reduce using rule 63 (comparator -> DIFFERENT .)
+
+
+state 97
+
+    (59) comparator -> GREATER .
+
+    LPAR            reduce using rule 59 (comparator -> GREATER .)
+    CTEINT          reduce using rule 59 (comparator -> GREATER .)
+    CTEDOUBLE       reduce using rule 59 (comparator -> GREATER .)
+    ID              reduce using rule 59 (comparator -> GREATER .)
+    TRUE            reduce using rule 59 (comparator -> GREATER .)
+    FALSE           reduce using rule 59 (comparator -> GREATER .)
+
+
+state 98
+
+    (57) exp_comp -> comparator . exp
+    (65) exp -> . term more_term
+    (70) term -> . factor more_factor
+    (75) factor -> . LPAR exp RPAR
+    (76) factor -> . var_cte
+    (77) var_cte -> . CTEINT
+    (78) var_cte -> . CTEDOUBLE
+    (79) var_cte -> . ID
+    (80) var_cte -> . cte_bool
+    (81) var_cte -> . function_call
+    (82) cte_bool -> . TRUE
+    (83) cte_bool -> . FALSE
+    (87) function_call -> . ID LPAR func_params RPAR
+
+    LPAR            shift and go to state 64
+    CTEINT          shift and go to state 58
+    CTEDOUBLE       shift and go to state 56
+    ID              shift and go to state 63
+    TRUE            shift and go to state 62
+    FALSE           shift and go to state 57
+
+    term                           shift and go to state 68
+    cte_bool                       shift and go to state 59
+    function_call                  shift and go to state 60
+    var_cte                        shift and go to state 67
+    exp                            shift and go to state 121
+    factor                         shift and go to state 65
+
+state 99
+
+    (64) comparator -> EQUALEQUALS .
+
+    LPAR            reduce using rule 64 (comparator -> EQUALEQUALS .)
+    CTEINT          reduce using rule 64 (comparator -> EQUALEQUALS .)
+    CTEDOUBLE       reduce using rule 64 (comparator -> EQUALEQUALS .)
+    ID              reduce using rule 64 (comparator -> EQUALEQUALS .)
+    TRUE            reduce using rule 64 (comparator -> EQUALEQUALS .)
+    FALSE           reduce using rule 64 (comparator -> EQUALEQUALS .)
+
+
+state 100
+
+    (62) comparator -> FEWEROREQUAL .
+
+    LPAR            reduce using rule 62 (comparator -> FEWEROREQUAL .)
+    CTEINT          reduce using rule 62 (comparator -> FEWEROREQUAL .)
+    CTEDOUBLE       reduce using rule 62 (comparator -> FEWEROREQUAL .)
+    ID              reduce using rule 62 (comparator -> FEWEROREQUAL .)
+    TRUE            reduce using rule 62 (comparator -> FEWEROREQUAL .)
+    FALSE           reduce using rule 62 (comparator -> FEWEROREQUAL .)
+
+
+state 101
+
+    (60) comparator -> FEWER .
+
+    LPAR            reduce using rule 60 (comparator -> FEWER .)
+    CTEINT          reduce using rule 60 (comparator -> FEWER .)
+    CTEDOUBLE       reduce using rule 60 (comparator -> FEWER .)
+    ID              reduce using rule 60 (comparator -> FEWER .)
+    TRUE            reduce using rule 60 (comparator -> FEWER .)
+    FALSE           reduce using rule 60 (comparator -> FEWER .)
+
+
+state 102
+
+    (61) comparator -> GREATEROREQUAL .
+
+    LPAR            reduce using rule 61 (comparator -> GREATEROREQUAL .)
+    CTEINT          reduce using rule 61 (comparator -> GREATEROREQUAL .)
+    CTEDOUBLE       reduce using rule 61 (comparator -> GREATEROREQUAL .)
+    ID              reduce using rule 61 (comparator -> GREATEROREQUAL .)
+    TRUE            reduce using rule 61 (comparator -> GREATEROREQUAL .)
+    FALSE           reduce using rule 61 (comparator -> GREATEROREQUAL .)
+
+
+state 103
+
+    (56) comp -> exp exp_comp .
+
+    AND             reduce using rule 56 (comp -> exp exp_comp .)
+    OR              reduce using rule 56 (comp -> exp exp_comp .)
+    RPAR            reduce using rule 56 (comp -> exp exp_comp .)
+    SEMICOLON       reduce using rule 56 (comp -> exp exp_comp .)
+
+
+state 104
+
+    (41) cycle -> WHILE LPAR expression RPAR . block
+    (84) block -> . LBRACKET more_statements RBRACKET
+
+    LBRACKET        shift and go to state 122
+
+    block                          shift and go to state 123
+
+state 105
+
+    (43) write -> WRITE LPAR var_comp RPAR . SEMICOLON
+
+    SEMICOLON       shift and go to state 124
+
+
+state 106
+
+    (46) function -> ID LPAR func_params RPAR . SEMICOLON
+
+    SEMICOLON       shift and go to state 125
+
+
+state 107
+
+    (47) func_params -> var_comp var_more .
+
+    RPAR            reduce using rule 47 (func_params -> var_comp var_more .)
+
+
+state 108
+
+    (49) var_more -> COMMA . var_comp var_more
+    (44) var_comp -> . function_call
+    (45) var_comp -> . var_cte
+    (87) function_call -> . ID LPAR func_params RPAR
+    (77) var_cte -> . CTEINT
+    (78) var_cte -> . CTEDOUBLE
+    (79) var_cte -> . ID
+    (80) var_cte -> . cte_bool
+    (81) var_cte -> . function_call
+    (82) cte_bool -> . TRUE
+    (83) cte_bool -> . FALSE
+
+    ID              shift and go to state 74
+    CTEINT          shift and go to state 58
+    CTEDOUBLE       shift and go to state 56
+    TRUE            shift and go to state 62
+    FALSE           shift and go to state 57
+
+    var_comp                       shift and go to state 126
+    cte_bool                       shift and go to state 59
+    function_call                  shift and go to state 72
+    var_cte                        shift and go to state 73
+
+state 109
+
+    (37) assignation -> ID EQUALS expression SEMICOLON .
+
+    ID              reduce using rule 37 (assignation -> ID EQUALS expression SEMICOLON .)
+    IF              reduce using rule 37 (assignation -> ID EQUALS expression SEMICOLON .)
+    WHILE           reduce using rule 37 (assignation -> ID EQUALS expression SEMICOLON .)
+    READ            reduce using rule 37 (assignation -> ID EQUALS expression SEMICOLON .)
+    WRITE           reduce using rule 37 (assignation -> ID EQUALS expression SEMICOLON .)
+    RBRACKET        reduce using rule 37 (assignation -> ID EQUALS expression SEMICOLON .)
+    RETURN          reduce using rule 37 (assignation -> ID EQUALS expression SEMICOLON .)
+
+
+state 110
+
+    (38) condition -> IF LPAR expression RPAR . block condition_comp
+    (84) block -> . LBRACKET more_statements RBRACKET
+
+    LBRACKET        shift and go to state 122
+
+    block                          shift and go to state 127
+
+state 111
+
+    (22) more_pars -> COMMA . pars_comp
+    (21) pars_comp -> . var_type ID more_pars
+    (8) var_type -> . INT
+    (9) var_type -> . DOUBLE
+    (10) var_type -> . BOOL
+    (11) var_type -> . INTLIST
+    (12) var_type -> . DOUBLELIST
 
     INT             shift and go to state 3
     DOUBLE          shift and go to state 4
@@ -1391,41 +1860,41 @@ state 78
     INTLIST         shift and go to state 7
     DOUBLELIST      shift and go to state 8
 
-    var_type                       shift and go to state 42
-    pars_comp                      shift and go to state 112
+    var_type                       shift and go to state 53
+    pars_comp                      shift and go to state 128
 
-state 79
+state 112
 
-    (18) pars_comp -> var_type ID more_pars .
+    (21) pars_comp -> var_type ID more_pars .
 
-    RPAR            reduce using rule 18 (pars_comp -> var_type ID more_pars .)
+    RPAR            reduce using rule 21 (pars_comp -> var_type ID more_pars .)
 
 
-state 80
+state 113
 
-    (11) func -> FUNC func_type ID LPAR pars RPAR func_block . more_func
-    (23) more_func -> . func
-    (24) more_func -> .
-    (11) func -> . FUNC func_type ID LPAR pars RPAR func_block more_func
+    (13) func -> FUNC func_type ID procedure_name LPAR pars RPAR func_block . more_func
+    (26) more_func -> . func
+    (27) more_func -> .
+    (13) func -> . FUNC func_type ID procedure_name LPAR pars RPAR func_block more_func
 
-    MAIN            reduce using rule 24 (more_func -> .)
+    MAIN            reduce using rule 27 (more_func -> .)
     FUNC            shift and go to state 13
 
     func                           shift and go to state 11
-    more_func                      shift and go to state 113
+    more_func                      shift and go to state 129
 
-state 81
+state 114
 
-    (21) func_block -> LBRACKET . more_vars more_statements RETURN var_cte SEMICOLON RBRACKET
-    (4) more_vars -> . vars
-    (5) more_vars -> .
-    (2) vars -> . var_type ID SEMICOLON vars
+    (24) func_block -> LBRACKET . more_vars more_statements RETURN var_cte SEMICOLON RBRACKET
+    (6) more_vars -> . vars
+    (7) more_vars -> .
+    (2) vars -> . var_type to_actual_type ID to_var_table SEMICOLON vars
     (3) vars -> .
-    (6) var_type -> . INT
-    (7) var_type -> . DOUBLE
-    (8) var_type -> . BOOL
-    (9) var_type -> . INTLIST
-    (10) var_type -> . DOUBLELIST
+    (8) var_type -> . INT
+    (9) var_type -> . DOUBLE
+    (10) var_type -> . BOOL
+    (11) var_type -> . INTLIST
+    (12) var_type -> . DOUBLELIST
 
   ! reduce/reduce conflict for ID resolved using rule 3 (vars -> .)
   ! reduce/reduce conflict for IF resolved using rule 3 (vars -> .)
@@ -1445,831 +1914,395 @@ state 81
     INTLIST         shift and go to state 7
     DOUBLELIST      shift and go to state 8
 
-  ! ID              [ reduce using rule 5 (more_vars -> .) ]
-  ! IF              [ reduce using rule 5 (more_vars -> .) ]
-  ! WHILE           [ reduce using rule 5 (more_vars -> .) ]
-  ! READ            [ reduce using rule 5 (more_vars -> .) ]
-  ! WRITE           [ reduce using rule 5 (more_vars -> .) ]
-  ! RETURN          [ reduce using rule 5 (more_vars -> .) ]
+  ! ID              [ reduce using rule 7 (more_vars -> .) ]
+  ! IF              [ reduce using rule 7 (more_vars -> .) ]
+  ! WHILE           [ reduce using rule 7 (more_vars -> .) ]
+  ! READ            [ reduce using rule 7 (more_vars -> .) ]
+  ! WRITE           [ reduce using rule 7 (more_vars -> .) ]
+  ! RETURN          [ reduce using rule 7 (more_vars -> .) ]
 
-    var_type                       shift and go to state 2
-    more_vars                      shift and go to state 114
     vars                           shift and go to state 1
-
-state 82
-
-    (39) read -> READ LPAR var_cte RPAR . SEMICOLON
-
-    SEMICOLON       shift and go to state 115
-
-
-state 83
-
-    (84) function_call -> ID LPAR . func_params RPAR
-    (44) func_params -> . var_comp var_more
-    (45) func_params -> .
-    (41) var_comp -> . function_call
-    (42) var_comp -> . var_cte
-    (84) function_call -> . ID LPAR func_params RPAR
-    (74) var_cte -> . CTEINT
-    (75) var_cte -> . CTEDOUBLE
-    (76) var_cte -> . ID
-    (77) var_cte -> . cte_bool
-    (78) var_cte -> . function_call
-    (79) cte_bool -> . TRUE
-    (80) cte_bool -> . FALSE
-
-    RPAR            reduce using rule 45 (func_params -> .)
-    ID              shift and go to state 73
-    CTEINT          shift and go to state 57
-    CTEDOUBLE       shift and go to state 55
-    TRUE            shift and go to state 61
-    FALSE           shift and go to state 56
-
-    func_params                    shift and go to state 116
-    var_comp                       shift and go to state 75
-    cte_bool                       shift and go to state 58
-    function_call                  shift and go to state 71
-    var_cte                        shift and go to state 72
-
-state 84
-
-    (72) factor -> LPAR exp . RPAR
-
-    RPAR            shift and go to state 117
-
-
-state 85
-
-    (71) multiplier -> DIVISION .
-
-    LPAR            reduce using rule 71 (multiplier -> DIVISION .)
-    CTEINT          reduce using rule 71 (multiplier -> DIVISION .)
-    CTEDOUBLE       reduce using rule 71 (multiplier -> DIVISION .)
-    ID              reduce using rule 71 (multiplier -> DIVISION .)
-    TRUE            reduce using rule 71 (multiplier -> DIVISION .)
-    FALSE           reduce using rule 71 (multiplier -> DIVISION .)
-
-
-state 86
-
-    (67) term -> factor more_factor .
-
-    PLUS            reduce using rule 67 (term -> factor more_factor .)
-    MINUS           reduce using rule 67 (term -> factor more_factor .)
-    GREATER         reduce using rule 67 (term -> factor more_factor .)
-    FEWER           reduce using rule 67 (term -> factor more_factor .)
-    GREATEROREQUAL  reduce using rule 67 (term -> factor more_factor .)
-    FEWEROREQUAL    reduce using rule 67 (term -> factor more_factor .)
-    DIFFERENT       reduce using rule 67 (term -> factor more_factor .)
-    EQUALEQUALS     reduce using rule 67 (term -> factor more_factor .)
-    AND             reduce using rule 67 (term -> factor more_factor .)
-    OR              reduce using rule 67 (term -> factor more_factor .)
-    RPAR            reduce using rule 67 (term -> factor more_factor .)
-    SEMICOLON       reduce using rule 67 (term -> factor more_factor .)
-
-
-state 87
-
-    (68) more_factor -> multiplier . term
-    (67) term -> . factor more_factor
-    (72) factor -> . LPAR exp RPAR
-    (73) factor -> . var_cte
-    (74) var_cte -> . CTEINT
-    (75) var_cte -> . CTEDOUBLE
-    (76) var_cte -> . ID
-    (77) var_cte -> . cte_bool
-    (78) var_cte -> . function_call
-    (79) cte_bool -> . TRUE
-    (80) cte_bool -> . FALSE
-    (84) function_call -> . ID LPAR func_params RPAR
-
-    LPAR            shift and go to state 63
-    CTEINT          shift and go to state 57
-    CTEDOUBLE       shift and go to state 55
-    ID              shift and go to state 62
-    TRUE            shift and go to state 61
-    FALSE           shift and go to state 56
-
-    term                           shift and go to state 118
-    cte_bool                       shift and go to state 58
-    function_call                  shift and go to state 59
-    var_cte                        shift and go to state 66
-    factor                         shift and go to state 64
-
-state 88
-
-    (70) multiplier -> MULTIPLICATION .
-
-    LPAR            reduce using rule 70 (multiplier -> MULTIPLICATION .)
-    CTEINT          reduce using rule 70 (multiplier -> MULTIPLICATION .)
-    CTEDOUBLE       reduce using rule 70 (multiplier -> MULTIPLICATION .)
-    ID              reduce using rule 70 (multiplier -> MULTIPLICATION .)
-    TRUE            reduce using rule 70 (multiplier -> MULTIPLICATION .)
-    FALSE           reduce using rule 70 (multiplier -> MULTIPLICATION .)
-
-
-state 89
-
-    (51) andor -> AND .
-
-    LPAR            reduce using rule 51 (andor -> AND .)
-    CTEINT          reduce using rule 51 (andor -> AND .)
-    CTEDOUBLE       reduce using rule 51 (andor -> AND .)
-    ID              reduce using rule 51 (andor -> AND .)
-    TRUE            reduce using rule 51 (andor -> AND .)
-    FALSE           reduce using rule 51 (andor -> AND .)
-
-
-state 90
-
-    (48) expression -> comp expression_comp .
-
-    RPAR            reduce using rule 48 (expression -> comp expression_comp .)
-    SEMICOLON       reduce using rule 48 (expression -> comp expression_comp .)
-
-
-state 91
-
-    (49) expression_comp -> andor . comp
-    (53) comp -> . exp exp_comp
-    (62) exp -> . term more_term
-    (67) term -> . factor more_factor
-    (72) factor -> . LPAR exp RPAR
-    (73) factor -> . var_cte
-    (74) var_cte -> . CTEINT
-    (75) var_cte -> . CTEDOUBLE
-    (76) var_cte -> . ID
-    (77) var_cte -> . cte_bool
-    (78) var_cte -> . function_call
-    (79) cte_bool -> . TRUE
-    (80) cte_bool -> . FALSE
-    (84) function_call -> . ID LPAR func_params RPAR
-
-    LPAR            shift and go to state 63
-    CTEINT          shift and go to state 57
-    CTEDOUBLE       shift and go to state 55
-    ID              shift and go to state 62
-    TRUE            shift and go to state 61
-    FALSE           shift and go to state 56
-
-    term                           shift and go to state 67
-    comp                           shift and go to state 119
-    factor                         shift and go to state 64
-    cte_bool                       shift and go to state 58
-    function_call                  shift and go to state 59
-    var_cte                        shift and go to state 66
-    exp                            shift and go to state 68
-
-state 92
-
-    (52) andor -> OR .
-
-    LPAR            reduce using rule 52 (andor -> OR .)
-    CTEINT          reduce using rule 52 (andor -> OR .)
-    CTEDOUBLE       reduce using rule 52 (andor -> OR .)
-    ID              reduce using rule 52 (andor -> OR .)
-    TRUE            reduce using rule 52 (andor -> OR .)
-    FALSE           reduce using rule 52 (andor -> OR .)
-
-
-state 93
-
-    (62) exp -> term more_term .
-
-    GREATER         reduce using rule 62 (exp -> term more_term .)
-    FEWER           reduce using rule 62 (exp -> term more_term .)
-    GREATEROREQUAL  reduce using rule 62 (exp -> term more_term .)
-    FEWEROREQUAL    reduce using rule 62 (exp -> term more_term .)
-    DIFFERENT       reduce using rule 62 (exp -> term more_term .)
-    EQUALEQUALS     reduce using rule 62 (exp -> term more_term .)
-    AND             reduce using rule 62 (exp -> term more_term .)
-    OR              reduce using rule 62 (exp -> term more_term .)
-    RPAR            reduce using rule 62 (exp -> term more_term .)
-    SEMICOLON       reduce using rule 62 (exp -> term more_term .)
-
-
-state 94
-
-    (65) operator -> PLUS .
-
-    LPAR            reduce using rule 65 (operator -> PLUS .)
-    CTEINT          reduce using rule 65 (operator -> PLUS .)
-    CTEDOUBLE       reduce using rule 65 (operator -> PLUS .)
-    ID              reduce using rule 65 (operator -> PLUS .)
-    TRUE            reduce using rule 65 (operator -> PLUS .)
-    FALSE           reduce using rule 65 (operator -> PLUS .)
-
-
-state 95
-
-    (63) more_term -> operator . exp
-    (62) exp -> . term more_term
-    (67) term -> . factor more_factor
-    (72) factor -> . LPAR exp RPAR
-    (73) factor -> . var_cte
-    (74) var_cte -> . CTEINT
-    (75) var_cte -> . CTEDOUBLE
-    (76) var_cte -> . ID
-    (77) var_cte -> . cte_bool
-    (78) var_cte -> . function_call
-    (79) cte_bool -> . TRUE
-    (80) cte_bool -> . FALSE
-    (84) function_call -> . ID LPAR func_params RPAR
-
-    LPAR            shift and go to state 63
-    CTEINT          shift and go to state 57
-    CTEDOUBLE       shift and go to state 55
-    ID              shift and go to state 62
-    TRUE            shift and go to state 61
-    FALSE           shift and go to state 56
-
-    term                           shift and go to state 67
-    cte_bool                       shift and go to state 58
-    function_call                  shift and go to state 59
-    var_cte                        shift and go to state 66
-    exp                            shift and go to state 120
-    factor                         shift and go to state 64
-
-state 96
-
-    (66) operator -> MINUS .
-
-    LPAR            reduce using rule 66 (operator -> MINUS .)
-    CTEINT          reduce using rule 66 (operator -> MINUS .)
-    CTEDOUBLE       reduce using rule 66 (operator -> MINUS .)
-    ID              reduce using rule 66 (operator -> MINUS .)
-    TRUE            reduce using rule 66 (operator -> MINUS .)
-    FALSE           reduce using rule 66 (operator -> MINUS .)
-
-
-state 97
-
-    (60) comparator -> DIFFERENT .
-
-    LPAR            reduce using rule 60 (comparator -> DIFFERENT .)
-    CTEINT          reduce using rule 60 (comparator -> DIFFERENT .)
-    CTEDOUBLE       reduce using rule 60 (comparator -> DIFFERENT .)
-    ID              reduce using rule 60 (comparator -> DIFFERENT .)
-    TRUE            reduce using rule 60 (comparator -> DIFFERENT .)
-    FALSE           reduce using rule 60 (comparator -> DIFFERENT .)
-
-
-state 98
-
-    (56) comparator -> GREATER .
-
-    LPAR            reduce using rule 56 (comparator -> GREATER .)
-    CTEINT          reduce using rule 56 (comparator -> GREATER .)
-    CTEDOUBLE       reduce using rule 56 (comparator -> GREATER .)
-    ID              reduce using rule 56 (comparator -> GREATER .)
-    TRUE            reduce using rule 56 (comparator -> GREATER .)
-    FALSE           reduce using rule 56 (comparator -> GREATER .)
-
-
-state 99
-
-    (54) exp_comp -> comparator . exp
-    (62) exp -> . term more_term
-    (67) term -> . factor more_factor
-    (72) factor -> . LPAR exp RPAR
-    (73) factor -> . var_cte
-    (74) var_cte -> . CTEINT
-    (75) var_cte -> . CTEDOUBLE
-    (76) var_cte -> . ID
-    (77) var_cte -> . cte_bool
-    (78) var_cte -> . function_call
-    (79) cte_bool -> . TRUE
-    (80) cte_bool -> . FALSE
-    (84) function_call -> . ID LPAR func_params RPAR
-
-    LPAR            shift and go to state 63
-    CTEINT          shift and go to state 57
-    CTEDOUBLE       shift and go to state 55
-    ID              shift and go to state 62
-    TRUE            shift and go to state 61
-    FALSE           shift and go to state 56
-
-    term                           shift and go to state 67
-    cte_bool                       shift and go to state 58
-    function_call                  shift and go to state 59
-    var_cte                        shift and go to state 66
-    exp                            shift and go to state 121
-    factor                         shift and go to state 64
-
-state 100
-
-    (61) comparator -> EQUALEQUALS .
-
-    LPAR            reduce using rule 61 (comparator -> EQUALEQUALS .)
-    CTEINT          reduce using rule 61 (comparator -> EQUALEQUALS .)
-    CTEDOUBLE       reduce using rule 61 (comparator -> EQUALEQUALS .)
-    ID              reduce using rule 61 (comparator -> EQUALEQUALS .)
-    TRUE            reduce using rule 61 (comparator -> EQUALEQUALS .)
-    FALSE           reduce using rule 61 (comparator -> EQUALEQUALS .)
-
-
-state 101
-
-    (59) comparator -> FEWEROREQUAL .
-
-    LPAR            reduce using rule 59 (comparator -> FEWEROREQUAL .)
-    CTEINT          reduce using rule 59 (comparator -> FEWEROREQUAL .)
-    CTEDOUBLE       reduce using rule 59 (comparator -> FEWEROREQUAL .)
-    ID              reduce using rule 59 (comparator -> FEWEROREQUAL .)
-    TRUE            reduce using rule 59 (comparator -> FEWEROREQUAL .)
-    FALSE           reduce using rule 59 (comparator -> FEWEROREQUAL .)
-
-
-state 102
-
-    (57) comparator -> FEWER .
-
-    LPAR            reduce using rule 57 (comparator -> FEWER .)
-    CTEINT          reduce using rule 57 (comparator -> FEWER .)
-    CTEDOUBLE       reduce using rule 57 (comparator -> FEWER .)
-    ID              reduce using rule 57 (comparator -> FEWER .)
-    TRUE            reduce using rule 57 (comparator -> FEWER .)
-    FALSE           reduce using rule 57 (comparator -> FEWER .)
-
-
-state 103
-
-    (58) comparator -> GREATEROREQUAL .
-
-    LPAR            reduce using rule 58 (comparator -> GREATEROREQUAL .)
-    CTEINT          reduce using rule 58 (comparator -> GREATEROREQUAL .)
-    CTEDOUBLE       reduce using rule 58 (comparator -> GREATEROREQUAL .)
-    ID              reduce using rule 58 (comparator -> GREATEROREQUAL .)
-    TRUE            reduce using rule 58 (comparator -> GREATEROREQUAL .)
-    FALSE           reduce using rule 58 (comparator -> GREATEROREQUAL .)
-
-
-state 104
-
-    (53) comp -> exp exp_comp .
-
-    AND             reduce using rule 53 (comp -> exp exp_comp .)
-    OR              reduce using rule 53 (comp -> exp exp_comp .)
-    SEMICOLON       reduce using rule 53 (comp -> exp exp_comp .)
-    RPAR            reduce using rule 53 (comp -> exp exp_comp .)
-
-
-state 105
-
-    (38) cycle -> WHILE LPAR expression RPAR . block
-    (81) block -> . LBRACKET more_statements RBRACKET
-
-    LBRACKET        shift and go to state 122
-
-    block                          shift and go to state 123
-
-state 106
-
-    (40) write -> WRITE LPAR var_comp RPAR . SEMICOLON
-
-    SEMICOLON       shift and go to state 124
-
-
-state 107
-
-    (43) function -> ID LPAR func_params RPAR . SEMICOLON
-
-    SEMICOLON       shift and go to state 125
-
-
-state 108
-
-    (44) func_params -> var_comp var_more .
-
-    RPAR            reduce using rule 44 (func_params -> var_comp var_more .)
-
-
-state 109
-
-    (46) var_more -> COMMA . var_comp var_more
-    (41) var_comp -> . function_call
-    (42) var_comp -> . var_cte
-    (84) function_call -> . ID LPAR func_params RPAR
-    (74) var_cte -> . CTEINT
-    (75) var_cte -> . CTEDOUBLE
-    (76) var_cte -> . ID
-    (77) var_cte -> . cte_bool
-    (78) var_cte -> . function_call
-    (79) cte_bool -> . TRUE
-    (80) cte_bool -> . FALSE
-
-    ID              shift and go to state 73
-    CTEINT          shift and go to state 57
-    CTEDOUBLE       shift and go to state 55
-    TRUE            shift and go to state 61
-    FALSE           shift and go to state 56
-
-    var_comp                       shift and go to state 126
-    cte_bool                       shift and go to state 58
-    function_call                  shift and go to state 71
-    var_cte                        shift and go to state 72
-
-state 110
-
-    (34) assignation -> ID EQUALS expression SEMICOLON .
-
-    ID              reduce using rule 34 (assignation -> ID EQUALS expression SEMICOLON .)
-    IF              reduce using rule 34 (assignation -> ID EQUALS expression SEMICOLON .)
-    WHILE           reduce using rule 34 (assignation -> ID EQUALS expression SEMICOLON .)
-    READ            reduce using rule 34 (assignation -> ID EQUALS expression SEMICOLON .)
-    WRITE           reduce using rule 34 (assignation -> ID EQUALS expression SEMICOLON .)
-    RBRACKET        reduce using rule 34 (assignation -> ID EQUALS expression SEMICOLON .)
-    RETURN          reduce using rule 34 (assignation -> ID EQUALS expression SEMICOLON .)
-
-
-state 111
-
-    (35) condition -> IF LPAR expression RPAR . block condition_comp
-    (81) block -> . LBRACKET more_statements RBRACKET
-
-    LBRACKET        shift and go to state 122
-
-    block                          shift and go to state 127
-
-state 112
-
-    (19) more_pars -> COMMA pars_comp .
-
-    RPAR            reduce using rule 19 (more_pars -> COMMA pars_comp .)
-
-
-state 113
-
-    (11) func -> FUNC func_type ID LPAR pars RPAR func_block more_func .
-
-    MAIN            reduce using rule 11 (func -> FUNC func_type ID LPAR pars RPAR func_block more_func .)
-
-
-state 114
-
-    (21) func_block -> LBRACKET more_vars . more_statements RETURN var_cte SEMICOLON RBRACKET
-    (25) more_statements -> . statement
-    (26) more_statements -> .
-    (27) statement -> . statement_comp more_statements
-    (28) statement_comp -> . assignation
-    (29) statement_comp -> . condition
-    (30) statement_comp -> . cycle
-    (31) statement_comp -> . read
-    (32) statement_comp -> . write
-    (33) statement_comp -> . function
-    (34) assignation -> . ID EQUALS expression SEMICOLON
-    (35) condition -> . IF LPAR expression RPAR block condition_comp
-    (38) cycle -> . WHILE LPAR expression RPAR block
-    (39) read -> . READ LPAR var_cte RPAR SEMICOLON
-    (40) write -> . WRITE LPAR var_comp RPAR SEMICOLON
-    (43) function -> . ID LPAR func_params RPAR SEMICOLON
-
-    RETURN          reduce using rule 26 (more_statements -> .)
-    ID              shift and go to state 38
-    IF              shift and go to state 40
-    WHILE           shift and go to state 29
-    READ            shift and go to state 28
-    WRITE           shift and go to state 37
-
-    function                       shift and go to state 35
-    assignation                    shift and go to state 41
-    read                           shift and go to state 36
-    write                          shift and go to state 32
-    statement                      shift and go to state 33
-    statement_comp                 shift and go to state 30
-    cycle                          shift and go to state 34
-    condition                      shift and go to state 39
-    more_statements                shift and go to state 128
+    var_type                       shift and go to state 2
+    more_vars                      shift and go to state 130
 
 state 115
 
-    (39) read -> READ LPAR var_cte RPAR SEMICOLON .
+    (42) read -> READ LPAR var_cte RPAR SEMICOLON .
 
-    ID              reduce using rule 39 (read -> READ LPAR var_cte RPAR SEMICOLON .)
-    IF              reduce using rule 39 (read -> READ LPAR var_cte RPAR SEMICOLON .)
-    WHILE           reduce using rule 39 (read -> READ LPAR var_cte RPAR SEMICOLON .)
-    READ            reduce using rule 39 (read -> READ LPAR var_cte RPAR SEMICOLON .)
-    WRITE           reduce using rule 39 (read -> READ LPAR var_cte RPAR SEMICOLON .)
-    RETURN          reduce using rule 39 (read -> READ LPAR var_cte RPAR SEMICOLON .)
-    RBRACKET        reduce using rule 39 (read -> READ LPAR var_cte RPAR SEMICOLON .)
+    ID              reduce using rule 42 (read -> READ LPAR var_cte RPAR SEMICOLON .)
+    IF              reduce using rule 42 (read -> READ LPAR var_cte RPAR SEMICOLON .)
+    WHILE           reduce using rule 42 (read -> READ LPAR var_cte RPAR SEMICOLON .)
+    READ            reduce using rule 42 (read -> READ LPAR var_cte RPAR SEMICOLON .)
+    WRITE           reduce using rule 42 (read -> READ LPAR var_cte RPAR SEMICOLON .)
+    RBRACKET        reduce using rule 42 (read -> READ LPAR var_cte RPAR SEMICOLON .)
+    RETURN          reduce using rule 42 (read -> READ LPAR var_cte RPAR SEMICOLON .)
 
 
 state 116
 
-    (84) function_call -> ID LPAR func_params . RPAR
+    (87) function_call -> ID LPAR func_params . RPAR
 
-    RPAR            shift and go to state 129
+    RPAR            shift and go to state 131
 
 
 state 117
 
-    (72) factor -> LPAR exp RPAR .
+    (75) factor -> LPAR exp RPAR .
 
-    MULTIPLICATION  reduce using rule 72 (factor -> LPAR exp RPAR .)
-    DIVISION        reduce using rule 72 (factor -> LPAR exp RPAR .)
-    PLUS            reduce using rule 72 (factor -> LPAR exp RPAR .)
-    MINUS           reduce using rule 72 (factor -> LPAR exp RPAR .)
-    GREATER         reduce using rule 72 (factor -> LPAR exp RPAR .)
-    FEWER           reduce using rule 72 (factor -> LPAR exp RPAR .)
-    GREATEROREQUAL  reduce using rule 72 (factor -> LPAR exp RPAR .)
-    FEWEROREQUAL    reduce using rule 72 (factor -> LPAR exp RPAR .)
-    DIFFERENT       reduce using rule 72 (factor -> LPAR exp RPAR .)
-    EQUALEQUALS     reduce using rule 72 (factor -> LPAR exp RPAR .)
-    AND             reduce using rule 72 (factor -> LPAR exp RPAR .)
-    OR              reduce using rule 72 (factor -> LPAR exp RPAR .)
-    RPAR            reduce using rule 72 (factor -> LPAR exp RPAR .)
-    SEMICOLON       reduce using rule 72 (factor -> LPAR exp RPAR .)
+    MULTIPLICATION  reduce using rule 75 (factor -> LPAR exp RPAR .)
+    DIVISION        reduce using rule 75 (factor -> LPAR exp RPAR .)
+    PLUS            reduce using rule 75 (factor -> LPAR exp RPAR .)
+    MINUS           reduce using rule 75 (factor -> LPAR exp RPAR .)
+    GREATER         reduce using rule 75 (factor -> LPAR exp RPAR .)
+    FEWER           reduce using rule 75 (factor -> LPAR exp RPAR .)
+    GREATEROREQUAL  reduce using rule 75 (factor -> LPAR exp RPAR .)
+    FEWEROREQUAL    reduce using rule 75 (factor -> LPAR exp RPAR .)
+    DIFFERENT       reduce using rule 75 (factor -> LPAR exp RPAR .)
+    EQUALEQUALS     reduce using rule 75 (factor -> LPAR exp RPAR .)
+    AND             reduce using rule 75 (factor -> LPAR exp RPAR .)
+    OR              reduce using rule 75 (factor -> LPAR exp RPAR .)
+    RPAR            reduce using rule 75 (factor -> LPAR exp RPAR .)
+    SEMICOLON       reduce using rule 75 (factor -> LPAR exp RPAR .)
 
 
 state 118
 
-    (68) more_factor -> multiplier term .
+    (71) more_factor -> multiplier term .
 
-    PLUS            reduce using rule 68 (more_factor -> multiplier term .)
-    MINUS           reduce using rule 68 (more_factor -> multiplier term .)
-    GREATER         reduce using rule 68 (more_factor -> multiplier term .)
-    FEWER           reduce using rule 68 (more_factor -> multiplier term .)
-    GREATEROREQUAL  reduce using rule 68 (more_factor -> multiplier term .)
-    FEWEROREQUAL    reduce using rule 68 (more_factor -> multiplier term .)
-    DIFFERENT       reduce using rule 68 (more_factor -> multiplier term .)
-    EQUALEQUALS     reduce using rule 68 (more_factor -> multiplier term .)
-    AND             reduce using rule 68 (more_factor -> multiplier term .)
-    OR              reduce using rule 68 (more_factor -> multiplier term .)
-    RPAR            reduce using rule 68 (more_factor -> multiplier term .)
-    SEMICOLON       reduce using rule 68 (more_factor -> multiplier term .)
+    PLUS            reduce using rule 71 (more_factor -> multiplier term .)
+    MINUS           reduce using rule 71 (more_factor -> multiplier term .)
+    GREATER         reduce using rule 71 (more_factor -> multiplier term .)
+    FEWER           reduce using rule 71 (more_factor -> multiplier term .)
+    GREATEROREQUAL  reduce using rule 71 (more_factor -> multiplier term .)
+    FEWEROREQUAL    reduce using rule 71 (more_factor -> multiplier term .)
+    DIFFERENT       reduce using rule 71 (more_factor -> multiplier term .)
+    EQUALEQUALS     reduce using rule 71 (more_factor -> multiplier term .)
+    AND             reduce using rule 71 (more_factor -> multiplier term .)
+    OR              reduce using rule 71 (more_factor -> multiplier term .)
+    RPAR            reduce using rule 71 (more_factor -> multiplier term .)
+    SEMICOLON       reduce using rule 71 (more_factor -> multiplier term .)
 
 
 state 119
 
-    (49) expression_comp -> andor comp .
+    (52) expression_comp -> andor comp .
 
-    RPAR            reduce using rule 49 (expression_comp -> andor comp .)
-    SEMICOLON       reduce using rule 49 (expression_comp -> andor comp .)
+    RPAR            reduce using rule 52 (expression_comp -> andor comp .)
+    SEMICOLON       reduce using rule 52 (expression_comp -> andor comp .)
 
 
 state 120
 
-    (63) more_term -> operator exp .
+    (66) more_term -> operator exp .
 
-    GREATER         reduce using rule 63 (more_term -> operator exp .)
-    FEWER           reduce using rule 63 (more_term -> operator exp .)
-    GREATEROREQUAL  reduce using rule 63 (more_term -> operator exp .)
-    FEWEROREQUAL    reduce using rule 63 (more_term -> operator exp .)
-    DIFFERENT       reduce using rule 63 (more_term -> operator exp .)
-    EQUALEQUALS     reduce using rule 63 (more_term -> operator exp .)
-    AND             reduce using rule 63 (more_term -> operator exp .)
-    OR              reduce using rule 63 (more_term -> operator exp .)
-    RPAR            reduce using rule 63 (more_term -> operator exp .)
-    SEMICOLON       reduce using rule 63 (more_term -> operator exp .)
+    GREATER         reduce using rule 66 (more_term -> operator exp .)
+    FEWER           reduce using rule 66 (more_term -> operator exp .)
+    GREATEROREQUAL  reduce using rule 66 (more_term -> operator exp .)
+    FEWEROREQUAL    reduce using rule 66 (more_term -> operator exp .)
+    DIFFERENT       reduce using rule 66 (more_term -> operator exp .)
+    EQUALEQUALS     reduce using rule 66 (more_term -> operator exp .)
+    AND             reduce using rule 66 (more_term -> operator exp .)
+    OR              reduce using rule 66 (more_term -> operator exp .)
+    RPAR            reduce using rule 66 (more_term -> operator exp .)
+    SEMICOLON       reduce using rule 66 (more_term -> operator exp .)
 
 
 state 121
 
-    (54) exp_comp -> comparator exp .
+    (57) exp_comp -> comparator exp .
 
-    AND             reduce using rule 54 (exp_comp -> comparator exp .)
-    OR              reduce using rule 54 (exp_comp -> comparator exp .)
-    RPAR            reduce using rule 54 (exp_comp -> comparator exp .)
-    SEMICOLON       reduce using rule 54 (exp_comp -> comparator exp .)
+    AND             reduce using rule 57 (exp_comp -> comparator exp .)
+    OR              reduce using rule 57 (exp_comp -> comparator exp .)
+    RPAR            reduce using rule 57 (exp_comp -> comparator exp .)
+    SEMICOLON       reduce using rule 57 (exp_comp -> comparator exp .)
 
 
 state 122
 
-    (81) block -> LBRACKET . more_statements RBRACKET
-    (25) more_statements -> . statement
-    (26) more_statements -> .
-    (27) statement -> . statement_comp more_statements
-    (28) statement_comp -> . assignation
-    (29) statement_comp -> . condition
-    (30) statement_comp -> . cycle
-    (31) statement_comp -> . read
-    (32) statement_comp -> . write
-    (33) statement_comp -> . function
-    (34) assignation -> . ID EQUALS expression SEMICOLON
-    (35) condition -> . IF LPAR expression RPAR block condition_comp
-    (38) cycle -> . WHILE LPAR expression RPAR block
-    (39) read -> . READ LPAR var_cte RPAR SEMICOLON
-    (40) write -> . WRITE LPAR var_comp RPAR SEMICOLON
-    (43) function -> . ID LPAR func_params RPAR SEMICOLON
+    (84) block -> LBRACKET . more_statements RBRACKET
+    (28) more_statements -> . statement
+    (29) more_statements -> .
+    (30) statement -> . statement_comp more_statements
+    (31) statement_comp -> . assignation
+    (32) statement_comp -> . condition
+    (33) statement_comp -> . cycle
+    (34) statement_comp -> . read
+    (35) statement_comp -> . write
+    (36) statement_comp -> . function
+    (37) assignation -> . ID EQUALS expression SEMICOLON
+    (38) condition -> . IF LPAR expression RPAR block condition_comp
+    (41) cycle -> . WHILE LPAR expression RPAR block
+    (42) read -> . READ LPAR var_cte RPAR SEMICOLON
+    (43) write -> . WRITE LPAR var_comp RPAR SEMICOLON
+    (46) function -> . ID LPAR func_params RPAR SEMICOLON
 
-    RBRACKET        reduce using rule 26 (more_statements -> .)
-    ID              shift and go to state 38
-    IF              shift and go to state 40
-    WHILE           shift and go to state 29
-    READ            shift and go to state 28
-    WRITE           shift and go to state 37
+    RBRACKET        reduce using rule 29 (more_statements -> .)
+    ID              shift and go to state 40
+    IF              shift and go to state 42
+    WHILE           shift and go to state 31
+    READ            shift and go to state 30
+    WRITE           shift and go to state 39
 
-    function                       shift and go to state 35
-    assignation                    shift and go to state 41
-    read                           shift and go to state 36
-    write                          shift and go to state 32
-    statement                      shift and go to state 33
-    statement_comp                 shift and go to state 30
-    more_statements                shift and go to state 130
-    condition                      shift and go to state 39
-    cycle                          shift and go to state 34
+    function                       shift and go to state 37
+    assignation                    shift and go to state 43
+    read                           shift and go to state 38
+    write                          shift and go to state 34
+    statement                      shift and go to state 35
+    statement_comp                 shift and go to state 32
+    more_statements                shift and go to state 132
+    condition                      shift and go to state 41
+    cycle                          shift and go to state 36
 
 state 123
 
-    (38) cycle -> WHILE LPAR expression RPAR block .
+    (41) cycle -> WHILE LPAR expression RPAR block .
 
-    ID              reduce using rule 38 (cycle -> WHILE LPAR expression RPAR block .)
-    IF              reduce using rule 38 (cycle -> WHILE LPAR expression RPAR block .)
-    WHILE           reduce using rule 38 (cycle -> WHILE LPAR expression RPAR block .)
-    READ            reduce using rule 38 (cycle -> WHILE LPAR expression RPAR block .)
-    WRITE           reduce using rule 38 (cycle -> WHILE LPAR expression RPAR block .)
-    RBRACKET        reduce using rule 38 (cycle -> WHILE LPAR expression RPAR block .)
-    RETURN          reduce using rule 38 (cycle -> WHILE LPAR expression RPAR block .)
+    ID              reduce using rule 41 (cycle -> WHILE LPAR expression RPAR block .)
+    IF              reduce using rule 41 (cycle -> WHILE LPAR expression RPAR block .)
+    WHILE           reduce using rule 41 (cycle -> WHILE LPAR expression RPAR block .)
+    READ            reduce using rule 41 (cycle -> WHILE LPAR expression RPAR block .)
+    WRITE           reduce using rule 41 (cycle -> WHILE LPAR expression RPAR block .)
+    RBRACKET        reduce using rule 41 (cycle -> WHILE LPAR expression RPAR block .)
+    RETURN          reduce using rule 41 (cycle -> WHILE LPAR expression RPAR block .)
 
 
 state 124
 
-    (40) write -> WRITE LPAR var_comp RPAR SEMICOLON .
+    (43) write -> WRITE LPAR var_comp RPAR SEMICOLON .
 
-    ID              reduce using rule 40 (write -> WRITE LPAR var_comp RPAR SEMICOLON .)
-    IF              reduce using rule 40 (write -> WRITE LPAR var_comp RPAR SEMICOLON .)
-    WHILE           reduce using rule 40 (write -> WRITE LPAR var_comp RPAR SEMICOLON .)
-    READ            reduce using rule 40 (write -> WRITE LPAR var_comp RPAR SEMICOLON .)
-    WRITE           reduce using rule 40 (write -> WRITE LPAR var_comp RPAR SEMICOLON .)
-    RBRACKET        reduce using rule 40 (write -> WRITE LPAR var_comp RPAR SEMICOLON .)
-    RETURN          reduce using rule 40 (write -> WRITE LPAR var_comp RPAR SEMICOLON .)
+    ID              reduce using rule 43 (write -> WRITE LPAR var_comp RPAR SEMICOLON .)
+    IF              reduce using rule 43 (write -> WRITE LPAR var_comp RPAR SEMICOLON .)
+    WHILE           reduce using rule 43 (write -> WRITE LPAR var_comp RPAR SEMICOLON .)
+    READ            reduce using rule 43 (write -> WRITE LPAR var_comp RPAR SEMICOLON .)
+    WRITE           reduce using rule 43 (write -> WRITE LPAR var_comp RPAR SEMICOLON .)
+    RBRACKET        reduce using rule 43 (write -> WRITE LPAR var_comp RPAR SEMICOLON .)
+    RETURN          reduce using rule 43 (write -> WRITE LPAR var_comp RPAR SEMICOLON .)
 
 
 state 125
 
-    (43) function -> ID LPAR func_params RPAR SEMICOLON .
+    (46) function -> ID LPAR func_params RPAR SEMICOLON .
 
-    ID              reduce using rule 43 (function -> ID LPAR func_params RPAR SEMICOLON .)
-    IF              reduce using rule 43 (function -> ID LPAR func_params RPAR SEMICOLON .)
-    WHILE           reduce using rule 43 (function -> ID LPAR func_params RPAR SEMICOLON .)
-    READ            reduce using rule 43 (function -> ID LPAR func_params RPAR SEMICOLON .)
-    WRITE           reduce using rule 43 (function -> ID LPAR func_params RPAR SEMICOLON .)
-    RBRACKET        reduce using rule 43 (function -> ID LPAR func_params RPAR SEMICOLON .)
-    RETURN          reduce using rule 43 (function -> ID LPAR func_params RPAR SEMICOLON .)
+    ID              reduce using rule 46 (function -> ID LPAR func_params RPAR SEMICOLON .)
+    IF              reduce using rule 46 (function -> ID LPAR func_params RPAR SEMICOLON .)
+    WHILE           reduce using rule 46 (function -> ID LPAR func_params RPAR SEMICOLON .)
+    READ            reduce using rule 46 (function -> ID LPAR func_params RPAR SEMICOLON .)
+    WRITE           reduce using rule 46 (function -> ID LPAR func_params RPAR SEMICOLON .)
+    RETURN          reduce using rule 46 (function -> ID LPAR func_params RPAR SEMICOLON .)
+    RBRACKET        reduce using rule 46 (function -> ID LPAR func_params RPAR SEMICOLON .)
 
 
 state 126
 
-    (46) var_more -> COMMA var_comp . var_more
-    (46) var_more -> . COMMA var_comp var_more
-    (47) var_more -> .
+    (49) var_more -> COMMA var_comp . var_more
+    (49) var_more -> . COMMA var_comp var_more
+    (50) var_more -> .
 
-    COMMA           shift and go to state 109
-    RPAR            reduce using rule 47 (var_more -> .)
+    COMMA           shift and go to state 108
+    RPAR            reduce using rule 50 (var_more -> .)
 
-    var_more                       shift and go to state 131
+    var_more                       shift and go to state 133
 
 state 127
 
-    (35) condition -> IF LPAR expression RPAR block . condition_comp
-    (36) condition_comp -> . ELSE block
-    (37) condition_comp -> .
+    (38) condition -> IF LPAR expression RPAR block . condition_comp
+    (39) condition_comp -> . ELSE block
+    (40) condition_comp -> .
 
-    ELSE            shift and go to state 133
-    ID              reduce using rule 37 (condition_comp -> .)
-    IF              reduce using rule 37 (condition_comp -> .)
-    WHILE           reduce using rule 37 (condition_comp -> .)
-    READ            reduce using rule 37 (condition_comp -> .)
-    WRITE           reduce using rule 37 (condition_comp -> .)
-    RBRACKET        reduce using rule 37 (condition_comp -> .)
-    RETURN          reduce using rule 37 (condition_comp -> .)
+    ELSE            shift and go to state 135
+    ID              reduce using rule 40 (condition_comp -> .)
+    IF              reduce using rule 40 (condition_comp -> .)
+    WHILE           reduce using rule 40 (condition_comp -> .)
+    READ            reduce using rule 40 (condition_comp -> .)
+    WRITE           reduce using rule 40 (condition_comp -> .)
+    RBRACKET        reduce using rule 40 (condition_comp -> .)
+    RETURN          reduce using rule 40 (condition_comp -> .)
 
-    condition_comp                 shift and go to state 132
+    condition_comp                 shift and go to state 134
 
 state 128
 
-    (21) func_block -> LBRACKET more_vars more_statements . RETURN var_cte SEMICOLON RBRACKET
+    (22) more_pars -> COMMA pars_comp .
 
-    RETURN          shift and go to state 134
+    RPAR            reduce using rule 22 (more_pars -> COMMA pars_comp .)
 
 
 state 129
 
-    (84) function_call -> ID LPAR func_params RPAR .
+    (13) func -> FUNC func_type ID procedure_name LPAR pars RPAR func_block more_func .
 
-    MULTIPLICATION  reduce using rule 84 (function_call -> ID LPAR func_params RPAR .)
-    DIVISION        reduce using rule 84 (function_call -> ID LPAR func_params RPAR .)
-    PLUS            reduce using rule 84 (function_call -> ID LPAR func_params RPAR .)
-    MINUS           reduce using rule 84 (function_call -> ID LPAR func_params RPAR .)
-    GREATER         reduce using rule 84 (function_call -> ID LPAR func_params RPAR .)
-    FEWER           reduce using rule 84 (function_call -> ID LPAR func_params RPAR .)
-    GREATEROREQUAL  reduce using rule 84 (function_call -> ID LPAR func_params RPAR .)
-    FEWEROREQUAL    reduce using rule 84 (function_call -> ID LPAR func_params RPAR .)
-    DIFFERENT       reduce using rule 84 (function_call -> ID LPAR func_params RPAR .)
-    EQUALEQUALS     reduce using rule 84 (function_call -> ID LPAR func_params RPAR .)
-    AND             reduce using rule 84 (function_call -> ID LPAR func_params RPAR .)
-    OR              reduce using rule 84 (function_call -> ID LPAR func_params RPAR .)
-    RPAR            reduce using rule 84 (function_call -> ID LPAR func_params RPAR .)
-    SEMICOLON       reduce using rule 84 (function_call -> ID LPAR func_params RPAR .)
-    COMMA           reduce using rule 84 (function_call -> ID LPAR func_params RPAR .)
+    MAIN            reduce using rule 13 (func -> FUNC func_type ID procedure_name LPAR pars RPAR func_block more_func .)
 
 
 state 130
 
-    (81) block -> LBRACKET more_statements . RBRACKET
+    (24) func_block -> LBRACKET more_vars . more_statements RETURN var_cte SEMICOLON RBRACKET
+    (28) more_statements -> . statement
+    (29) more_statements -> .
+    (30) statement -> . statement_comp more_statements
+    (31) statement_comp -> . assignation
+    (32) statement_comp -> . condition
+    (33) statement_comp -> . cycle
+    (34) statement_comp -> . read
+    (35) statement_comp -> . write
+    (36) statement_comp -> . function
+    (37) assignation -> . ID EQUALS expression SEMICOLON
+    (38) condition -> . IF LPAR expression RPAR block condition_comp
+    (41) cycle -> . WHILE LPAR expression RPAR block
+    (42) read -> . READ LPAR var_cte RPAR SEMICOLON
+    (43) write -> . WRITE LPAR var_comp RPAR SEMICOLON
+    (46) function -> . ID LPAR func_params RPAR SEMICOLON
 
-    RBRACKET        shift and go to state 135
+    RETURN          reduce using rule 29 (more_statements -> .)
+    ID              shift and go to state 40
+    IF              shift and go to state 42
+    WHILE           shift and go to state 31
+    READ            shift and go to state 30
+    WRITE           shift and go to state 39
 
+    function                       shift and go to state 37
+    assignation                    shift and go to state 43
+    read                           shift and go to state 38
+    write                          shift and go to state 34
+    statement                      shift and go to state 35
+    statement_comp                 shift and go to state 32
+    cycle                          shift and go to state 36
+    condition                      shift and go to state 41
+    more_statements                shift and go to state 136
 
 state 131
 
-    (46) var_more -> COMMA var_comp var_more .
+    (87) function_call -> ID LPAR func_params RPAR .
 
-    RPAR            reduce using rule 46 (var_more -> COMMA var_comp var_more .)
+    MULTIPLICATION  reduce using rule 87 (function_call -> ID LPAR func_params RPAR .)
+    DIVISION        reduce using rule 87 (function_call -> ID LPAR func_params RPAR .)
+    PLUS            reduce using rule 87 (function_call -> ID LPAR func_params RPAR .)
+    MINUS           reduce using rule 87 (function_call -> ID LPAR func_params RPAR .)
+    GREATER         reduce using rule 87 (function_call -> ID LPAR func_params RPAR .)
+    FEWER           reduce using rule 87 (function_call -> ID LPAR func_params RPAR .)
+    GREATEROREQUAL  reduce using rule 87 (function_call -> ID LPAR func_params RPAR .)
+    FEWEROREQUAL    reduce using rule 87 (function_call -> ID LPAR func_params RPAR .)
+    DIFFERENT       reduce using rule 87 (function_call -> ID LPAR func_params RPAR .)
+    EQUALEQUALS     reduce using rule 87 (function_call -> ID LPAR func_params RPAR .)
+    AND             reduce using rule 87 (function_call -> ID LPAR func_params RPAR .)
+    OR              reduce using rule 87 (function_call -> ID LPAR func_params RPAR .)
+    RPAR            reduce using rule 87 (function_call -> ID LPAR func_params RPAR .)
+    SEMICOLON       reduce using rule 87 (function_call -> ID LPAR func_params RPAR .)
+    COMMA           reduce using rule 87 (function_call -> ID LPAR func_params RPAR .)
 
 
 state 132
 
-    (35) condition -> IF LPAR expression RPAR block condition_comp .
+    (84) block -> LBRACKET more_statements . RBRACKET
 
-    ID              reduce using rule 35 (condition -> IF LPAR expression RPAR block condition_comp .)
-    IF              reduce using rule 35 (condition -> IF LPAR expression RPAR block condition_comp .)
-    WHILE           reduce using rule 35 (condition -> IF LPAR expression RPAR block condition_comp .)
-    READ            reduce using rule 35 (condition -> IF LPAR expression RPAR block condition_comp .)
-    WRITE           reduce using rule 35 (condition -> IF LPAR expression RPAR block condition_comp .)
-    RBRACKET        reduce using rule 35 (condition -> IF LPAR expression RPAR block condition_comp .)
-    RETURN          reduce using rule 35 (condition -> IF LPAR expression RPAR block condition_comp .)
+    RBRACKET        shift and go to state 137
 
 
 state 133
 
-    (36) condition_comp -> ELSE . block
-    (81) block -> . LBRACKET more_statements RBRACKET
+    (49) var_more -> COMMA var_comp var_more .
 
-    LBRACKET        shift and go to state 122
+    RPAR            reduce using rule 49 (var_more -> COMMA var_comp var_more .)
 
-    block                          shift and go to state 136
 
 state 134
 
-    (21) func_block -> LBRACKET more_vars more_statements RETURN . var_cte SEMICOLON RBRACKET
-    (74) var_cte -> . CTEINT
-    (75) var_cte -> . CTEDOUBLE
-    (76) var_cte -> . ID
-    (77) var_cte -> . cte_bool
-    (78) var_cte -> . function_call
-    (79) cte_bool -> . TRUE
-    (80) cte_bool -> . FALSE
-    (84) function_call -> . ID LPAR func_params RPAR
+    (38) condition -> IF LPAR expression RPAR block condition_comp .
 
-    CTEINT          shift and go to state 57
-    CTEDOUBLE       shift and go to state 55
-    ID              shift and go to state 62
-    TRUE            shift and go to state 61
-    FALSE           shift and go to state 56
+    ID              reduce using rule 38 (condition -> IF LPAR expression RPAR block condition_comp .)
+    IF              reduce using rule 38 (condition -> IF LPAR expression RPAR block condition_comp .)
+    WHILE           reduce using rule 38 (condition -> IF LPAR expression RPAR block condition_comp .)
+    READ            reduce using rule 38 (condition -> IF LPAR expression RPAR block condition_comp .)
+    WRITE           reduce using rule 38 (condition -> IF LPAR expression RPAR block condition_comp .)
+    RBRACKET        reduce using rule 38 (condition -> IF LPAR expression RPAR block condition_comp .)
+    RETURN          reduce using rule 38 (condition -> IF LPAR expression RPAR block condition_comp .)
 
-    cte_bool                       shift and go to state 58
-    function_call                  shift and go to state 59
-    var_cte                        shift and go to state 137
 
 state 135
 
-    (81) block -> LBRACKET more_statements RBRACKET .
+    (39) condition_comp -> ELSE . block
+    (84) block -> . LBRACKET more_statements RBRACKET
 
-    ID              reduce using rule 81 (block -> LBRACKET more_statements RBRACKET .)
-    IF              reduce using rule 81 (block -> LBRACKET more_statements RBRACKET .)
-    WHILE           reduce using rule 81 (block -> LBRACKET more_statements RBRACKET .)
-    READ            reduce using rule 81 (block -> LBRACKET more_statements RBRACKET .)
-    WRITE           reduce using rule 81 (block -> LBRACKET more_statements RBRACKET .)
-    RBRACKET        reduce using rule 81 (block -> LBRACKET more_statements RBRACKET .)
-    RETURN          reduce using rule 81 (block -> LBRACKET more_statements RBRACKET .)
-    ELSE            reduce using rule 81 (block -> LBRACKET more_statements RBRACKET .)
+    LBRACKET        shift and go to state 122
 
+    block                          shift and go to state 138
 
 state 136
 
-    (36) condition_comp -> ELSE block .
+    (24) func_block -> LBRACKET more_vars more_statements . RETURN var_cte SEMICOLON RBRACKET
 
-    ID              reduce using rule 36 (condition_comp -> ELSE block .)
-    IF              reduce using rule 36 (condition_comp -> ELSE block .)
-    WHILE           reduce using rule 36 (condition_comp -> ELSE block .)
-    READ            reduce using rule 36 (condition_comp -> ELSE block .)
-    WRITE           reduce using rule 36 (condition_comp -> ELSE block .)
-    RBRACKET        reduce using rule 36 (condition_comp -> ELSE block .)
-    RETURN          reduce using rule 36 (condition_comp -> ELSE block .)
+    RETURN          shift and go to state 139
 
 
 state 137
 
-    (21) func_block -> LBRACKET more_vars more_statements RETURN var_cte . SEMICOLON RBRACKET
+    (84) block -> LBRACKET more_statements RBRACKET .
 
-    SEMICOLON       shift and go to state 138
+    ID              reduce using rule 84 (block -> LBRACKET more_statements RBRACKET .)
+    IF              reduce using rule 84 (block -> LBRACKET more_statements RBRACKET .)
+    WHILE           reduce using rule 84 (block -> LBRACKET more_statements RBRACKET .)
+    READ            reduce using rule 84 (block -> LBRACKET more_statements RBRACKET .)
+    WRITE           reduce using rule 84 (block -> LBRACKET more_statements RBRACKET .)
+    RBRACKET        reduce using rule 84 (block -> LBRACKET more_statements RBRACKET .)
+    RETURN          reduce using rule 84 (block -> LBRACKET more_statements RBRACKET .)
+    ELSE            reduce using rule 84 (block -> LBRACKET more_statements RBRACKET .)
 
 
 state 138
 
-    (21) func_block -> LBRACKET more_vars more_statements RETURN var_cte SEMICOLON . RBRACKET
+    (39) condition_comp -> ELSE block .
 
-    RBRACKET        shift and go to state 139
+    ID              reduce using rule 39 (condition_comp -> ELSE block .)
+    IF              reduce using rule 39 (condition_comp -> ELSE block .)
+    WHILE           reduce using rule 39 (condition_comp -> ELSE block .)
+    READ            reduce using rule 39 (condition_comp -> ELSE block .)
+    WRITE           reduce using rule 39 (condition_comp -> ELSE block .)
+    RBRACKET        reduce using rule 39 (condition_comp -> ELSE block .)
+    RETURN          reduce using rule 39 (condition_comp -> ELSE block .)
 
 
 state 139
 
-    (21) func_block -> LBRACKET more_vars more_statements RETURN var_cte SEMICOLON RBRACKET .
+    (24) func_block -> LBRACKET more_vars more_statements RETURN . var_cte SEMICOLON RBRACKET
+    (77) var_cte -> . CTEINT
+    (78) var_cte -> . CTEDOUBLE
+    (79) var_cte -> . ID
+    (80) var_cte -> . cte_bool
+    (81) var_cte -> . function_call
+    (82) cte_bool -> . TRUE
+    (83) cte_bool -> . FALSE
+    (87) function_call -> . ID LPAR func_params RPAR
 
-    FUNC            reduce using rule 21 (func_block -> LBRACKET more_vars more_statements RETURN var_cte SEMICOLON RBRACKET .)
-    MAIN            reduce using rule 21 (func_block -> LBRACKET more_vars more_statements RETURN var_cte SEMICOLON RBRACKET .)
+    CTEINT          shift and go to state 58
+    CTEDOUBLE       shift and go to state 56
+    ID              shift and go to state 63
+    TRUE            shift and go to state 62
+    FALSE           shift and go to state 57
+
+    cte_bool                       shift and go to state 59
+    function_call                  shift and go to state 60
+    var_cte                        shift and go to state 140
+
+state 140
+
+    (24) func_block -> LBRACKET more_vars more_statements RETURN var_cte . SEMICOLON RBRACKET
+
+    SEMICOLON       shift and go to state 141
+
+
+state 141
+
+    (24) func_block -> LBRACKET more_vars more_statements RETURN var_cte SEMICOLON . RBRACKET
+
+    RBRACKET        shift and go to state 142
+
+
+state 142
+
+    (24) func_block -> LBRACKET more_vars more_statements RETURN var_cte SEMICOLON RBRACKET .
+
+    FUNC            reduce using rule 24 (func_block -> LBRACKET more_vars more_statements RETURN var_cte SEMICOLON RBRACKET .)
+    MAIN            reduce using rule 24 (func_block -> LBRACKET more_vars more_statements RETURN var_cte SEMICOLON RBRACKET .)
 
 WARNING: 
 WARNING: Conflicts:
@@ -2278,8 +2311,8 @@ WARNING: reduce/reduce conflict in state 0 resolved using rule (vars -> <empty>)
 WARNING: rejected rule (more_vars -> <empty>) in state 0
 WARNING: reduce/reduce conflict in state 24 resolved using rule (vars -> <empty>)
 WARNING: rejected rule (more_vars -> <empty>) in state 24
-WARNING: reduce/reduce conflict in state 71 resolved using rule (var_comp -> function_call)
-WARNING: rejected rule (var_cte -> function_call) in state 71
-WARNING: reduce/reduce conflict in state 81 resolved using rule (vars -> <empty>)
-WARNING: rejected rule (more_vars -> <empty>) in state 81
+WARNING: reduce/reduce conflict in state 72 resolved using rule (var_comp -> function_call)
+WARNING: rejected rule (var_cte -> function_call) in state 72
+WARNING: reduce/reduce conflict in state 114 resolved using rule (vars -> <empty>)
+WARNING: rejected rule (more_vars -> <empty>) in state 114
 WARNING: Rule (more_vars -> <empty>) is never reduced

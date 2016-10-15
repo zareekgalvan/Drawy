@@ -21,7 +21,11 @@ import sys
 from drawylex import tokens
 # Directorio de procedimientos
 dirProcedures = {}
+dirProcedures["global"] = {}
 varTableGlobal = []
+scope = "global"
+actualtype = ""
+
 
 # Funcion que encapsula todo el codigo, funcion principal del lenguaje
 def p_program(p):
@@ -30,8 +34,21 @@ def p_program(p):
 
 # Funcion que define la declaracion de variables
 def p_vars(p):
-	'''vars : var_type ID SEMICOLON vars
+	'''vars : var_type to_actual_type ID to_var_table SEMICOLON vars
 			|'''
+
+#
+def p_to_actual_type(p):
+	'''to_actual_type :'''
+	actualtype = p[-1]
+	print actualtype
+
+# Funcion para agregar al directorio de funciones la variable y su tipo
+def p_to_var_table(p):
+	'''to_var_table :'''
+	print p[-1]
+	print scope
+	dirProcedures[scope][p[-1]] = actualtype
 
 # Funcion complementaria de declaracion de variables
 def p_more_vars(p):
@@ -48,7 +65,7 @@ def p_var_type(p):
 
 # Funcion para declaracion de funciones
 def p_func(p):
-	'''func : FUNC func_type ID LPAR pars RPAR func_block more_func'''
+	'''func : FUNC func_type ID procedure_name LPAR pars RPAR func_block more_func'''
 
 # Funcion para declarar el tipo de funcion
 def p_func_type(p):
@@ -56,6 +73,13 @@ def p_func_type(p):
 			| DOUBLE
 			| BOOL
 			| VOID'''
+
+# Funcion para insertar en el directorio de funciones el nombre de la funcion
+def p_procedure_name(p):
+	'''procedure_name :'''
+	funcname = p[-1]
+	scope = p[-1]
+	dirProcedures[funcname] = {}
 
 # Funcion para la declaracion de parametros dentro de una funcion
 def p_pars(p):
@@ -98,28 +122,28 @@ def p_statement_comp(p):
 			| write
 			| function'''
 
-# Funcion 
+# Funcion de asignacion de un valor a una variable
 def p_assignation(p):
 	'''assignation : ID EQUALS expression SEMICOLON'''
 
-# Funcion
+# Funcion de condicion, if else
 def p_condition(p):
 	'''condition : IF LPAR expression RPAR block condition_comp'''
 
-# Funcion
+# Funcion complementaria de condicion
 def p_condition_comp(p):
 	'''condition_comp : ELSE block
 			|'''
 
-# Funcion 
+# Funcion de ciclo, where
 def p_cycle(p):
 	'''cycle : WHILE LPAR expression RPAR block'''
 
-# Funcion
+# Funcion de lectura de una variable
 def p_read(p):
 	'''read : READ LPAR var_cte RPAR SEMICOLON'''
 
-# Funcion
+# Funcion  de escritura de una argumento
 def p_write(p):
 	'''write : WRITE LPAR var_comp RPAR SEMICOLON'''
 
@@ -232,11 +256,11 @@ def p_main(p):
 def p_main_block(p):
 	'''main_block : LBRACKET more_vars more_statements RBRACKET'''
 
-# Funcion
+# Funcion para la llamada de una funcion
 def p_function_call(p):
 	'''function_call : ID LPAR func_params RPAR'''
 
-
+# Funcion de error de sintaxis
 def p_error(p):
     print('Syntax error in token %s with value \"%s\" in line %s' % (p.type, p.value, p.lineno))
     sys.exit()
@@ -254,11 +278,12 @@ if __name__ == '__main__':
 		try:
 			f = open(file,'r')
 			data = f.read()
-			#print data
+			# print data
 			f.close()
 			# Parsear el contenido
 			
 			if (drawyparser.parse(data, tracking=True) == 'PROGRAM COMPILED'):
+				print dirProcedures
 				print "Valid syntax"
 				
 		except EOFError:
