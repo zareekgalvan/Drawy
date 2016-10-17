@@ -20,11 +20,11 @@ from sets import Set
 
 # Importar token del lexer
 from drawylex import tokens
+from semanticCube import semanticCube
 # Directorio de procedimientos
 dirProcedures = {}
-dirProcedures["global"] = {}
-varTableGlobal = {}
-varTableGlobal["global"] = {}
+varTable = {}
+varTable["global"] = {}
 ids = set()
 global scope 
 scope = ['global']
@@ -40,10 +40,6 @@ def p_program(p):
 def p_vars(p):
 	'''vars : var_type to_actual_type ID to_var_table SEMICOLON vars
 			|'''
-# Funcion
-def p_to_ids_set(p):
-	'''to_ids_set :'''
-
 
 #
 def p_to_actual_type(p):
@@ -53,15 +49,15 @@ def p_to_actual_type(p):
 	tipo = p[-1]
 	#print actualtype
 
-# Funcion para agregar al directorio de funciones la variable y su tipo
+# Funcion para agregar al directorio de variables la variable y su tipo
 def p_to_var_table(p):
 	'''to_var_table :'''
 	#print p[-1]
 	varid = p[-1]
-	print varid
-	if varid not in varTableGlobal['global']:
+	#print varid
+	if varid not in varTable['global'] and varid not in varTable[scope[len(scope)-1]]:
 		ids.add(varid)
-		varTableGlobal[scope[len(scope)-1]][varid]  = tipo
+		varTable[scope[len(scope)-1]][varid]  = tipo
 	else:
 		print('Variable "%s" already registered' % (varid))
 		sys.exit() 
@@ -98,8 +94,9 @@ def p_procedure_name(p):
 	funcname = p[-1]
 	scope.append(p[-1])
 	ids.add(p[-1])
-	print scope[len(scope)-1]
-	varTableGlobal[funcname] = {}
+	#print scope[len(scope)-1]
+	varTable[funcname] = {}
+	dirProcedures[funcname] = []
 
 # Funcion para la declaracion de parametros dentro de una funcion
 def p_pars(p):
@@ -108,7 +105,15 @@ def p_pars(p):
 
 # Funcion para declarar al menos un parametro
 def p_pars_comp(p):
-	'''pars_comp : var_type ID to_var_table more_pars'''
+	'''pars_comp : var_type add_to_param_type ID to_var_table more_pars'''
+	#print p[1]
+	p[0] = p[1]
+
+#
+def p_add_to_param_type(p):
+	'''add_to_param_type :'''
+	dirProcedures[scope[len(scope)-1]].append(p[-1])
+	#print dirProcedures[scope[len(scope)-1]]
 
 # Funcion para declarar mas parametros adicionales
 def p_more_pars(p):
@@ -303,8 +308,9 @@ if __name__ == '__main__':
 			# Parsear el contenido
 			
 			if (drawyparser.parse(data, tracking=True) == 'PROGRAM COMPILED'):
-				print varTableGlobal
-				print ids
+				#print varTable
+				#print ids
+				print "dirProcedures: ", dirProcedures
 				print "Valid syntax"
 				
 		except EOFError:

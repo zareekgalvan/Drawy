@@ -20,9 +20,9 @@ func double func3()
 	return 8;
 }
 
-func void func4(int v, int e, double t, intList h, doubleList j, bool d)
+func void func4(int v, int e, double t, intList h, doubleList z, bool d)
 {
-	int x;
+	int b;
 	x = y;
 	x = 5;
 	y = fun();
@@ -56,7 +56,7 @@ func void func4(int v, int e, double t, intList h, doubleList j, bool d)
 	return func3(6);
 }
 
-func bool func5(int i, int e, double t, intList h, doubleList j, bool d)
+func bool func5(int im, int e, double t, intList h, doubleList jj, bool d)
 {
 	return 8;
 }
@@ -71,9 +71,9 @@ func void func6 () {
 
 main 
 {
-	int x;
-	int y;
-	double z;
+	int xx;
+	int yy;
+	double zx;
 	bool a;
 	x = y;
 	x = 5;
