@@ -20,7 +20,7 @@ from sets import Set
 
 # Importar token del lexer
 from drawylex import tokens
-from semanticCube import semanticCube
+from semanticCube import *
 # Directorio de procedimientos
 dirProcedures = {}
 varTable = {}
@@ -87,6 +87,7 @@ def p_func_type(p):
 			| DOUBLE
 			| BOOL
 			| VOID'''
+	p[0] = p[1]
 
 # Funcion para insertar en el directorio de funciones el nombre de la funcion
 def p_procedure_name(p):
@@ -308,9 +309,9 @@ if __name__ == '__main__':
 			# Parsear el contenido
 			
 			if (drawyparser.parse(data, tracking=True) == 'PROGRAM COMPILED'):
-				#print varTable
+				print "varTable: ",varTable
 				#print ids
-				print "dirProcedures: ", dirProcedures
+				#print "dirProcedures: ", dirProcedures
 				print "Valid syntax"
 				
 		except EOFError:

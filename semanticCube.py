@@ -167,9 +167,12 @@ semanticCube = {
 	}
 }
 
+def getTypeSC(op1, op2, oper):
+	return semanticCube[op1][op2][oper]
+
 # Probar que este declarado correctamente el cubo semantico
-'''
-for key in semanticCube:
-	for  key2 in semanticCube[key]:
-		print semanticCube[key][key2]
-'''
+
+def printSemanticCube():
+	for key in semanticCube:
+		for  key2 in semanticCube[key]:
+			print semanticCube[key][key2]
