@@ -2,7 +2,7 @@ int i;
 double x;
 bool y;
 intList c;
-doubleList j;
+intList j;
 
 func int fun1(int v)
 {

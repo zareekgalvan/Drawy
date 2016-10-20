@@ -21,6 +21,8 @@ from sets import Set
 # Importar token del lexer
 from drawylex import tokens
 from semanticCube import *
+from quadruple import *
+from other import *
 # Directorio de procedimientos
 dirProcedures = {}
 varTable = {}
@@ -28,7 +30,6 @@ varTable["global"] = {}
 ids = set()
 global scope 
 scope = ['global']
-tipo = None
 
 
 # Funcion que encapsula todo el codigo, funcion principal del lenguaje
@@ -45,9 +46,8 @@ def p_vars(p):
 def p_to_actual_type(p):
 	'''to_actual_type :'''
 	#print p[-1]
-	global tipo
-	tipo = p[-1]
-	#print actualtype
+	p[0] = p[-1]
+	#print p[0]
 
 # Funcion para agregar al directorio de variables la variable y su tipo
 def p_to_var_table(p):
@@ -57,7 +57,7 @@ def p_to_var_table(p):
 	#print varid
 	if varid not in varTable['global'] and varid not in varTable[scope[len(scope)-1]]:
 		ids.add(varid)
-		varTable[scope[len(scope)-1]][varid]  = tipo
+		varTable[scope[len(scope)-1]][varid]  = p[-3]
 	else:
 		print('Variable "%s" already registered' % (varid))
 		sys.exit() 
@@ -198,7 +198,7 @@ def p_expression(p):
 
 # Funcion
 def p_expression_comp(p):
-	'''expression_comp : andor comp
+	'''expression_comp : andor comp expression_comp
 			|'''
 
 # Funcion
@@ -255,7 +255,13 @@ def p_multiplier(p):
 # Funcion
 def p_factor(p):
 	'''factor : LPAR exp RPAR
-			| var_cte'''
+			| var_cte add_to_pilaO'''
+
+# Funcion
+def p_add_to_pilaO(p):
+	'''add_to_pilaO :'''
+	#print p[-1]
+	pilaO.push(p[-1])
 
 # Funcion
 def p_var_cte(p):
@@ -264,6 +270,8 @@ def p_var_cte(p):
 			| ID
 			| cte_bool
 			| function_call'''
+	#print p[1]
+	p[0] = p[1]
 
 # Funcion
 def p_cte_bool(p):
@@ -309,11 +317,12 @@ if __name__ == '__main__':
 			# Parsear el contenido
 			
 			if (drawyparser.parse(data, tracking=True) == 'PROGRAM COMPILED'):
-				print "varTable: ",varTable
+				#print "varTable: ",varTable
 				#print ids
 				#print "dirProcedures: ", dirProcedures
-				print "Valid syntax"
 				
+				print "Valid syntax"
+
 		except EOFError:
 	   		print(EOFError)
 	else:
