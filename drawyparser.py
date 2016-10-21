@@ -230,13 +230,14 @@ def p_exp(p):
 
 # Funcion
 def p_more_term(p):
-	'''more_term : operator exp
+	'''more_term : operator add_to_pOper exp
 			|'''
 
 # Funcion
 def p_operator(p):
 	'''operator : PLUS
 			| MINUS'''
+	p[0] = p[1]
 
 # Funcion
 def p_term(p):
@@ -244,24 +245,41 @@ def p_term(p):
 
 # Funcion
 def p_more_factor(p):
-	'''more_factor : multiplier term
+	'''more_factor : multiplier add_to_pOper term
 			|'''
+
+# Funcion
+def p_add_to_pOper(p):
+	'''add_to_pOper :'''
+	#print p[-1]
+	pOper.push(p[-1])
 
 # Funcion
 def p_multiplier(p):
 	'''multiplier : MULTIPLICATION
 			| DIVISION'''
+	p[0] = p[1]
 
 # Funcion
 def p_factor(p):
-	'''factor : LPAR exp RPAR
+	'''factor : LPAR fondo_falso exp RPAR
 			| var_cte add_to_pilaO'''
+
+# Funcion
+def p_fondo_falso(p):
+	'''fondo_falso :'''
+	#print p[-1]
+	pOper.push(p[-1])
 
 # Funcion
 def p_add_to_pilaO(p):
 	'''add_to_pilaO :'''
 	#print p[-1]
 	pilaO.push(p[-1])
+	if p[-1] in varTable[scope[len(scope)-1]]:
+		tipo = varTable[scope[len(scope)-1]][p[-1]]
+		print tipo
+		pType.push(tipo)
 
 # Funcion
 def p_var_cte(p):
@@ -317,10 +335,10 @@ if __name__ == '__main__':
 			# Parsear el contenido
 			
 			if (drawyparser.parse(data, tracking=True) == 'PROGRAM COMPILED'):
-				#print "varTable: ",varTable
+				print "varTable: ",varTable
 				#print ids
 				#print "dirProcedures: ", dirProcedures
-				
+				#printPila(pilaO)
 				print "Valid syntax"
 
 		except EOFError:

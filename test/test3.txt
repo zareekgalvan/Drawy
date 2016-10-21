@@ -34,7 +34,7 @@ func void func4(int v, int e, double t, intList h, doubleList z, bool d)
 
 	}
 
-	if ( (5 + 5)*3/8 > 5)
+	if ( ((5 + 5)*3/8) > 5)
 	{
 		x = y;
 		read(5);
@@ -75,7 +75,7 @@ main
 	int yy;
 	double zx;
 	bool a;
-	x = y;
+	xx = 5;
 	x = 5;
 	y = fun();
 	y = true;
