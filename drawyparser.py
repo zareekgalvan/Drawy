@@ -226,7 +226,15 @@ def p_comparator(p):
 
 # Funcion
 def p_exp(p):
-	'''exp : term more_term'''
+	'''exp : term pop_plus_minus more_term'''
+
+# Funcion
+def p_pop_plus_minus(p):
+	'''pop_plus_minus :'''
+	if not pOper.isEmpty():
+		if pOper.peek() == '+' or pOper.peek() == '-':
+			print pOper.peek()
+
 
 # Funcion
 def p_more_term(p):
@@ -241,7 +249,13 @@ def p_operator(p):
 
 # Funcion
 def p_term(p):
-	'''term : factor more_factor'''
+	'''term : factor pop_mult_div more_factor'''
+
+def p_pop_mult_div(p):
+	'''pop_mult_div :'''
+	if not pOper.isEmpty():
+		if pOper.peek() == '*' or pOper.peek() == '/':
+			print pOper.peek()
 
 # Funcion
 def p_more_factor(p):
@@ -276,8 +290,13 @@ def p_add_to_pilaO(p):
 	'''add_to_pilaO :'''
 	#print p[-1]
 	pilaO.push(p[-1])
+	p
 	if p[-1] in varTable[scope[len(scope)-1]]:
 		tipo = varTable[scope[len(scope)-1]][p[-1]]
+		print tipo
+		pType.push(tipo)
+	elif p[-1] in varTable['global']:
+		tipo = varTable['global'][p[-1]]
 		print tipo
 		pType.push(tipo)
 
@@ -338,7 +357,8 @@ if __name__ == '__main__':
 				print "varTable: ",varTable
 				#print ids
 				#print "dirProcedures: ", dirProcedures
-				#printPila(pilaO)
+				printPila(pType)
+				print type(5.4)
 				print "Valid syntax"
 
 		except EOFError:
