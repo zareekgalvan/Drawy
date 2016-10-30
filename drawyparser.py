@@ -290,7 +290,6 @@ def p_add_to_pilaO(p):
 	'''add_to_pilaO :'''
 	#print p[-1]
 	pilaO.push(p[-1])
-	p
 	if p[-1] in varTable[scope[len(scope)-1]]:
 		tipo = varTable[scope[len(scope)-1]][p[-1]]
 		print tipo
